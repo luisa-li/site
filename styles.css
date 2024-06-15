@@ -1,0 +1,111 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #dcdcdc; /* Light text color */
+    background-color: #1e1e1e; /* Dark background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+/* Header styling */
+header {
+    background: #f8c947; /* Yellow */
+    color: #1e1e1e; /* Dark background color for text */
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 8px 8px 0 0; /* Rounded corners (top) */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #1e1e1e; /* Dark background color for text */
+}
+
+.flex-parent {
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    align-items: flex-start; /* Align children to the top */
+    gap: 20px; /* Gap between flex items */
+    padding: 20px; /* Optional padding around the parent */
+}
+
+.left-child {
+    flex: 1; /* Grow to fill available space */
+    padding: 20px; /* Padding inside left child */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.right-child {
+    flex: 1; /* Grow to fill available space */
+    padding: 20px; /* Padding inside right child */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+    max-height: 400px; /* Optional: Limit max height for scrolling */
+}
+
+
+/* Main content styling */
+.head {
+    width: 100%;
+    background: #1e1e1e; /* Uniform grey background */
+    padding: 20px;
+    margin: 40px;
+    border-radius: 0 0 8px 8px; /* Rounded corners (bottom) */
+}
+
+.body {
+    width: 100%;
+    background: #1e1e1e; /* Uniform grey background */
+    padding: 20px;
+    border-radius: 0 0 8px 8px; /* Rounded corners (bottom) */
+}
+
+/* Links styling */
+a {
+    color: #3498db; /* Blue */
+    text-decoration: underline; /* Underline by default */
+}
+
+a:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: #27ae60; /* Green */
+}
+
+/* Footer styling */
+footer {
+    background: #27ae60; /* Green */
+    color: #fff; /* White text color */
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+}
