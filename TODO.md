@@ -1,0 +1,1 @@
+- Write a function that takes in a set of assets and returns the HTML code for it, and also add the projects and rest of the work experience

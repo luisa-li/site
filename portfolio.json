@@ -1,0 +1,44 @@
+{
+    "summary": "I'm currently an undergraduate at Northeastern University, pursuing a degree in computer science and mathematics.",
+    "education": [
+        {
+          "institution": "Northeastern University — Boston, Massachusetts",
+          "degree": "BSc in Computer Science and Mathematics",
+          "dates": "September 2022 - May 2026",
+          "grade": "3.9/4.0",
+          "honors": ["Honors Program", "Dean's List", "REU Grant", "MathWorks DMSB Scholarship", "PEAK Research Award"],
+          "courses": ["Object-Oriented Design", "Algorithms and Data Structures", "Linear Algebra", "Advanced Probability and Statistics", "Differential Equations"]
+        },
+        {
+          "institution": "Markham College — Lima, Peru",
+          "degree": "IB Diploma",
+          "dates": "March 2018 - December 2021",
+          "grade": "41/45",
+          "courses": ["HL Mathematics AI", "HL Computer Science", "HL Physics", "SL Philosophy", "SL Spanish A Literature", "SL English A Literature"]
+        }
+    ],
+    "workExperience": [
+        {
+            "title": "Computational Modeling Co-op",
+            "companyName": "Montai Therapeutics",
+            "location": "Cambridge, Massachusetts",
+            "dates": "January 2024 - Present",
+            "description": [
+                "Contributed to bioactivity machine learning model development using PyTorch, incorporated weighting and ensembling features and performed detailed analysis demonstrating performance improvement over original model.", 
+                "Built interpretable machine learning models to predict druglikeness in compounds, wrangling data from public and proprietary databases. Iteratively improved model design through continuous feedback and ablation experiments.",
+                "Worked on cross-team engineering efforts in streamlining model training, prediction and evaluation pipelines, and built Streamlit apps that queries models and visualizes results to increase accesibility of models to biologically focused teams."
+            ]
+        },
+        {
+            "title": "Undergraduate Researcher",
+            "companyName": "Programming Research Laboratory (NUPRL)",
+            "location": "Boston, Massachusetts",
+            "dates": "January 2023 - Present",
+            "description": [
+                "Contributed to CanItEdit, a code-editing benchmark that evaluates Large Language Model’s performance on sophisticated and diverse code editing tasks that demand domain-specific knowledge.", 
+                "Wrote code to evaluate open and closed source models using our benchmark problems and metrics such as Pass@1.",
+                "Co-authored the CanItEdit paper and presented at LLM4Code (ICSE Workshop). The paper is also submission to COLM."
+            ]
+        }
+    ]
+}

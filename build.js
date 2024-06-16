@@ -1,18 +1,54 @@
-document.addEventListener("DOMContentLoaded", function() {
-    fetch('biography.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('portfolio.json')
+        .then(response => response.json())
         .then(data => {
-            // Update the HTML content with the JSON data
-            document.getElementById('name').textContent = data.name;
-            document.getElementById('name-subheader').textContent = data.summary;
-            document.getElementById('languages').textContent = data.languages;
+            populateSummary(data.summary);
+            populateWorkExperience(data.workExperience);
+            populateEducation(data.education)
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
+            console.error('Error fetching or parsing JSON:', error);
         });
 });
+
+function populateSummary(summary) {
+    const summaryContent = document.getElementById('summary');
+    summaryContent.textContent = summary;
+}
+
+function populateWorkExperience(workExperience) {
+    const workExperienceSection = document.getElementById('experience-body');
+    const jobsContainer = workExperience.map(job => `
+        <div>
+            <div class="left-right">
+                <h3> ${job.companyName} </h4>
+                <p> ${job.dates}</p>
+            </div>
+            <div class="left-right">
+                <h4> ${job.title} </h4>
+                <p> ${job.location}</p>
+            </div>
+            <ul class="job-description">
+                ${job.description.map(desc => `<li>${desc}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+
+    workExperienceSection.innerHTML = jobsContainer;
+}
+
+function populateEducation(education) {
+    const educationSection = document.getElementById('education-body');
+    const educationContainer = education.map(edu => `
+        <div>
+            <h3>${edu.institution}</h3>
+            <h4>${edu.degree}</h4>
+            <p><b>Grade: ${edu.grade}</b>, <i>${edu.dates}</i></p>
+            ${edu.honors ? `<p><strong>Honors:</strong> ${edu.honors.join(', ')}</p>` : ''}
+            ${edu.courses && edu.courses.length > 0 ? `
+                <p><strong>Courses:</strong> ${edu.courses.join(', ')}</p>` : ''}
+            ${edu.description ? `<p>${edu.description}</p>` : ''}
+        </div>
+    `).join('');
+    educationSection.innerHTML = educationContainer;
+}

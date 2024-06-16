@@ -1,98 +1,174 @@
-/* Reset some default browser styles */
+:root {
+    --black1: #1d2021;
+    --black2: #3c3836;
+    --black3: #504945;
+    --white: #e2cca9;
+    --red: #f2594b;
+    --orange: #f28534;
+    --yellow: #e9b143;
+    --green: #b0b846;
+    --aqua: #8bba7f;
+    --blue: #80aa9e;
+    --pink: #e08cba;
+    --purple: #d386b0;
+    --grey0: #7c6f64;
+    --grey1: #928374;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+h1 {
+    color: var(--red);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h2 {
+    color: var(--yellow);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+h3 {
+    color: var(--green);
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
+h4 {
+    color: var(--blue);
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
 body {
+    /* font-family: 'Courier New', Courier, monospace; */
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
+    color: var(--white);
     line-height: 1.6;
-    color: #dcdcdc; /* Light text color */
-    background-color: #1e1e1e; /* Dark background color */
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Arrange children vertically */
     min-height: 100vh; /* Ensure full viewport height */
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black1);
 }
 
-/* Header styling */
-header {
-    background: #f8c947; /* Yellow */
-    color: #1e1e1e; /* Dark background color for text */
-    padding: 20px 0;
+footer {
+    color: var(--pink); 
     text-align: center;
-    border-radius: 8px 8px 0 0; /* Rounded corners (top) */
+    width: 100%; /* Ensure footer spans the full width */
+    margin-top: 50px; /* Push footer further down */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: #1e1e1e; /* Dark background color for text */
+.left-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.yellow-highlight {
+    color: var(--yellow);
+}
+
+.orange-highlight {
+    color: var(--orange);
+}
+
+.blue-highlight {
+    color: var(--blue); 
+}
+
+.red-highlight {
+    color: var(--red); 
+}
+
+.green-highlight {
+    color: var(--green);
+}
+
+.purple-highlight {
+    color: var(--purple);
+}
+
+.white-highlight {
+    color: var(--purple);
+}
+
+.pink-highlight {
+    color: var(--pink);
 }
 
 .flex-parent {
     display: flex;
     justify-content: center; /* Center children horizontally */
-    align-items: flex-start; /* Align children to the top */
-    gap: 20px; /* Gap between flex items */
-    padding: 20px; /* Optional padding around the parent */
+    align-items: center; /* Align children to the top */
+    gap: 10px; /* Gap between flex items */
+    padding: 40px; /* Optional padding around the parent */
+    margin: 10px 50px;
+    overflow: hidden;
+    width: 90%;
+    border: 2px solid var(--black3);
+    background-color: var(--black1);
 }
 
 .left-child {
     flex: 1; /* Grow to fill available space */
     padding: 20px; /* Padding inside left child */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 700px;
 }
 
 .right-child {
-    flex: 1; /* Grow to fill available space */
+    flex: 2; /* Grow to fill available space */
     padding: 20px; /* Padding inside right child */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Enable vertical scrollbar if content overflows */
-    max-height: 400px; /* Optional: Limit max height for scrolling */
+    overflow-y: scroll; /* Enable vertical scrollbar if content overflows */
+    max-height: 700px; /* Optional: Limit max height for scrolling */
 }
 
-
-/* Main content styling */
-.head {
-    width: 100%;
-    background: #1e1e1e; /* Uniform grey background */
-    padding: 20px;
-    margin: 40px;
-    border-radius: 0 0 8px 8px; /* Rounded corners (bottom) */
+.right-child > * {
+    margin-bottom: 20px;
 }
 
-.body {
-    width: 100%;
-    background: #1e1e1e; /* Uniform grey background */
-    padding: 20px;
-    border-radius: 0 0 8px 8px; /* Rounded corners (bottom) */
+.left-child > * {
+    margin-bottom: 20px; 
 }
 
-/* Links styling */
-a {
-    color: #3498db; /* Blue */
-    text-decoration: underline; /* Underline by default */
+.margin10 > * {
+    margin-bottom: 10px;
 }
 
-a:hover {
-    text-decoration: none; /* Remove underline on hover */
-    color: #27ae60; /* Green */
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px 20px; 
 }
 
-/* Footer styling */
-footer {
-    background: #27ae60; /* Green */
-    color: #fff; /* White text color */
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
+.navbar a {
+    padding: 5px 20px; 
+    color: var(--purple); 
+    text-decoration: none; 
+}
+
+.navbar a:hover {
+    text-decoration: underline; 
+    color: var(--pink); 
+}
+
+.job-description {
+    margin-top: 10px; /* Adjust margin as needed */
+    padding-left: 20px; /* Indentation for the bullets */
+}
+
+.job-description li {
+    list-style-type: disc; /* Bullet style (default) */
+    margin-bottom: 8px; /* Space between list items */
 }
 
 /* Responsive Design */
