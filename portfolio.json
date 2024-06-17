@@ -36,8 +36,8 @@
             "location": "Boston, Massachusetts",
             "dates": "January 2023 - Present",
             "assets": {
-                "CanItEdit repository": "https://github.com/nuprl/CanItEdit",
-                "CanItEdit paper": "https://arxiv.org/abs/2312.12450"
+                "CanItEdit Benchmark": "https://github.com/nuprl/CanItEdit",
+                "CanItEdit Paper": "https://arxiv.org/abs/2312.12450"
             },
             "description": [
                 "Contributed to CanItEdit, a code-editing benchmark that evaluates Large Language Model’s performance on sophisticated and diverse code editing tasks that demand domain-specific knowledge.", 
@@ -81,5 +81,27 @@
             ]
         }
     ],
-    "projects": []
+    "projects": [
+        {
+            "name": "Personal website",
+            "assets": {
+                "Website": "https://www.youtube.com/watch?v=xvFZjo5PgG0",
+                "Code": "https://github.com/luisa-li/site"
+            },
+            "description": [
+                "Created a website that helps users edit their emails to be either more direct or more polite, with the idea to subvert the gender expectation that women should email differently to men.",
+                "The application is built with React, Typescript and CSS in the frontend, Python, FastAPI and OpenAI’s API in the backend. This project won Best Overall Hack at Hack the Patriarchy Hackathon."
+            ]
+        },
+        {
+            "name": "GenderSender",
+            "assets": {
+                "GenderSender Repository": "https://github.com/elizabeth-mcdowell/gendersender"
+            },
+            "description": [
+                "Created a website that helps users edit their emails to be either more direct or more polite, with the idea to subvert the gender expectation that women should email differently to men.",
+                "The application is built with React, Typescript and CSS in the frontend, Python, FastAPI and OpenAI’s API in the backend. This project won Best Overall Hack at Hack the Patriarchy Hackathon."
+            ]
+        }
+    ]
 }

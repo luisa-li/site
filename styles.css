@@ -22,6 +22,7 @@
 
 h1 {
     color: var(--red);
+    font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -33,40 +34,42 @@ h2 {
 
 h3 {
     color: var(--green);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.03em;
 }
 
 h4 {
     color: var(--blue);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.03em;
 }
 
 body {
-    /* font-family: 'Courier New', Courier, monospace; */
     font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--white);
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
     display: flex;
-    flex-direction: column; /* Arrange children vertically */
-    min-height: 100vh; /* Ensure full viewport height */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--black1);
     overflow: hidden;
+    height: 100vh;
 }
 
-footer {
+a {
+    color: var(--purple); 
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; 
     color: var(--pink); 
-    text-align: center;
-    width: 100%; /* Ensure footer spans the full width */
-    margin-top: 50px; /* Push footer further down */
+    
 }
 
 .left-right {
@@ -79,78 +82,55 @@ footer {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    gap: 10px; 
-    padding: 40px; 
-    margin: 10px 50px;
+    padding: 5vh; 
     overflow: hidden;
     width: 90%;
     border: 2px solid var(--black3);
     background-color: var(--black1);
+    height: 90vh; 
 }
 
 .left-child {
-    flex: 1; 
-    padding: 20px; 
-    max-height: 700px;
+    flex: 1;
+    padding: 3vh;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-start; 
+    height: 100%;
 }
 
 .right-child {
     flex: 2; 
-    padding: 20px; 
+    padding: 3vh; 
     overflow-y: scroll; 
-    max-height: 700px; 
+    height: 100%; /* Fill the parent height */
 }
 
-.right-child > * {
-    margin-bottom: 20px;
-}
 
-.left-child > * {
-    margin-bottom: 20px; 
-}
-
-.margin15 > * {
-    margin-bottom: 15px;
+.left-child > *, .small-margin > * {
+    margin-bottom: 1vh;
 }
 
 .navbar {
     display: flex;
-    justify-content: space-between; 
-}
-
-.navbar a {
-    padding: 5px 20px; 
-    color: var(--purple); 
-}
-
-.navbar a:hover {
-    text-decoration: underline; 
-    color: var(--pink); 
-}
-
-.assets_nav {
-    display: flex;
-}
-
-.assets_nav a {
-    justify-content: space-between;
-    margin: 10px;
-    color: var(--purple); 
-}
-
-.assets_nav a:hover {
-    text-decoration: underline; 
-    color: var(--pink); 
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    gap: 3vw;
+    height: auto;
+    flex-direction: row;
 }
 
 .job-description {
-    margin-top: 5px;
-    padding-left: 20px; 
+    margin-top: 1vw;
+    padding-left: 3vh; 
 }
 
 .job-description li {
     list-style-type: disc; 
-    margin-bottom: 8px; 
+    margin-bottom: 1vh; 
 }
 
 .yellow-highlight {
@@ -185,17 +165,6 @@ footer {
     color: var(--pink);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    
-    .container {
-        width: 90%; /* Adjust width for smaller screens */
-    }
-
-    header h1 {
-        font-size: 2em;
-    }
+.aqua-highlight {
+    color: var(--aqua);
 }

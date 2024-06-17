@@ -1,5 +1,4 @@
 - Add in section for projects
-- Add in section for links
 - Add quirkiness to the thing
 - Add in section for books and book review
 - Add in section for cool chess games that I looked into 

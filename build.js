@@ -28,7 +28,7 @@ function populateWorkExperience(workExperience) {
                 <h4> ${job.title} </h4>
                 <p><i> ${job.location} </i></p>
             </div>
-            <nav class="assets_nav">
+            <nav class="navbar">
                 ${parseAssets(job.assets)}
             </nav>
             <ul class="job-description">
@@ -59,7 +59,7 @@ function populateEducation(education) {
 function parseAssets(assets) {
     let html = '';
     Object.keys(assets).forEach(key => {
-        html += `<a href="${assets[key]}" class="asset-link" target="_blank">${key}</a>`;
+        html += `<a href="${assets[key]}" target="_blank">${key}</a>`;
     });
     return html;
 }
