@@ -22,12 +22,15 @@ function populateWorkExperience(workExperience) {
         <div>
             <div class="left-right">
                 <h3> ${job.companyName} </h4>
-                <p> ${job.dates}</p>
+                <p><i> ${job.dates} </i></p>
             </div>
             <div class="left-right">
                 <h4> ${job.title} </h4>
-                <p> ${job.location}</p>
+                <p><i> ${job.location} </i></p>
             </div>
+            <nav class="assets_nav">
+                ${parseAssets(job.assets)}
+            </nav>
             <ul class="job-description">
                 ${job.description.map(desc => `<li>${desc}</li>`).join('')}
             </ul>
@@ -51,4 +54,12 @@ function populateEducation(education) {
         </div>
     `).join('');
     educationSection.innerHTML = educationContainer;
+}
+
+function parseAssets(assets) {
+    let html = '';
+    Object.keys(assets).forEach(key => {
+        html += `<a href="${assets[key]}" class="asset-link" target="_blank">${key}</a>`;
+    });
+    return html;
 }

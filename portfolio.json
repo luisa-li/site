@@ -23,6 +23,7 @@
             "companyName": "Montai Therapeutics",
             "location": "Cambridge, Massachusetts",
             "dates": "January 2024 - Present",
+            "assets": {},
             "description": [
                 "Contributed to bioactivity machine learning model development using PyTorch, incorporated weighting and ensembling features and performed detailed analysis demonstrating performance improvement over original model.", 
                 "Built interpretable machine learning models to predict druglikeness in compounds, wrangling data from public and proprietary databases. Iteratively improved model design through continuous feedback and ablation experiments.",
@@ -34,11 +35,51 @@
             "companyName": "Programming Research Laboratory (NUPRL)",
             "location": "Boston, Massachusetts",
             "dates": "January 2023 - Present",
+            "assets": {
+                "CanItEdit repository": "https://github.com/nuprl/CanItEdit",
+                "CanItEdit paper": "https://arxiv.org/abs/2312.12450"
+            },
             "description": [
                 "Contributed to CanItEdit, a code-editing benchmark that evaluates Large Language Model’s performance on sophisticated and diverse code editing tasks that demand domain-specific knowledge.", 
                 "Wrote code to evaluate open and closed source models using our benchmark problems and metrics such as Pass@1.",
                 "Co-authored the CanItEdit paper and presented at LLM4Code (ICSE Workshop). The paper is also submission to COLM."
             ]
+        },
+        {
+            "title": "Teaching Assistant",
+            "companyName": "Khoury College of Computer Sciences",
+            "location": "Boston, Massachusetts",
+            "dates": "September 2023 - December 2023",
+            "assets": {
+            },
+            "description": [
+                "Directed weekly lab sessions, wrote reference solutions and test suites, hosted office hours and graded weekly homework"
+            ]
+        },
+        {
+            "title": "Mathematics Grader",
+            "companyName": "Northeastern University",
+            "location": "Boston, Massachusetts",
+            "dates": "September 2023 - December 2023",
+            "assets": {
+            },
+            "description": [
+                "Graded students' weekly quizzes and provided feedback for improvements."
+            ]
+        },
+        {
+            "title": "Undergraduate Researcher",
+            "companyName": "Research Experience for Undergraduates (REU)",
+            "location": "Boston, Massachusetts",
+            "dates": "May 2023 - June 2023",
+            "assets": {
+            },
+            "description": [
+                "Researched Convolutional Neural Networks (CNNs) and potential extensions to current architectures through group theory, which adds other forms of equivariance properties to standard CNN models.",
+                "Collaborated with fellow researchers to code, train and test CNN architectures such as ResNet and GoogLeNet in Python with PyTorch on the CIFAR10 dataset, which consists of 70K total images split into 10 classes.", 
+                "Developed group equivariant neural networks that extends a normal CNN to be equivariant to rotations and reflections."
+            ]
         }
-    ]
+    ],
+    "projects": []
 }

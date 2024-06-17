@@ -33,14 +33,14 @@ h2 {
 
 h3 {
     color: var(--green);
-    font-size: 17px;
+    font-size: 15px;
     font-weight: normal;
     letter-spacing: 0.03em;
 }
 
 h4 {
     color: var(--blue);
-    font-size: 17px;
+    font-size: 15px;
     font-weight: normal;
     letter-spacing: 0.03em;
 }
@@ -48,7 +48,7 @@ h4 {
 body {
     /* font-family: 'Courier New', Courier, monospace; */
     font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--white);
     line-height: 1.6;
     margin: 0;
@@ -59,6 +59,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--black1);
+    overflow: hidden;
 }
 
 footer {
@@ -72,6 +73,84 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.flex-parent {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 40px; 
+    margin: 10px 50px;
+    overflow: hidden;
+    width: 90%;
+    border: 2px solid var(--black3);
+    background-color: var(--black1);
+}
+
+.left-child {
+    flex: 1; 
+    padding: 20px; 
+    max-height: 700px;
+}
+
+.right-child {
+    flex: 2; 
+    padding: 20px; 
+    overflow-y: scroll; 
+    max-height: 700px; 
+}
+
+.right-child > * {
+    margin-bottom: 20px;
+}
+
+.left-child > * {
+    margin-bottom: 20px; 
+}
+
+.margin15 > * {
+    margin-bottom: 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.navbar a {
+    padding: 5px 20px; 
+    color: var(--purple); 
+}
+
+.navbar a:hover {
+    text-decoration: underline; 
+    color: var(--pink); 
+}
+
+.assets_nav {
+    display: flex;
+}
+
+.assets_nav a {
+    justify-content: space-between;
+    margin: 10px;
+    color: var(--purple); 
+}
+
+.assets_nav a:hover {
+    text-decoration: underline; 
+    color: var(--pink); 
+}
+
+.job-description {
+    margin-top: 5px;
+    padding-left: 20px; 
+}
+
+.job-description li {
+    list-style-type: disc; 
+    margin-bottom: 8px; 
 }
 
 .yellow-highlight {
@@ -104,71 +183,6 @@ footer {
 
 .pink-highlight {
     color: var(--pink);
-}
-
-.flex-parent {
-    display: flex;
-    justify-content: center; /* Center children horizontally */
-    align-items: center; /* Align children to the top */
-    gap: 10px; /* Gap between flex items */
-    padding: 40px; /* Optional padding around the parent */
-    margin: 10px 50px;
-    overflow: hidden;
-    width: 90%;
-    border: 2px solid var(--black3);
-    background-color: var(--black1);
-}
-
-.left-child {
-    flex: 1; /* Grow to fill available space */
-    padding: 20px; /* Padding inside left child */
-    max-height: 700px;
-}
-
-.right-child {
-    flex: 2; /* Grow to fill available space */
-    padding: 20px; /* Padding inside right child */
-    overflow-y: scroll; /* Enable vertical scrollbar if content overflows */
-    max-height: 700px; /* Optional: Limit max height for scrolling */
-}
-
-.right-child > * {
-    margin-bottom: 20px;
-}
-
-.left-child > * {
-    margin-bottom: 20px; 
-}
-
-.margin10 > * {
-    margin-bottom: 10px;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between; 
-    padding: 10px 20px; 
-}
-
-.navbar a {
-    padding: 5px 20px; 
-    color: var(--purple); 
-    text-decoration: none; 
-}
-
-.navbar a:hover {
-    text-decoration: underline; 
-    color: var(--pink); 
-}
-
-.job-description {
-    margin-top: 10px; /* Adjust margin as needed */
-    padding-left: 20px; /* Indentation for the bullets */
-}
-
-.job-description li {
-    list-style-type: disc; /* Bullet style (default) */
-    margin-bottom: 8px; /* Space between list items */
 }
 
 /* Responsive Design */
