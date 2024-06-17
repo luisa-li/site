@@ -14,6 +14,7 @@
     --grey0: #7c6f64;
     --grey1: #928374;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -123,12 +124,21 @@ a:hover {
     flex-direction: row;
 }
 
-.job-description {
-    margin-top: 1vw;
+.left-navbar {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    width: 100%;
+    gap: 3vw;
+    height: auto;
+    flex-direction: row;
+}
+
+.bullets {
     padding-left: 3vh; 
 }
 
-.job-description li {
+.bullets li {
     list-style-type: disc; 
     margin-bottom: 1vh; 
 }

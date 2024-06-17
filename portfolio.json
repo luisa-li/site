@@ -83,25 +83,36 @@
     ],
     "projects": [
         {
-            "name": "Personal website",
+            "name": "Personal Website",
+            "date": "June 2024",
             "assets": {
-                "Website": "https://www.youtube.com/watch?v=xvFZjo5PgG0",
-                "Code": "https://github.com/luisa-li/site"
+                "Website repository": "https://github.com/luisa-li/site"
             },
-            "description": [
-                "Created a website that helps users edit their emails to be either more direct or more polite, with the idea to subvert the gender expectation that women should email differently to men.",
-                "The application is built with React, Typescript and CSS in the frontend, Python, FastAPI and OpenAI’s API in the backend. This project won Best Overall Hack at Hack the Patriarchy Hackathon."
-            ]
+            "description": ["A website built using HTML, CSS and JavaScript, hosting a web version of my resume, and other bits and bobs!"]
+        },
+        {
+            "name": "MD Simulation of Argon Gas",
+            "date": "June 2024",
+            "assets": {
+                "Python code": "https://github.com/luisa-li/COMBINE/blob/main/argon_simulation.py"
+            },
+            "description": ["A molecular dynamics simulation of argon gas in 3D space, obeying the basic kinematic equations, and moving under the influence of the Lennard-Jones force.", "Code written in Python, animated using Matplotlib, and vector operations optimized with Numpy."]
         },
         {
             "name": "GenderSender",
+            "date": "October 2023",
             "assets": {
                 "GenderSender Repository": "https://github.com/elizabeth-mcdowell/gendersender"
             },
-            "description": [
-                "Created a website that helps users edit their emails to be either more direct or more polite, with the idea to subvert the gender expectation that women should email differently to men.",
-                "The application is built with React, Typescript and CSS in the frontend, Python, FastAPI and OpenAI’s API in the backend. This project won Best Overall Hack at Hack the Patriarchy Hackathon."
-            ]
+            "description": ["Created a website that helps users edit their emails to be either more direct or more polite, with the idea to subvert the gender expectation that women should email differently to men.", "The application is built with React, Typescript and CSS in the frontend, Python, FastAPI and OpenAI’s API in the backend. This project won Best Overall Hack at Hack the Patriarchy Hackathon."]
+        },
+        {
+            "name": "SpotCheck",
+            "date": "February 2023",
+            "assets": {
+                "SpotCheck Repository": "https://github.com/SpaceRage/AIHackathon"
+            },
+            "description": ["Created a machine learning model to classify skin cancer lesions with special emphasis on reducing discrimination based on skin tone in similar models. The project won Best Overall Project at the Responsible AI Hackathon."]
         }
     ]
 }

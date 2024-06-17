@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             populateSummary(data.summary);
             populateWorkExperience(data.workExperience);
             populateEducation(data.education)
+            populateProjects(data.projects)
         })
         .catch(error => {
             console.error('Error fetching or parsing JSON:', error);
@@ -14,30 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function populateSummary(summary) {
     const summaryContent = document.getElementById('summary');
     summaryContent.textContent = summary;
-}
-
-function populateWorkExperience(workExperience) {
-    const workExperienceSection = document.getElementById('experience-body');
-    const jobsContainer = workExperience.map(job => `
-        <div>
-            <div class="left-right">
-                <h3> ${job.companyName} </h4>
-                <p><i> ${job.dates} </i></p>
-            </div>
-            <div class="left-right">
-                <h4> ${job.title} </h4>
-                <p><i> ${job.location} </i></p>
-            </div>
-            <nav class="navbar">
-                ${parseAssets(job.assets)}
-            </nav>
-            <ul class="job-description">
-                ${job.description.map(desc => `<li>${desc}</li>`).join('')}
-            </ul>
-        </div>
-    `).join('');
-
-    workExperienceSection.innerHTML = jobsContainer;
 }
 
 function populateEducation(education) {
@@ -54,6 +31,49 @@ function populateEducation(education) {
         </div>
     `).join('');
     educationSection.innerHTML = educationContainer;
+}
+
+function populateWorkExperience(workExperience) {
+    const workExperienceSection = document.getElementById('experience-body');
+    const jobsContainer = workExperience.map(job => `
+        <div>
+            <div class="left-right">
+                <h3> ${job.companyName} </h3>
+                <p><i> ${job.dates} </i></p>
+            </div>
+            <div class="left-right">
+                <h4> ${job.title} </h4>
+                <p><i> ${job.location} </i></p>
+            </div>
+            <nav class="left-navbar">
+                ${parseAssets(job.assets)}
+            </nav>
+            <ul class="bullets">
+                ${job.description.map(desc => `<li>${desc}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+
+    workExperienceSection.innerHTML = jobsContainer;
+}
+
+function populateProjects(projects) {
+    const projectsSection = document.getElementById('projects-body')
+    const educationContainer = projects.map(proj => `
+        <div>
+            <div class="left-right">
+                <h4> ${proj.name} </h4>
+                <p><i> ${proj.date} </i></p>
+            </div>
+            <nav class="left-navbar">
+                ${parseAssets(proj.assets)}
+            </nav>
+            <ul class="bullets">
+                ${proj.description.map(desc => `<li>${desc}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+    projectsSection.innerHTML = educationContainer;
 }
 
 function parseAssets(assets) {
