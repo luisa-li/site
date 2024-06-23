@@ -70,7 +70,6 @@ a {
 a:hover {
     text-decoration: underline; 
     color: var(--pink); 
-    
 }
 
 .left-right {
@@ -103,17 +102,21 @@ a:hover {
 
 .right-child {
     flex: 2; 
-    padding: 3vh; 
+    padding: 2vh; 
     overflow-y: scroll; 
     height: 100%; /* Fill the parent height */
 }
 
 
 .left-child > *, .small-margin > * {
-    margin-bottom: 1vh;
+    margin-bottom: 1.5vh;
 }
 
-.navbar {
+.smaller-margin > * {
+    margin-bottom: 0.3vh
+}
+
+.navbar{
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -180,7 +183,8 @@ a:hover {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    width: 0; 
+    height: 0; 
 }
 
 * {

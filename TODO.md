@@ -1,5 +1,5 @@
-- Add quirkiness to the thing
+- Add a landing page!
 - Add in section for books and book review
 - Add in section for cool chess games that I looked into 
 - Add in section for music recommendations
-- Blog!!
+- Blog with cool things I'm learning

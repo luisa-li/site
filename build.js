@@ -20,7 +20,7 @@ function populateSummary(summary) {
 function populateEducation(education) {
     const educationSection = document.getElementById('education-body');
     const educationContainer = education.map(edu => `
-        <div>
+        <div class="smaller-margin">
             <h3>${edu.institution}</h3>
             <h4>${edu.degree}</h4>
             <p><b>Grade: ${edu.grade}</b>, <i>${edu.dates}</i></p>
@@ -36,7 +36,7 @@ function populateEducation(education) {
 function populateWorkExperience(workExperience) {
     const workExperienceSection = document.getElementById('experience-body');
     const jobsContainer = workExperience.map(job => `
-        <div>
+        <div class="smaller-margin">
             <div class="left-right">
                 <h3> ${job.companyName} </h3>
                 <p><i> ${job.dates} </i></p>
@@ -60,7 +60,7 @@ function populateWorkExperience(workExperience) {
 function populateProjects(projects) {
     const projectsSection = document.getElementById('projects-body')
     const educationContainer = projects.map(proj => `
-        <div>
+        <div class="smaller-margin">
             <div class="left-right">
                 <h4> ${proj.name} </h4>
                 <p><i> ${proj.date} </i></p>
