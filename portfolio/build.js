@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('info.json')
+    fetch('portfolio/info.json')
         .then(response => response.json())
         .then(data => {
             populateSummary(data.summary);

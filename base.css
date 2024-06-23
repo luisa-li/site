@@ -1,0 +1,68 @@
+:root {
+    --black1: #1d2021;
+    --black2: #3c3836;
+    --black3: #504945;
+    --white: #e2cca9;
+    --red: #f2594b;
+    --orange: #f28534;
+    --yellow: #e9b143;
+    --green: #b0b846;
+    --aqua: #8bba7f;
+    --blue: #80aa9e;
+    --pink: #e08cba;
+    --purple: #d386b0;
+    --grey0: #7c6f64;
+    --grey1: #928374;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: var(--white);
+    background-color: var(--black1);
+}
+
+.red-highlight {
+    color: var(--red); 
+}
+
+.orange-highlight {
+    color: var(--orange);
+}
+
+.yellow-highlight {
+    color: var(--yellow);
+}
+
+.green-highlight {
+    color: var(--green);
+}
+
+.aqua-highlight {
+    color: var(--aqua);
+}
+
+.blue-highlight {
+    color: var(--blue); 
+}
+
+.pink-highlight {
+    color: var(--pink);
+}
+
+.purple-highlight {
+    color: var(--purple);
+}
+
+.white-highlight {
+    color: var(--white);
+}
+
+::-webkit-scrollbar {
+    width: 0; 
+    height: 0; 
+}
+
+* {
+    scrollbar-width: none; 
+}

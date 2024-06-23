@@ -1,0 +1,72 @@
+h1 {
+    color: var(--red);
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h2 {
+    color: var(--yellow);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+h3 {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
+h4 {
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
+body {
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+    padding: 8vh;
+}
+
+a {
+    color: var(--white); 
+    justify-content: space-between;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline; 
+    color: var(--pink); 
+}
+
+
+#blog-parent {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 50vw;
+    text-align: center;
+    height: auto;
+    flex-direction: row;
+}
+
+.blog-post .left {
+    text-align: left; 
+    flex: 1; 
+}
+
+.blog-post .right {
+    text-align: right; 
+    flex: 1;
+}

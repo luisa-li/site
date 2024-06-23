@@ -3,8 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Luisa Li</title>
-        <link rel="stylesheet" href="styles.css"/>
+        <title>luisa's portfolio</title>
+        <link rel="stylesheet" href="base.css"/>
+        <link rel="stylesheet" href="portfolio/styles.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="icon" type="image/png" href="/images/tau.png">
     </head>
@@ -19,17 +20,25 @@
                 <h1>luisa's <span class="yellow-highlight">portfolio</span></h1>
                 <p><b><span class="blue-highlight">Hello hello!</span></b> I'm <b><span class="aqua-highlight">Luisa Li</span></b>, nice seeing you here!</p>
                 <p id="summary"></p>
-                <nav class="navbar">
-                    <a href="https://www.linkedin.com/in/luisa-li-t/" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                <div id="contact" class="small-margin">
+                    <p> You can find me on GitHub and LinkedIn: </p>
+                    <nav class="navbar">
+                        <a href="https://www.linkedin.com/in/luisa-li-t/" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/luisa-li" class="link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </nav>
+                    <p> Alternatively, feel free to shoot me an email at <span class="aqua-highlight">li.tao@northeastern.edu</span>
+                    </p>
+                </div>
+                <div id="navigation" class="small-margin">
+                    <b>Go to:</b>
+                    <a href="blog.html" class="link" target="_blank">
+                        <i class="fas fa-book"></i> Blog
                     </a>
-                    <a href="https://github.com/luisa-li" class="link" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:li.tao@northeastern.edu">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                </nav>
+                </div>
             </div>
             <div class="child right-child">
                 <div class="small-margin">
@@ -46,6 +55,6 @@
                 </div>
             </div>
         </div>
-        <script src="build.js"></script>
+        <script src="portfolio/build.js"></script>
     </body>
 </html>
