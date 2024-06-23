@@ -180,10 +180,9 @@ a:hover {
 }
 
 ::-webkit-scrollbar {
-    width: 0; 
-    height: 0; 
+    display: none;
 }
 
 * {
-    scrollbar-width: none; /* Hides the scrollbar */
+    scrollbar-width: none; 
 }
