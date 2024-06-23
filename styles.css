@@ -178,3 +178,12 @@ a:hover {
 .aqua-highlight {
     color: var(--aqua);
 }
+
+::-webkit-scrollbar {
+    width: 0; 
+    height: 0; 
+}
+
+* {
+    scrollbar-width: none; /* Hides the scrollbar */
+}
