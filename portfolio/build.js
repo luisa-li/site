@@ -20,10 +20,16 @@ function populateSummary(summary) {
 function populateEducation(education) {
     const educationSection = document.getElementById('education-body');
     const educationContainer = education.map(edu => `
-        <div class="smaller-margin">
-            <h3>${edu.institution}</h3>
-            <h4>${edu.degree}</h4>
-            <p><b>Grade: ${edu.grade}</b>, <i>${edu.dates}</i></p>
+        <div>
+            <div class="left-right">
+                <h3> ${edu.institution} </h3>
+                <p><i> ${edu.location} </i></p>
+            </div>
+            <div class="left-right">
+                <h3> ${edu.degree} </h3>
+                <p><i> ${edu.dates} </i></p>
+            </div>
+            <p><b>Grade: ${edu.grade}</b></p>
             ${edu.honors ? `<p><strong>Honors:</strong> ${edu.honors.join(', ')}</p>` : ''}
             ${edu.courses && edu.courses.length > 0 ? `
                 <p><strong>Courses:</strong> ${edu.courses.join(', ')}</p>` : ''}
@@ -36,7 +42,7 @@ function populateEducation(education) {
 function populateWorkExperience(workExperience) {
     const workExperienceSection = document.getElementById('experience-body');
     const jobsContainer = workExperience.map(job => `
-        <div class="smaller-margin">
+        <div>
             <div class="left-right">
                 <h3> ${job.companyName} </h3>
                 <p><i> ${job.dates} </i></p>
@@ -60,9 +66,9 @@ function populateWorkExperience(workExperience) {
 function populateProjects(projects) {
     const projectsSection = document.getElementById('projects-body')
     const educationContainer = projects.map(proj => `
-        <div class="smaller-margin">
+        <div>
             <div class="left-right">
-                <h4> ${proj.name} </h4>
+                <h3> ${proj.name} </h3>
                 <p><i> ${proj.date} </i></p>
             </div>
             <nav class="left-navbar">

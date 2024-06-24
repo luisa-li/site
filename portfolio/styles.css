@@ -5,30 +5,28 @@
 }
 
 h1 {
-    color: var(--red);
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     padding-bottom: 3vh;
+    text-decoration: underline;
 }
 
 h2 {
-    color: var(--yellow);
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-decoration: underline;
 }
 
 h3 {
-    color: var(--green);
-    font-size: 14px;
-    font-weight: normal;
-    letter-spacing: 0.03em;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.06em;
 }
 
 h4 {
-    color: var(--blue);
-    font-size: 14px;
     font-weight: normal;
-    letter-spacing: 0.03em;
+    font-size: 15px;
+    letter-spacing: 0.06em;
 }
 
 body {
@@ -42,14 +40,14 @@ body {
 }
 
 a {
-    color: var(--purple); 
+    color: var(--white); 
     justify-content: space-between;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
+    color: var(--white); 
     text-decoration: underline; 
-    color: var(--pink); 
 }
 
 .left-right {
@@ -65,8 +63,6 @@ a:hover {
     padding: 5vh; 
     overflow: hidden;
     width: 90%;
-    border: 2px solid var(--black3);
-    background-color: var(--black1);
     height: 90vh; 
 }
 
@@ -78,13 +74,17 @@ a:hover {
     justify-content: center; 
     align-items: flex-start; 
     height: 100%;
+    gap: 2vh
 }
 
 .right-child {
     flex: 2; 
-    padding: 2vh; 
+    display: flex;
+    flex-direction: column;
+    padding: 3vh; 
     overflow-y: scroll; 
     height: 100%;
+    gap: 3vh;
 }
 
 .right-child a {
@@ -96,15 +96,6 @@ a:hover {
 a:hover {
     text-decoration: underline; 
     color: var(--aqua); 
-}
-
-
-.left-child > *, .small-margin > * {
-    margin-bottom: 1.5vh;
-}
-
-.smaller-margin > * {
-    margin-bottom: 0.3vh
 }
 
 .navbar{
@@ -135,6 +126,18 @@ a:hover {
 .bullets li {
     list-style-type: disc; 
     margin-bottom: 1vh; 
+}
+
+.right-child-child {
+    gap: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-child {
+    gap: 1.8vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #id p {

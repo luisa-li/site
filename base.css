@@ -1,7 +1,5 @@
 :root {
-    --black1: #1d2021;
-    --black2: #3c3836;
-    --black3: #504945;
+    --black: #151718;
     --white: #e2cca9;
     --red: #f2594b;
     --orange: #f28534;
@@ -19,43 +17,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
     color: var(--white);
-    background-color: var(--black1);
-}
-
-.red-highlight {
-    color: var(--red); 
-}
-
-.orange-highlight {
-    color: var(--orange);
-}
-
-.yellow-highlight {
-    color: var(--yellow);
-}
-
-.green-highlight {
-    color: var(--green);
-}
-
-.aqua-highlight {
-    color: var(--aqua);
-}
-
-.blue-highlight {
-    color: var(--blue); 
-}
-
-.pink-highlight {
-    color: var(--pink);
-}
-
-.purple-highlight {
-    color: var(--purple);
-}
-
-.white-highlight {
-    color: var(--white);
+    background-color: var(--black);
 }
 
 ::-webkit-scrollbar {

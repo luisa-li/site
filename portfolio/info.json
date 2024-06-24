@@ -2,7 +2,8 @@
     "summary": "I'm a undergraduate student at Northeastern University studying CS & Math. I'm broadly interested in researching applied mathematics and machine learning in the context of biochemistry and bioengineering.",
     "education": [
         {
-          "institution": "Northeastern University — Boston, Massachusetts",
+          "institution": "Northeastern University",
+          "location":"Boston, Massachusetts",
           "degree": "BSc in Computer Science and Mathematics",
           "dates": "September 2022 - May 2026",
           "grade": "3.9/4.0",
@@ -10,7 +11,8 @@
           "courses": ["Object-Oriented Design", "Algorithms and Data Structures", "Linear Algebra", "Advanced Probability and Statistics", "Differential Equations"]
         },
         {
-          "institution": "Markham College — Lima, Peru",
+          "institution": "Markham College",
+          "location": "Lima, Peru",
           "degree": "IB Diploma",
           "dates": "March 2018 - December 2021",
           "grade": "41/45",
