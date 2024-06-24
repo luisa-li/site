@@ -6,7 +6,6 @@
 
 h1 {
     font-size: 25px;
-    font-family: 'Courier New', Courier, monospace;
     padding-bottom: 3vh;
     text-decoration: underline;
     color: var(--lightwhite);
@@ -62,7 +61,8 @@ a:hover {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 4vh; 
+    padding-top: 5vh; 
+    padding-bottom: 5vh; 
     overflow: hidden;
     width: 90%;
     height: 90vh; 
@@ -91,6 +91,11 @@ a:hover {
 
 .right-child a {
     color: var(--lightwhite); 
+    text-decoration: underline;
+}
+
+.right-child a:hover {
+    color: var(--pink); 
     text-decoration: underline;
 }
 

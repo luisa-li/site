@@ -33,3 +33,39 @@ body {
 .highlight {
     color: var(--lightwhite)
 }
+
+.red-highlight {
+    color: var(--red); 
+}
+
+.orange-highlight {
+    color: var(--orange);
+}
+
+.yellow-highlight {
+    color: var(--yellow);
+}
+
+.green-highlight {
+    color: var(--green);
+}
+
+.aqua-highlight {
+    color: var(--aqua);
+}
+
+.blue-highlight {
+    color: var(--blue); 
+}
+
+.pink-highlight {
+    color: var(--pink);
+}
+
+.purple-highlight {
+    color: var(--purple);
+}
+
+.white-highlight {
+    color: var(--white);
+}

@@ -1,24 +1,20 @@
 h1 {
-    color: var(--red);
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
 }
 
 h2 {
-    color: var(--yellow);
     font-weight: 600;
     letter-spacing: 0.05em;
 }
 
 h3 {
-    color: var(--green);
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.03em;
 }
 
 h4 {
-    color: var(--blue);
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.03em;
@@ -35,20 +31,21 @@ body {
 }
 
 a {
-    color: var(--white); 
+    color: var(--lightwhite); 
     justify-content: space-between;
     text-decoration: underline;
 }
 
 a:hover {
     text-decoration: underline; 
-    color: var(--pink); 
+    color: var(--blue); 
 }
 
 
 #blog-parent {
     display: flex;
     flex-direction: column;
+    height: 70vh;
 }
 
 .blog-post {
@@ -69,4 +66,15 @@ a:hover {
 .blog-post .right {
     text-align: right; 
     flex: 1;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    gap: 3vw;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2vh;
 }
