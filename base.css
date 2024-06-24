@@ -1,6 +1,7 @@
 :root {
     --black: #151718;
     --white: #e2cca9;
+    --lightwhite: #e6dac7;
     --red: #f2594b;
     --orange: #f28534;
     --yellow: #e9b143;
@@ -27,4 +28,8 @@ body {
 
 * {
     scrollbar-width: none; 
+}
+
+.highlight {
+    color: var(--lightwhite)
 }

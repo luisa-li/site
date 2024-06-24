@@ -9,12 +9,14 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
     padding-bottom: 3vh;
     text-decoration: underline;
+    color: var(--lightwhite);
 }
 
 h2 {
     font-weight: bold;
     letter-spacing: 0.06em;
     text-decoration: underline;
+    color: var(--lightwhite);
 }
 
 h3 {
@@ -40,13 +42,13 @@ body {
 }
 
 a {
-    color: var(--white); 
+    color: var(--lightwhite); 
     justify-content: space-between;
     text-decoration: underline;
 }
 
 a:hover {
-    color: var(--white); 
+    color: var(--yellow); 
     text-decoration: underline; 
 }
 
@@ -60,7 +62,7 @@ a:hover {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 5vh; 
+    padding: 4vh; 
     overflow: hidden;
     width: 90%;
     height: 90vh; 
@@ -68,34 +70,28 @@ a:hover {
 
 .left-child {
     flex: 1;
-    padding: 3vh;
+    padding: 5vh;
     display: flex;
     flex-direction: column; 
     justify-content: center; 
     align-items: flex-start; 
     height: 100%;
-    gap: 2vh
+    gap: 2vh;
 }
 
 .right-child {
     flex: 2; 
     display: flex;
     flex-direction: column;
-    padding: 3vh; 
+    padding: 5vh; 
     overflow-y: scroll; 
     height: 100%;
     gap: 3vh;
 }
 
 .right-child a {
-    color: var(--white); 
-    justify-content: space-between;
+    color: var(--lightwhite); 
     text-decoration: underline;
-}
-
-a:hover {
-    text-decoration: underline; 
-    color: var(--aqua); 
 }
 
 .navbar{
@@ -136,6 +132,19 @@ a:hover {
 
 .section-child {
     gap: 1.8vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.separator {
+    width: 1px;
+    height: 60vh;
+    background-color: var(--lightwhite);
+    
+}
+
+.portfolio-section {
+    gap: 0.5vh;
     display: flex;
     flex-direction: column;
 }
