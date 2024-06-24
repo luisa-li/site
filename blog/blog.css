@@ -21,6 +21,7 @@ body {
     font-family: 'Book Antiqua', 'Palatino Linotype', 'Georgia', Palatino, serif;
     font-size: 17px;
     letter-spacing: 0.03em;
+    line-height: 1.7;
 }
 
 .left-navbar {
@@ -39,6 +40,25 @@ body {
     height: 1px;
     margin-top: 2vh;
     margin-bottom: 2vh;
+}
+
+
+.whisper {
+    font-size: 14px;
+    width: 60vw;
+    color: var(--grey1);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.glossary {
+    font-size: 15px;
+    width: 60vw;
+    color: var(--grey1);
+    text-align: right;
+    align-items: center;
+    justify-content: center;
 }
 
 

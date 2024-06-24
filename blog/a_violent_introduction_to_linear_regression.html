@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="blog.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="icon" type="image/png" href="/images/tau.png">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
     </head>
     <body>
         <nav class="left-navbar">
@@ -31,7 +33,83 @@
         </div>
         <div class="separator"></div>
         <div class="body">
-            <p> This is a work in progress... </p>
+
+            <p>ok, so have a bunch of points \( (x_1, y_1), (x_2, y_2), ... , (x_n, y_n) \), you'd like to find a linear model that defines the relationship between \(x\) and \(y\). in other words, you want a function \( y = mx + b \) derived from your training data, so that you can estimate what \(y\) is for an unseen \(x\). </p>
+
+            <p>there are two ways you can go about this. the first being the analytical solution where you solve for the optimal parameters with some hardcore linear algebra, which gives you the best™ solution. the second approach involves gradient descent, which is what this blog is about. </p>
+
+            <p class="whisper"> you absolutely should not get used to the luxury of having an analytical solution to your problem, this happens never </p>
+
+            <p> the \(m\) in the equation \( y = mx + b \) is known commonly as the slope, and \(b\) as the y-intercept. you can basically think of them as little knobs to tune; increasing \(m\) makes the line steeper, and increasing \(y\) moves the line upwards without changing the slope. that equation can be generalized to the \(n^{th}\) dimension as \(y = m_1 x_1 + m_2 x_2 + m_3 x_3 + ... + m_k x_k + b \). it's the same idea as the 2d case, you just got more knobs to tweak. </p>
+
+            <p class="glossary"> these knobs are formally known as <span class="yellow-highlight">parameters</span> or <span class="yellow-highlight">weights</span> in machine learning.</p>
+
+            <p>to have good knob settings, you want to minimize the error. the most common way to define error is known as `mean squared error`, which, you guessed it, takes the square and then the mean of all the errors. </p>
+
+            <p> \[ MSE = \frac{1}{n} \sum^n_{i = 1} (y_i - \hat{y}_i)^2 \]</p>
+            <p> where \(\hat{y}\) is our estimate of \(y\) produced by our linear model, and is defined as \( mx_i + b\), and the error \(e\) - the difference between our best guess and the correct answer, is given by \((y_i - \hat{y}_i)\) </p>
+
+            <p class="glossary"> functions that define how good a model is, like MSE, are known as <span class="yellow-highlight"> loss functions.</span></p>
+
+            <p> now onto gradient descent. </p>
+
+            <p> the best way to think about gradient descent is in the shoes of an adventurer navigating some vast, hilly terrain looking for the point with lowest altitude. your current location will have a certain steepness in each direction that you can walk in. to find the point with the lowest altitude, as fast as possible, you want to walk off the steepest cliff you can find. </p>
+            
+            <p> in formalized math jargon, this corresponds to finding the minima of the loss function. the steepness of each direction corresponds to the partial derivative of each independent variable of the loss function, also known as the parameters \(m\) and \(b\). to get to the minima of the loss, we calculate the partial derivative, which gives the direction of the steepest ascent, and move our parameters towards the opposite direction. </p>
+
+            <p class="whisper"> there is a lot more complexity surrounding finding the local V.S. global minima, but for simplicity we will keep one eye shut today. </p>
+
+            <p> the derivation of the derivatives is relatively simple calculus: </p>
+
+            <p> \[ MSE = \frac{1}{n} \sum^n_{i = 1} (y_i - \hat{y}_i)^2, \space e = (y_i - (mx_i + b))\]</p>
+            <p> \[ \frac{\partial{e^2}}{\partial{b}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{b}} = -1 \times 2(y_i - wx_i - b) = -2(y_i - wx_i - b) \] </p>
+            <p> \[ \frac{\partial{MSE}}{\partial{b}} = \frac{1}{N} \sum^n_{i = 1} -2(y_i - wx_i - b)\] </p>
+            <p> \[ \frac{\partial{e^2}}{\partial{w}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{w}} = -x_i \times 2(y_i - wx_i - b) = -2x_i(y_i - wx_i - b) \] </p>
+            <p> \[ \frac{\partial{MSE}}{\partial{w}} = \frac{1}{N} \sum^n_{i = 1} -2x_i(y_i - wx_i - b)\] </p>
+
+            now we improve our parameters by having them go a little bit towards the direction negative of their gradient: 
+
+            <p> \[ w \rightarrow w - \alpha \frac{\partial{MSE}}{\partial{w}}, \space b \rightarrow b - \alpha \frac{\partial{MSE}}{\partial{b}} \]</p>
+
+            <p class="glossary"> \(\alpha\) here is a constant called the <span class="yellow-highlight"> learning rate </span>, which controls how size of each step we take towards the minima. </p>
+
+            <p class="glossary"> this step of calculating the partial derivative with respect to each parameter, and updating the weights to go down the loss gradient, is called <span class="yellow-highlight"> backpropagation </span>, short for backward propagation of errors.</p>
+
+            <p>as we move from the realm of pure math to the scary world of applied math, i introduce to you the matrix notation. in essence, the big hunk of formula for linear regression in higher dimensions can be vastly simplified by writing \(x\), \(y\) along with their parameters as matrices, so: </p>
+
+            <p> \[ y = mx + b \rightarrow \vec{y} = X\vec{w} + b\] </p>
+
+            <p> we make the notation switch here to represent the change from simple scalars to matrices and vectors. Now: </p>
+
+            <ul>
+                <li> \(\vec{y}\) is a vector of shape \((n, 1)\) where \(n\) is the number of samples </li>
+                <li> \(\vec{w}\) is a vector of shape \((k, 1)\) where \(k\) is the number of features </li>
+                <li> \(X\) is a matrix of shape \((n, k)\)</li>
+                <li> \(b\) is a scalar </li>
+            </ul>
+
+            <p> a good habit is always to check that the dimensions work out right: \((n, k)(k, 1) + (1) = (n, 1) \), which is the shape of \(\vec{y}\). </p>
+
+            <p class="whisper"> if you're wondering why \(b\), a scalar, can be added to a vector of a different shape, look up the concept of `broadcasting`.</p>
+
+            <p> TODO: AAAAAAAAAAAAA now we also have to the the linear algebra part of the derivatives and the update rules</p>
+            
+            <p>that covers how we quntify the quality of a model, and how we make it better iteratively, and how to vectorize it for speed. now we need to put the pieces together, and introduce the technical details of training the model. </p>
+
+            <p> finally, an appropriate amount of machine learning jargon: </p>
+
+            <p class="glossary"> an <span class="yellow-highlight"> epoch </span> represents one round of training, and a full iteration of the training data. </p>
+            <p class="glossary"> an <span class="yellow-highlight"> split </span> is a portion of the data, the <span class="yellow-highlight"> train split </span> is the data used directly in training, and a <span class="yellow-highlight"> test split </span> is the data used to evaluate the resulting model. </p>
+
+            <p> the following algorithm should be straightforward after all that buildup: </p>
+
+            <code> 
+                randomly initialize weights W and b in the correct shape <br>
+                split the data into the train and test splits <br>
+                for every epoch:
+
+            </code>
+
         </div>
         
     </body>
