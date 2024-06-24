@@ -84,7 +84,18 @@ a:hover {
     flex: 2; 
     padding: 2vh; 
     overflow-y: scroll; 
-    height: 100%; /* Fill the parent height */
+    height: 100%;
+}
+
+.right-child a {
+    color: var(--white); 
+    justify-content: space-between;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline; 
+    color: var(--aqua); 
 }
 
 
