@@ -24,7 +24,7 @@
             "title": "Computational Modeling Co-op",
             "companyName": "Montai Therapeutics",
             "location": "Cambridge, Massachusetts",
-            "dates": "January 2024 - Present",
+            "dates": "January 2024 - June 2024",
             "assets": {},
             "description": [
                 "Contributed to bioactivity machine learning model development using PyTorch, incorporated weighting and ensembling features and performed detailed analysis demonstrating performance improvement over original model.", 
@@ -44,7 +44,7 @@
             "description": [
                 "Contributed to CanItEdit, a code-editing benchmark that evaluates Large Language Model’s performance on sophisticated and diverse code editing tasks that demand domain-specific knowledge.", 
                 "Wrote code to evaluate open and closed source models using our benchmark problems and metrics such as Pass@1.",
-                "Co-authored the CanItEdit paper and presented at LLM4Code (ICSE Workshop). The paper is also submission to COLM."
+                "Co-authored the CanItEdit paper and presented at LLM4Code (ICSE Workshop). The paper was also accepted at COLM 2024."
             ]
         },
         {

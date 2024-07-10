@@ -202,13 +202,16 @@ a:hover {
         display: block;
         overflow: visible;
         align-content: center;
-        gap: 4vh;
+    }
+
+    .left-child > * {
+        margin-bottom: 1vh; 
     }
 
     .right-child {
         display: block;
         overflow: visible;
-        gap: 4vh;
+        margin-top: 5vh;
     }
 
     .left-right {
