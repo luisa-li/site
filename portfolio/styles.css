@@ -159,26 +159,3 @@ a:hover {
     justify-content: space-between;
     align-items: center;
 }
-
-@media (max-width: 600px) {
-    .flex-parent {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .left-child {
-        width: 100%;
-        padding: 2vh;
-        overflow-y: scroll; 
-    }
-
-    .right-child {
-        width: 100%;
-        padding: 2vh;
-        overflow-y: scroll; 
-    }
-
-    .separator {
-        display: none;
-    }
-}
