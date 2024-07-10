@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
+
 h1 {
-    font-size: 25px;
     padding-bottom: 3vh;
     text-decoration: underline;
     color: var(--lightwhite);
@@ -19,14 +19,12 @@ h2 {
 }
 
 h3 {
-    font-size: 15px;
     font-weight: bold;
     letter-spacing: 0.06em;
 }
 
 h4 {
     font-weight: normal;
-    font-size: 15px;
     letter-spacing: 0.06em;
 }
 
@@ -73,10 +71,9 @@ a:hover {
     padding: 5vh;
     display: flex;
     flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
     height: 100%;
     gap: 2vh;
+    overflow-y: scroll; 
 }
 
 .right-child {
@@ -99,7 +96,7 @@ a:hover {
     text-decoration: underline;
 }
 
-.navbar{
+.navbar {
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -158,4 +155,80 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 23px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+    
+    h3 {
+        font-weight: bold;
+        letter-spacing: 0.06em;
+        font-size: 14px;
+    }
+    
+    h4 {
+        font-weight: normal;
+        letter-spacing: 0.06em;
+        font-size: 14px;
+    }
+    
+    body {
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: 100vh;
+        font-size: 13px;
+    }
+
+    .flex-parent {
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        gap: 10vh;
+        padding-top: 33vh;
+    }
+
+    .left-child {
+        display: block;
+        overflow: visible;
+        align-content: center;
+        gap: 4vh;
+    }
+
+    .right-child {
+        display: block;
+        overflow: visible;
+        gap: 4vh;
+    }
+
+    .left-right {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }    
+
+    .right-child-child {
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .section-child {
+        gap: 2vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
 }

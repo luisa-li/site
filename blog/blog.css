@@ -79,3 +79,19 @@ a:hover {
     color: var(--green); 
     text-decoration: underline; 
 }
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 23px;
+    }
+    
+    body {
+        font-size: 13px;
+    }
+    
+    a {
+        font-size: 13px;
+    }
+
+}
