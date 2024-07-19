@@ -6,6 +6,10 @@ body {
     padding: 5vh;   
 }
 
+h3 {
+    color: var(--lightwhite)
+}
+
 .head {
     display: flex;
     flex-direction: column;
