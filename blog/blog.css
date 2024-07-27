@@ -10,6 +10,10 @@ h3 {
     color: var(--lightwhite)
 }
 
+img {
+    padding-top: 2vh;
+}
+
 .head {
     display: flex;
     flex-direction: column;
