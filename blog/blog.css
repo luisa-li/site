@@ -10,8 +10,12 @@ h3 {
     color: var(--lightwhite)
 }
 
-img {
-    padding-top: 2vh;
+.centered {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .head {
