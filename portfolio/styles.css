@@ -4,29 +4,11 @@
     box-sizing: border-box;
 }
 
-
 h1 {
-    padding-bottom: 3vh;
-    text-decoration: underline;
     color: var(--lightwhite);
+    text-align: left;
 }
 
-h2 {
-    font-weight: bold;
-    letter-spacing: 0.06em;
-    text-decoration: underline;
-    color: var(--lightwhite);
-}
-
-h3 {
-    font-weight: bold;
-    letter-spacing: 0.06em;
-}
-
-h4 {
-    font-weight: normal;
-    letter-spacing: 0.06em;
-}
 
 body {
     line-height: 1.6;
@@ -34,204 +16,45 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     height: 100vh;
 }
 
 a {
     color: var(--lightwhite); 
-    justify-content: space-between;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 a:hover {
-    color: var(--yellow); 
-    text-decoration: underline; 
+    color: var(--pink)
 }
 
-.left-right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flex-parent {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    padding-top: 5vh; 
-    padding-bottom: 5vh; 
-    overflow: hidden;
+.center-box {
     width: 90%;
-    height: 90vh; 
-}
-
-.left-child {
-    flex: 1;
-    padding: 5vh;
-    display: flex;
-    flex-direction: column; 
-    height: 100%;
-    gap: 2vh;
-    overflow-y: scroll; 
-}
-
-.right-child {
-    flex: 2; 
-    display: flex;
-    flex-direction: column;
-    padding: 5vh; 
-    overflow-y: scroll; 
-    height: 100%;
-    gap: 3vh;
-}
-
-.right-child a {
-    color: var(--lightwhite); 
-    text-decoration: underline;
-}
-
-.right-child a:hover {
-    color: var(--pink); 
-    text-decoration: underline;
-}
-
-.navbar {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    gap: 3vw;
-    height: auto;
-    flex-direction: row;
-}
-
-.left-navbar {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    width: 100%;
-    gap: 3vw;
-    height: auto;
-    flex-direction: row;
-}
-
-.bullets {
-    padding-left: 3vh; 
-}
-
-.bullets li {
-    list-style-type: disc; 
-    margin-bottom: 1vh; 
-}
-
-.right-child-child {
+    max-width: 500px;
+    padding: 4vw;
     gap: 2vh;
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 
-.section-child {
-    gap: 1.8vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.separator {
-    width: 1px;
-    height: 60vh;
-    background-color: var(--lightwhite);
-    
-}
-
-.portfolio-section {
-    gap: 0.5vh;
-    display: flex;
-    flex-direction: column;
-}
-
-#id p {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 @media (max-width: 600px) {
 
-    h1 {
-        font-size: 23px;
+    .center-box {
+        max-width: 300px; 
+        padding: 15px;
     }
-    
-    h2 {
-        font-size: 20px;
+
+    .header a {
+        display: block;
     }
-    
-    h3 {
-        font-weight: bold;
-        letter-spacing: 0.06em;
-        font-size: 14px;
-    }
-    
-    h4 {
-        font-weight: normal;
-        letter-spacing: 0.06em;
-        font-size: 14px;
-    }
-    
+
     body {
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        height: 100vh;
+        font-family: 'Courier New', Courier, monospace;
         font-size: 13px;
+        color: var(--white);
+        background-color: var(--black);
     }
 
-    .flex-parent {
-        display: flex;
-        flex-direction: column;
-        overflow: scroll;
-        gap: 10vh;
-        padding-top: 33vh;
-    }
-
-    .left-child {
-        display: block;
-        overflow: visible;
-        align-content: center;
-    }
-
-    .left-child > * {
-        margin-bottom: 1vh; 
-    }
-
-    .right-child {
-        display: block;
-        overflow: visible;
-        margin-top: 5vh;
-    }
-
-    .left-right {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }    
-
-    .right-child-child {
-        padding-top: 2vh;
-        padding-bottom: 2vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .section-child {
-        gap: 2vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    
 }

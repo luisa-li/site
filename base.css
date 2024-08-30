@@ -16,7 +16,6 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
     color: var(--white);
     background-color: var(--black);
 }
