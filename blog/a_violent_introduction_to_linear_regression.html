@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>luisa's blog</title>
         <link rel="stylesheet" href="../base.css"/>
-        <link rel="stylesheet" href="blog.css">
+        <link rel="stylesheet" href="blogpost.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="icon" type="image/png" href="../resources/tau.png">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
     </head>
     <body>
+        <div class="center-box">
         <nav class="left-navbar">
             <a href="../blog.html">
                 <i class="fas fa-arrow-left icon"></i> Back
@@ -19,7 +20,7 @@
         </nav>
         <div class="head">
             <div class="title-data">
-                <h1> 
+                <h2> 
                     <span class="blue-highlight">a</span>
                     <span class="yellow-highlight">violent</span>
                     <span class="aqua-highlight">introduction</span>
@@ -29,7 +30,7 @@
                     <span class="blue-highlight">with</span>
                     <span class="yellow-highlight">gradient</span>
                     <span class="pink-highlight">descent</span>
-                </h1>
+                </h2>
                 <p> june 24, 2024 </p>
             </div>
             <p id="intro">sick and tired of gentle introductions to *insert an ml concept*? <br>  worry no more, for today, we will catapult you to the wolves of linear regression.</p>
@@ -68,9 +69,11 @@
             <p> the derivation of the derivatives is relatively simple calculus, which actually took me way too long to do: </p>
 
             <p> \[ MSE = \frac{1}{n} \sum^n_{i = 1} (y_i - \hat{y}_i)^2, \space e = (y_i - (mx_i + b))\]</p>
-            <p> \[ \frac{\partial{e^2}}{\partial{b}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{b}} = -1 \times 2(y_i - wx_i - b) = -2(y_i - wx_i - b) \] </p>
+            <p> \[ \frac{\partial{e^2}}{\partial{b}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{b}} \] </p> 
+            <p> \[ = -1 \times 2(y_i - wx_i - b) = -2(y_i - wx_i - b) \] </p>
             <p> \[ \frac{\partial{MSE}}{\partial{b}} = \frac{1}{N} \sum^n_{i = 1} -2(y_i - wx_i - b)\] </p>
-            <p> \[ \frac{\partial{e^2}}{\partial{w}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{w}} = -x_i \times 2(y_i - wx_i - b) = -2x_i(y_i - wx_i - b) \] </p>
+            <p> \[ \frac{\partial{e^2}}{\partial{w}} = \frac{\partial{(y_i - wx_i - b)}^2}{\partial{w}}  \] </p>
+            <p> \[ = -x_i \times 2(y_i - wx_i - b) = -2x_i(y_i - wx_i - b)\] </p>
             <p> \[ \frac{\partial{MSE}}{\partial{w}} = \frac{1}{N} \sum^n_{i = 1} -2x_i(y_i - wx_i - b)\] </p>
 
             <p> wielding one parameter in each hand, we can now improve our parameters by having them go a little bit towards the direction negative of their gradient: </p>
@@ -107,23 +110,21 @@
 
             <p> and... this is the actual algorithm for linear regression with stochastic gradient descent, this should be straightforward after all that buildup: </p>
 
-            <pre> 
-                randomly initialize weights W and b in the correct shape
-                split the data into the train and test splits
-                for every epoch:
-                    for every data point in the training set: 
-                        update the weights W
-                        update the bias b
-                evaluate the model's predictions on the test set 
-            </pre>
+            <div class="code-block"> 
+randomly initialize weights W and b in the correct shape
+split the data into the train and test splits
+for every epoch:
+    for every data point in the training set: 
+        update the weights W
+        update the bias b
+evaluate the model's predictions on the test set 
+            </div>
 
             <p> the actual implementation of the above is left as an exercise for the reader... </p>
 
-            <p> just kidding, you can find it <a href="https://github.com/luisa-li/scratch-ml/blob/017314baa2c64b01c6c9fb224d5ffd360ffde8fc/linear_regression.py"> here </a>, written with just python and numpy. </p> 
+            <p> just kidding, you can find it <a href="https://github.com/luisa-li/scratch-ml/blob/017314baa2c64b01c6c9fb224d5ffd360ffde8fc/linear_regression.py">here</a>,  written with just python and numpy. </p> 
             
-            <p> souces: d2l book, chapter 3
-
         </div>
-        
+    </div>
     </body>
 </html>

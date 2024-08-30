@@ -36,6 +36,14 @@ a:hover {
     flex-direction: column;
 }
 
+.code-block {
+    font-family: monospace;
+    white-space: pre;
+    max-width: 80%;
+    overflow: auto;
+    text-align: left;
+}
+
 @media (max-width: 600px) {
 
     h1 {

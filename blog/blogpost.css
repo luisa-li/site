@@ -1,16 +1,43 @@
+h2 {
+    letter-spacing: 0.05em;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; 
-    padding: 5vh;   
+    height: 100vh;
 }
 
-h3 {
-    color: var(--lightwhite)
+a {
+    color: var(--lightwhite); 
+    justify-content: space-between;
+    text-decoration: none;
 }
 
-.centered {
+a:hover {
+    color: var(--blue); 
+}
+
+.code-block {
+    font-family: monospace;
+    white-space: pre-wrap; 
+    overflow: auto;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-box {
+    width: 90%;
+    max-width: 600px;
+    padding: 4vw;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.image {
     padding-top: 1vh;
     padding-bottom: 1vh;
     justify-content: center;
@@ -21,17 +48,14 @@ h3 {
 .head {
     display: flex;
     flex-direction: column;
-    width: 60vw;
     align-items: center;
     text-align: center;
 }
 
 .body {
     justify-content: start;
-    width: 60vw;
-    text-align: justify;
+    text-align: left;
     font-family: 'Book Antiqua', 'Palatino Linotype', 'Georgia', Palatino, serif;
-    font-size: 17px;
     letter-spacing: 0.03em;
     line-height: 1.7;
     padding-bottom: 9vh;
@@ -41,7 +65,6 @@ h3 {
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    width: 90%;
     gap: 3vw;
     height: auto;
     flex-direction: row;
@@ -49,7 +72,6 @@ h3 {
 
 .separator {
     background-color: var(--lightwhite);
-    width: 40vw;
     height: 1px;
     margin-top: 2vh;
     margin-bottom: 2vh;
@@ -57,8 +79,6 @@ h3 {
 
 
 .whisper {
-    font-size: 14px;
-    width: 60vw;
     color: var(--grey1);
     text-align: center;
     align-items: center;
@@ -66,8 +86,6 @@ h3 {
 }
 
 .glossary {
-    font-size: 15px;
-    width: 60vw;
     color: var(--grey1);
     text-align: right;
     align-items: center;
@@ -78,7 +96,6 @@ h3 {
 #intro {
     font-style: italic;
     text-align: center;
-    font-size: 17px;
     color : var(--lightwhite)
 }
 
@@ -93,18 +110,33 @@ a:hover {
     text-decoration: underline; 
 }
 
-@media (max-width: 600px) {
+#makeitup {
+    width: 50%;
+}
 
-    h1 {
-        font-size: 23px;
-    }
+#gptstatistics {
+    width: 80%
+}
+
+@media (max-width: 600px) {
     
     body {
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
         font-size: 13px;
-    }
-    
-    a {
-        font-size: 13px;
+        overflow-x: hidden;
+        text-align: center;
+        padding: 3vw;
     }
 
+    #makeitup {
+        width: 100%;
+    }
+    
+    #gptstatistics {
+        width: 100%
+    }
+    
 }
