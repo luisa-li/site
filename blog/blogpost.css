@@ -3,6 +3,14 @@ h2 {
     size: 10px;
 }
 
+h3 {
+    color : var(--lightwhite)
+}
+
+h4 {
+    color : var(--lightwhite)
+}
+
 body {
     display: flex;
     flex-direction: column;
