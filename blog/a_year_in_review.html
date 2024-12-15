@@ -34,9 +34,18 @@
 
             <p class="whisper"> clearly a thing that i have not learned this year is actual web development, since this website is still made entirely of straight html and css >:D </p>
 
-            <h3> part I: jan - jun, the big girl employment </h3>
+            <p class="whisper"> long blog ahead, but it's been a long year </p>
+
+            <h3> part I: jan - jun, 
+                <span class="blue-highlight">the</span>
+                <span class="yellow-highlight">big</span>
+                <span class="orange-highlight">girl</span>
+                <span class="aqua-highlight">employment</span>
+            </h3>
         
             <p> i worked full time at a pharmaceutical company called montai health for the first half of the year, working on machine learning and engineering problems in the context of drug discovery. i learned a whole lot along the way, and here's an executive summary slash reflection, minus the nda bits.  a huge shoutout to all the amazing peeps on the computational modeling team, it was an amazing experience working as part of the team. <span class="pink-highlight"> <3 </span> </p>
+
+            <p> </p>
 
             <h3> part III: sep - dec, the fall semester </h3>
 
@@ -51,8 +60,35 @@
                 
             </ul>
 
-        <p> i also, obviously, took classes. here are my favorite bits from each: <p>
-            
+            <p> i also, obviously, took classes. here are my favorite bits from each. </p>
+
+            <h4> math3545: graph theory </h4>
+
+            <p class="whisper"> hexagons are the bestagons! </p>
+
+            <p> proving that a plane can only be tiled with three types of regular polygons (triangles, squares and hexagons) through euler's formula, the handshake lemma and the faceshake lemma, all of which are elementary results of studying planar graphs. </p>
+
+            <p> euler's formula states that for a planar graph: </p>
+            <p> \[ e + 2 = n + f\]</p>
+            <p> where \(G = (V, E)\), \( e = |E| \), \( n = |V| \), and \(f\) is the number of faces the planar graph \(G\). </p>
+
+            <p> the handshake lemma states that the sum of node degrees in a graph is equal to double the number of edges, which is an intuitive result: </p>
+
+            <p> \[ \sum_{v \in V} deg(v) = 2e \]</p>
+
+            <p> and lastly, the faceshake lemma (as dubbed by my professor) is the equivalent of the handshake lemma for the faces in a planar graph, stating that the sum of face degrees (or the number of edges that make up a face) is equivalent also to double the number of edges. also quite intuitive: </p>
+
+            <p> \[ \sum_{f \in F} deg(f) = 2e \]</p>
+
+            <p> the handshake and faceshake lemma are simplified to \( nk = 2e \) and \( fl = 2e \), respectively. with \( k \) being the degree of each node, and \(l\) being the number of sides of the polygon that we wish to tile with. </p>
+
+            <p> it turns out that that is enough for us to concretely say something about the polygons we can use to tile a 2D plane with. with some algebraic manipulations and number theory, we find eventually that the only integer \(k\) and \(l\) that satisfy constraints are \(k = 6, l = 3\), \(k = 4, l = 4\), \(k = 3, l = 6\), which corresponds to triangles, squares and hexagons, respectively. </p>
+
+            <p class="whisper"> isn't it pretty cool that elementary results in graph theory can tell you something so general about regular tilings? :D </p>
+
+            <h4> cs3800: theory of computation </h4>
+
+            <p> by far my favorite part of this class besides the content was the professor's sassy snap backs at students repeatedly asking questions about the same three things that did not matter to the lecture content. </p>
             
         </div>
     </body>
