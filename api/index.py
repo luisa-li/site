@@ -2,10 +2,11 @@ import os
 import base64
 import requests
 from fastapi import FastAPI, Response, status 
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from datetime import datetime, timezone
-
 from storage import get_access_key, update_access_key
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -21,10 +22,24 @@ SCOPE = "user-read-playback-state"
 
 app = FastAPI()
 
+origins = [
+    "https://luisali.com", 
+    "https://*.vercel.app",  
+    "http://127.0.0.1:5500/*", 
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Authorization", "Content-Type"], 
+)
+
 def get_spotify_access_key():
+    # Your logic to get the access key
     key, updated_at = get_access_key('spotify')
     updated_at_datetime = datetime.fromisoformat(updated_at).replace(tzinfo=timezone.utc)
-    # if access token expired, get another one
     if (datetime.now(timezone.utc) - updated_at_datetime).total_seconds() > 3600:
         key = refresh_key(REFRESH_TOKEN)
         update_access_key("spotify", key)
@@ -43,42 +58,35 @@ def refresh_key(refresh_token):
     
     if response.status_code == 200:
         tokens = response.json()
-        new_access_token = tokens.get("access_token")
-        return new_access_token
+        return tokens.get("access_token")
     else:
-        print(f"Error: {response.status_code}")
-        print(response.json())
         return None
-    
+
 @app.get("/listening")
 async def get_current_song():
-    
-    """
-    Fetch the currently playing song on Spotify and return an embeddable iframe HTML snippet.
-    """
     headers = {
         "Authorization": f"Bearer {get_spotify_access_key()}"
     }
-    
     response = requests.get(SPOTIFY_CURRENTLY_PLAYING_URL, headers=headers)
-        
+
     if response.status_code == 200:
-        # playing something or it is on pause, either way, return what it is 
-        data = response.json() 
+        data = response.json()
         track = data["item"]
         track_id = track["id"]
         embed_url = f"https://open.spotify.com/embed/track/{track_id}"
-        
         html_snippet = f"""
         <iframe src="{embed_url}" width="300" height="80" frameborder="0" 
         allowtransparency="true" allow="encrypted-media"></iframe>
         """
-        print(html_snippet)
         return Response(content=html_snippet, status_code=status.HTTP_200_OK)
     elif response.status_code == 204:
-        # spotify is not open on any of the current devices
         return Response(content=None, status_code=status.HTTP_200_OK)
     else:
-        # something went wrong D:
         return Response(content=None, status_code=status.HTTP_400_BAD_REQUEST)
-        
+
+@app.get("/{file_name}")
+async def serve_static_files(file_name: str):
+    file_path = os.path.join(os.getcwd(), file_name)
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    return {"error": "File not found"}
