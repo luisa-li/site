@@ -14,8 +14,11 @@
       {
         "source": "/listening",
         "destination": "/api/index.py"
+      },
+      {
+        "source": "/",
+        "destination": "/public/index.html"
       }
-    ],
-    "cleanUrls": true
+    ]
   }
   
