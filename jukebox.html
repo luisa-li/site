@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>luisa's jukebox</title>
+        <link rel="stylesheet" href="base.css"/>
+        <link rel="stylesheet" href="blog.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="icon" type="image/png" href="../resources/tau.png">
+    </head>
+    <body>
+        <p>*bopping*</p>
+        <div id="jukebox">
+        </div>
+
+        <script>
+            async function getCurrentSong() {
+                const response = await fetch('http://localhost:8000/listening'); 
+                const data = await response.text(); 
+
+                if (response.status === 200) {
+                    document.getElementById("jukebox").innerHTML = data;
+                } else {
+                    document.getElementById("jukebox").innerHTML = "<p>luisa is not listening to anything...</p>"
+                }
+            }
+            getCurrentSong();
+            setInterval(getCurrentSong, 60000);
+
+        </script>
+    </body>
+</html>
