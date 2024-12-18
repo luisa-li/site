@@ -71,13 +71,16 @@ async def get_current_song():
 
     if response.status_code == 200:
         data = response.json()
-        track = data["item"]
-        track_id = track["id"]
-        embed_url = f"https://open.spotify.com/embed/track/{track_id}"
-        html_snippet = f"""
-        <iframe src="{embed_url}" width="300" height="80" frameborder="0" 
-        allowtransparency="true" allow="encrypted-media"></iframe>
-        """
+        track = data.get("item")
+        is_playing = data.get("is_playing", False)  # Default to False if not present
+
+        if track and is_playing:
+            track_id = track.get("id")
+            embed_url = f"https://open.spotify.com/embed/track/{track_id}"
+            html_snippet = f"""
+            <iframe src="{embed_url}" width="300" height="80" frameborder="0" 
+            allowtransparency="true" allow="encrypted-media"></iframe>
+            """
         return Response(content=html_snippet, status_code=status.HTTP_200_OK)
     elif response.status_code == 204:
         return Response(content=None, status_code=status.HTTP_200_OK)
