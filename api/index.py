@@ -72,7 +72,7 @@ async def get_current_song():
     if response.status_code == 200:
         data = response.json()
         track = data.get("item")
-        is_playing = data.get("is_playing", False)  # Default to False if not present
+        is_playing = data.get("is_playing", False)
 
         if track and is_playing:
             track_id = track.get("id")
