@@ -8,6 +8,14 @@
       {
         "src": "public/*",
         "use": "@vercel/static"
+      },
+      {
+        "src": "public/blog/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "public/resources/*",
+        "use": "@vercel/static"
       }
     ],
     "rewrites": [
@@ -36,7 +44,7 @@
         "destination": "/public/blog/a_violent_introduction_to_linear_regression.html"
       },
       {
-        "source": "/blog/the_reading_itinerary.html",
+        "source": "/blog/the_reading_itinerary",
         "destination": "/public/blog/the_reading_itinerary.html"
       }
     ]
