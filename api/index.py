@@ -5,7 +5,7 @@ from fastapi import FastAPI, Response, status
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from datetime import datetime, timezone
-from storage import get_access_key, update_access_key
+from api.storage import get_access_key, update_access_key
 from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()

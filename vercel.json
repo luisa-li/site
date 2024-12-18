@@ -6,7 +6,7 @@
         "use": "@vercel/python"
       },
       {
-        "src": "public/**",
+        "src": "public/*",
         "use": "@vercel/static"
       }
     ],
@@ -18,6 +18,26 @@
       {
         "source": "/",
         "destination": "/public/index.html"
+      },
+      {
+        "source": "/blog",
+        "destination": "/public/blog.html"
+      },
+      {
+        "source": "/jukebox",
+        "destination": "/public/jukebox.html"
+      },
+      {
+        "source": "/blog/a_semester_in_review",
+        "destination": "/public/blog/a_semester_in_review.html"
+      },
+      {
+        "source": "/blog/a_violent_introduction_to_linear_regression",
+        "destination": "/public/blog/a_violent_introduction_to_linear_regression.html"
+      },
+      {
+        "source": "/blog/the_reading_itinerary.html",
+        "destination": "/public/blog/the_reading_itinerary.html"
       }
     ]
   }
