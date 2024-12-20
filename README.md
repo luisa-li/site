@@ -1,3 +1,5 @@
-A a personal website I'm building to host an online version of my resume, and collect bits and bobs of my thoughts and the cool things I learn.
+a personal site, to host the blog and a couple projects 
 
-The site can be found here: https://www.luisali.com
+backend: python and fastapi, database hosted on supabase, and deployed with vercel. 
+
+frontend: html, css and javascript.
