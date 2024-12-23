@@ -25,7 +25,9 @@
 
                 if (response.status === 200) {
                     document.getElementById("jukebox").innerHTML = data;
-                }
+                } else {
+                    document.getElementById("jukebox").innerHTML = data;
+                } 
             }
             getCurrentSong();
             setInterval(getCurrentSong, 10000);
