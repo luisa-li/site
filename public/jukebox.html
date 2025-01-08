@@ -1,37 +1,45 @@
+<!--To start the backend for this page, run `vercel --prod`-->
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>luisa's jukebox</title>
-        <link rel="stylesheet" href="/public/base.css"/>
-        <link rel="stylesheet" href="/public/blog.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="icon" type="image/png" href="/public/resources/tau.png">
-    </head>
-    <body>
-        <a href="/">
-            <i class="fas fa-home icon"></i> home
-        </a>
-        <p> luisa is currently listening to...</p>
-        <div id="jukebox">
-            <p> nothing at the moment...</p>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>luisa's jukebox</title>
+    <link rel="stylesheet" href="/public/base.css" />
+    <link rel="stylesheet" href="/public/blog.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="/public/resources/tau.png" />
+  </head>
+  <body>
+    <a href="/"> <i class="fas fa-home icon"></i> home </a>
+    <p>luisa is currently listening to...</p>
+    <div id="jukebox">
+      <p>nothing at the moment...</p>
+    </div>
+    <img
+      src="/public/resources/jukebox.webp"
+      alt="jukebox"
+      style="width: 150px; height: auto"
+    />
 
-        <script>
-            async function getCurrentSong() {
-                const response = await fetch('/listening'); 
-                const data = await response.text(); 
+    <script>
+      async function getCurrentSong() {
+        const response = await fetch("/listening");
+        const data = await response.text();
 
-                if (response.status === 200) {
-                    document.getElementById("jukebox").innerHTML = data;
-                } else {
-                    document.getElementById("jukebox").innerHTML = "<p> nothing at the moment... </p>";
-                } 
-            }
-            getCurrentSong();
-            setInterval(getCurrentSong, 10000);
-
-        </script>
-    </body>
+        if (response.status === 200) {
+          document.getElementById("jukebox").innerHTML = data;
+        } else {
+          document.getElementById("jukebox").innerHTML =
+            "<p> nothing at the moment... </p>";
+        }
+      }
+      getCurrentSong();
+      setInterval(getCurrentSong, 10000);
+    </script>
+  </body>
 </html>
