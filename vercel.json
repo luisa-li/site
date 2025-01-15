@@ -46,6 +46,10 @@
       {
         "source": "/blog/the_reading_itinerary",
         "destination": "/public/blog/the_reading_itinerary.html"
+      },
+      {
+        "source": "/favorites",
+        "destination": "/public/favorites.html"
       }
     ]
   }
