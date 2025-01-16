@@ -50,6 +50,10 @@
       {
         "source": "/favorites",
         "destination": "/public/favorites.html"
+      },
+      {
+        "source": "/recipes",
+        "destination": "/public/recipes.html"
       }
     ]
   }
