@@ -48,6 +48,10 @@
         "destination": "/public/blog/the_reading_itinerary.html"
       },
       {
+        "source": "/collection",
+        "destination": "/public/collection.html"
+      },
+      {
         "source": "/collection/favorites",
         "destination": "/public/collection/favorites.html"
       },
