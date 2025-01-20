@@ -16,6 +16,10 @@
       {
         "src": "public/resources/*",
         "use": "@vercel/static"
+      },
+      {
+        "src": "public/collection/*",
+        "use": "@vercel/static"
       }
     ],
     "rewrites": [
