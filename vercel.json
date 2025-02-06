@@ -52,8 +52,8 @@
         "destination": "/public/blog/the_reading_itinerary.html"
       },
       {
-        "source": "/favorites",
-        "destination": "/public/favorites.html"
+        "source": "/vault",
+        "destination": "/public/vault.html"
       }
     ]
   }
