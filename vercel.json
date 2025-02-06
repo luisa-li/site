@@ -52,20 +52,8 @@
         "destination": "/public/blog/the_reading_itinerary.html"
       },
       {
-        "source": "/collection",
-        "destination": "/public/collection.html"
-      },
-      {
-        "source": "/collection/favorites",
-        "destination": "/public/collection/favorites.html"
-      },
-      {
-        "source": "/collection/recipes",
-        "destination": "/public/collection/recipes.html"
-      },
-      {
-        "source": "/collection/books",
-        "destination": "/public/collection/books.html"
+        "source": "/favorites",
+        "destination": "/public/favorites.html"
       }
     ]
   }
