@@ -5,4 +5,5 @@ backend: python and fastapi, database hosted on supabase, and deployed with verc
 frontend: html, css and javascript.
 
 for luisa's future reference:
-- 
+- push to github
+- redeploy using `vercel --prod`
