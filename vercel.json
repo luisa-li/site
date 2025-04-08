@@ -54,6 +54,10 @@
       {
         "source": "/vault",
         "destination": "/public/vault.html"
+      },
+      {
+        "source": "/about",
+        "destination": "public/about.html"
       }
     ]
   }
