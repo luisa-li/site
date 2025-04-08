@@ -29,6 +29,13 @@ a:hover {
     text-align: left;
 }
 
+.glossary {
+    color: var(--grey1);
+    text-align: right;
+    align-items: center;
+    justify-content: center;
+}
+
 .head {
     display: flex;
     flex-direction: column;
@@ -50,4 +57,8 @@ a:hover {
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+.funfact {
+    padding-top: 8px;
 }
