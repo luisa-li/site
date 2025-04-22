@@ -49,6 +49,13 @@ a:hover {
     .center-box {
         max-width: 300px; 
         padding: 15px;
+        flex-direction: column;
+    }
+
+    .left {
+        text-align: left;
+        margin-right: auto;
+        margin-left: 0;
     }
 
     .header a {
