@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>luisa's blog</title>
+        <link rel="stylesheet" href="/public/base.css"/>
+        <link rel="stylesheet" href="/public/blog/blogpost.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="icon" type="image/png" href="/public/resources/tau.png">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+    </head>
+    <body>
+        <div class="center-box">
+        <nav class="left-navbar">
+            <a href="/blog">
+                <i class="fas fa-arrow-left icon"></i> Back
+            </a>
+        </nav>
+        <div class="head">
+            <div class="title-data">
+                <h2> 
+                    <span class="yellow-highlight">to</span>
+                    <span class="orange-highlight">invertibility</span>
+                    <span class="blue-highlight">and</span>
+                    <span class="pink-highlight">beyond</span>
+                </h2>
+                <p> may, 2025 </p>
+            </div>
+            <p id="intro"> i put thing through black box, then i want thing back, but how? </p>
+        </div>
+        <div class="body">
+
+            <p class="whisper"> this will be quite a tech-y blog by nature, but hopefully decently accessible to a general audience. of course, suggestions for improvements are welcome! </p>
+
+            <p> fall was a good and busy time. unlike fall of 2023, when i was swamped beyond belief with a intense course schedule, squeezing in social time in between the crevices of time blocked out for academic work in my google calendar, time of this fall was quite evenly distributed between my many commitments. i'll mostly talk about classes for this one, but also, i wrote down a few semesterly goals in august, and thought that i'd share a few of the accomplished ones with the class. </p>
+
+            <ul>
+                <li> i upped my climbing game! after a year of carefully treading into the sport again post injury, i think i'm once again climbing at peak strength and technique. i began sending v3s consistently a month or so ago, and am steadily sending v4s and projecting v5s in the last few weeks. it feels so good to be back on the walls again, and here's to a healthy and strong 2025 full of sketchy slabs and crimpy climbs. </li>
+                <li> i made up my mind about what i want professionally, and pivoted to that direction. i've always felt decisions like these are particularly hard to make, because remaining still is just so comfortable, so i'm proud to have made up my mind, and made the pivot. </li>
+                <li> i ran my first 5k again after not running consistently in two years, and i ran it at a 6min/km pace, way faster than i've ever managed to run that distance before. and maybe this is the first sign of me approaching my quarter life crisis, but i think i'll sign up for a 10k next year. :D </li>
+                <li> i made new friends! and i socialized! and i went out! i've prioritized good people over work this semester, and importantly, made it to every plan i promised, even if it meant scrambling until late night to finish work. </li>
+                <li> i did purposeful academic work. in the past, i've always been driven to achieve high scores for the sake of perfectionism rather than learning, and often being short on time this semester taught me to prioritize understanding over scores. as such, i spent my time on reading textbooks and understanding material, rather than polishing my assignments over and over for an extra .5 on my grade. not the most exciting accomplishment, but i am proud of that shift in mentality.  </li>
+                
+            </ul>
+
+            <p> i also took classes. this was a decently low load semester. i won't go too much into the course content, but here are my favorite bit of information i've learned from each: </p>
+
+            <h4> math3545: graph theory </h4>
+	        
+            <p class="whisper"> shoutout to <a href="https://jakegines.in/">jake</a>  for being a deadbeat (but rather entertaining) homework partner, you made graph theory better :) </p>
+
+            <p class="whisper"> <a href="https://youtu.be/thOifuHs6eY?si=g9cu4orAjzefVZES"> hexagons are the bestagons! </a> </p>
+
+            <p> proving that a plane can only be tiled with three types of regular polygons (triangles, squares and hexagons) through euler's formula, the handshake lemma and the faceshake lemma, all of which are elementary results of studying planar graphs. </p>
+
+            <p> euler's formula states that for a planar graph: </p>
+            <p> \[ e + 2 = n + f\]</p>
+            <p> where \(G = (V, E)\), \( e = |E| \), \( n = |V| \), and \(f\) is the number of faces the planar graph \(G\). </p>
+
+            <p> the handshake lemma states that the sum of node degrees in a graph is equal to double the number of edges, which is an intuitive result: </p>
+
+            <p> \[ \sum_{v \in V} deg(v) = 2e \]</p>
+
+            <p> and lastly, the faceshake lemma (as dubbed by my professor, shoutout to gabor) is the equivalent of the handshake lemma for the faces in a planar graph, stating that the sum of face degrees (or the number of edges that make up a face) is equivalent also to double the number of edges. also quite intuitive: </p>
+
+            <p> \[ \sum_{f \in F} deg(f) = 2e \]</p>
+
+            <p> the handshake and faceshake lemma are simplified to \( nk = 2e \) and \( fl = 2e \) respectively, with \( k \) being the degree of each node, and \(l\) being the number of sides of the polygon that we wish to tile with. these simplifications come from our original assumption of a tiling of the plane with regular polygons. </p>
+
+            <p> it turns out that that is enough for us to concretely say something about the polygons we can use to tile a 2D plane with. with some algebraic manipulations and number theory, we find eventually that the only integer \(k\) and \(l\) that satisfy our given constraints are \(k = 6, l = 3\), \(k = 4, l = 4\), \(k = 3, l = 6\), which corresponds to triangles, squares and hexagons, respectively. </p>
+
+            <p class="whisper"> isn't it pretty cool that elementary results in graph theory can tell you something so general about all the regular tilings of a plane? :D </p>
+
+            <h4> cs3800: theory of computation </h4>
+
+            <p> proving that the traveling salesperson problem (TSP) is NP complete. </p>
+
+            <p> back in highschool i did a project on various exploration and exploitation strategies in genetic algorithms evaluated on the traveling salesperson problem, and i distinctly remember writing in my final paper that TSP is NP-complete, without really understanding what it meant. i then went on to study computer science and mathematics in college, where i heard these terms thrown around for some more years, still without enough context on complexity classes. </p>
+            
+            <p> and so, it genuinely felt like a full circle moment when we learned about P and NP in this class, both concretely defining what it meant for a problem to be NP-complete, and proving that the traveling salesperson problem did in fact belong in it. the actual proof, which involved a polynomial time mapping reduction from the hamiltonian cycle problem, was not exactly exciting, but finally grasping something previously out of my intellectual reach was of course satisfying. </p>
+
+            <p> i also saw a bunch of very interesting, creative and sometimes unintuitive proofs in this class. notably, the proof that language \(L\) is regular iff \(\exists\) a regular expression \(R\) s.t \(L(R) = L\), and the reduction from 3SAT to the subset sum problem. </p>
+
+            <h4> cs4100: artificial intelligence </h4>
+
+            <p> generative adversarial networks, which is quite frankly a pretty cool idea for a neural network architecture. the essence of it lies in having two models, one named the generator and the other the discriminator, with the former attempting to generate images that are in distribution for the training data, and the latter attempting to distinguish between generator created images and real images in the training set. this creates a little adversarial game where the discriminator is attempting to minimize classification loss, while the generator is trying to maximize it. </p>
+
+            <p class="whisper"> in an alternate universe i'd like to imagine that the generator and the discriminator could have a enemies to lovers arc...</p>
+
+            <p> the architecture of the generator is also quite cool. it takes in a vector of noise, and through many layers of deconvolutions, upscales the noise into image outputs. with the discriminator's feedback, it updates the weights of the many layers, including the deconvolution ones, and iteratively improves the quality of the images generated. </p>
+
+            <h4> engl2695: travel writing </h4>
+            
+            <p> i spent most of this class writing about myself, and my places, and my travels. i used this class as an excuse for many late night walks through the city, and as a creative outlet in a otherwise very stemmy (science, technology, engineering, math-y) semester. given the absent of a cool cs or math tidbit, here's two of my favorite paragraphs that i wrote for this class. </p>
+            
+            <p class="glossary"> <span class="yellow-highlight"> on my home in Lima: </span> My parents are plain and practical people, and our house reflects their philosophy. The walls are bare and a simple shade of white, etched by scratches and pen marks - early abstract artworks of my little sister. They still hand wash all of their dishes and hang out clothes to dry. The furniture is minimal, purchased when they bought their first apartment in Peru. It survived several moves, ending up in our current home. My dad does have a particular appetite for hardwood tables. Every two years or so, I’d come home to an unexpected, shiny new dining table, so heavy that our whole family would come together to lift it to the living room. And then came the task of finding another suitable purpose for the old one, will it go in the kitchen, continuing its service as a second dining table, or out in the backyard, for when extra workspace is needed for a barbeque? Like many Chinese people that grew up in an era of famine and poverty, my parents are hoarders. We throw out nothing, and every piece of furniture we have ever owned sits somewhere in the house, in an ordered, but cluttered, fashion. </p>
+
+            <p class="glossary"> <span class="yellow-highlight"> on traveling in Lisbon: </span> During my many walks up to Barrio Alto (literally the “tall” neighborhood), Chiado and Cais Do Sodré, I found myself more than once cursing the Portuguese settlers that decided to put Lisbon there, out of all the places it could have been. Both Lisbon and Cusco are what I like to call stairmaster cities, where every inch of horizontal displacement is accompanied by significant vertical displacement, and going from point A to a point B a hundred feet away involves first tumbling down a gigantic set of stairs, and then crawling up the other side. </p>
+
+        </div>
+    </body>
+</html>
