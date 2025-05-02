@@ -58,6 +58,10 @@
       {
         "source": "/about",
         "destination": "public/about.html"
+      },
+      {
+        "source": "/blog/to_invertibility_and_beyond",
+        "destination": "/public/blog/to_invertibility_and_beyond.html"
       }
     ]
   }
