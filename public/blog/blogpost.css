@@ -94,6 +94,17 @@ a:hover {
     justify-content: center;
 }
 
+.section-title {
+    color: var(--yellow);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 2vh;
+    
+}
+
 .glossary {
     color: var(--grey1);
     text-align: right;
@@ -117,10 +128,6 @@ a {
 a:hover {
     color: var(--green); 
     text-decoration: underline; 
-}
-
-#gptstatistics {
-    width: 80%
 }
 
 @media (max-width: 600px) {
