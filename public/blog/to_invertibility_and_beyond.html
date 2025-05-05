@@ -28,7 +28,7 @@
                 </h2>
                 <p> may, 2025 </p>
             </div>
-            <p id="intro"> i put thing in black box, then i want thing back, but how? </p>
+            <p id="intro"> i put thing in black box, then i want thing back, but how? what does it take to build an invertible neural network? </p>
         </div>
         <div class="body">
 
@@ -43,7 +43,48 @@
             </ul>
             <p> in human words, an injective function is such that one output is given by one input exactly, with no two inputs giving the same output, and a surjective function is such that every possible output is mapped to by some input. together, they give a bijection. given any output, i know the input that mapped to it exists and is unique. </p>
 
-           
+            <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we can find an analytical form of the inverse function. </p>
+
+            <p> without going into the math, it is pretty easy to see that most neural networks are <b> not </b> analytically invertible. for one, the most common choice of activation function, ReLU, would render the whole thing non-invertible: </p>
+
+            <p> \[ ReLU(x) = max(0, x) \]</p>
+
+            <p> intuitively, if i got a positive number out of ReLU, i would know that that positive number is exactly the number that i put in. but if the output of ReLU is 0, then we would have no idea what we put in. and, since a composition of functions is only invertible if all pieces of the composition are invertible, the usage of ReLU renders the most common linear layer \( y = \phi(w^Tx + b)\) not analytically invertible. beyond linear layers, things like convolutions on images and message passing on graphs are also not invertible under similar reasoning. in both cases, the aggregation step renders the whole thing not analytically invertible - simply put, the result of an addition tell you nothing about what each component might have been. </p>
+
+            <p class="question"> so is all hope lost? can we go home now? </p>
+
+            <p class="response"> no, not yet. </p>
+
+            <h4 class="section-title"> normalizing flows </h4>
+
+            <p> never give up. </p>
+
+            <p> normalizing flows are a class of generative models. like many a ai art generators, its objective is to produce more samples in the distribution of data it is trained on. if i feed it pictures ikea chairs, it should learn how to generate more ikea looking chairs. </p>
+
+            <p> the key idea of normalizing flows is as follows: if we are able to transforming the data distribution into a simpler distribution via a series of invertible and differentiable mappings, like the standard normal (hence the name), we would be able to generate new samples in the data distribution by simply sampling noise from the standard normal, and pushing the noise back through the inverse functions. </p>
+
+            <p> this class of generative models is at its core based on the change of variables formula in probability theory, which gives us a way to compute the resulting (or the <i> pushforward</i>) distribution after applying a function to a distribution. </p>
+
+            <p> given \( Z \in \mathbb{R}^D\), a random variable with a known and tractable probability density function \( p_z: \mathbb{R}^D \rightarrow \mathbb{R} \), if \( g \) is an invertible function, and \( Y = g(z) \), then the change of variables formula gives us a way to compute the probability density function of the random variable \( Y\). </p>
+
+            <p> \[ p_Y(y) = p_Z(f(y)) \left| \det \frac{\partial f}{\partial y} \right| \] </p>
+            
+            <p> the inverse of this transformation can be similarly computed as long as \(g\) is invertible. this formula is informative in that it prescribes the necessary condition to building such an invertible layer. </p>
+                
+            <p class="whisper"> for a more comprehensive overview and a much more mathematically rigorous definition of normalizing flows see <a href="https://arxiv.org/abs/1908.09257">this review</a>.</p>
+
+            <p class="whisper"> this change of variable formula is also useful for inverse transform sampling, which is relevant but also super cool, you can read more about that <a href="https://www.bishopbook.com/"> in the bishop & bishop deep learning book</a>.</p>
+
+            <p> that formula prescribes the necessary components to building such an invertible layer: we want a bijection \( g \), and more importantly for building models, we need this bijection, its inverse to be easy to compute, and the determinant of the jacobian to be easily computable. </p>
+
+            <p class="question"> that is, <b> if</b> we had such a function. </p>
+
+            <p class="response"> and we do. </p>
+
+            <h4> coupling layers and friends </h4>
+
+            <p> the authors of non-linear independent components estimation (dinh et al.) came up with what they coined an coupling layer, which gave rise to a whole family of  </p>
+
         </div>
     </body>
 </html>
