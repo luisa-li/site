@@ -59,7 +59,7 @@
 
             <p> never give up. </p>
 
-            <p> normalizing flows are a class of generative models. like many a ai art generators, its objective is to produce more samples in the distribution of data it is trained on. if i feed it pictures ikea chairs, it should learn how to generate more ikea looking chairs. </p>
+            <p> normalizing flows are a class of generative models. think of stable diffusion and the gpts: its objective is to produce more samples in the distribution of data it is trained on. if i feed it pictures ikea sharks, it should learn how to generate more ikea shark looking plushies. </p>
 
             <p> the key idea of normalizing flows is as follows: if we are able to transforming the data distribution into a simpler distribution via a series of invertible and differentiable mappings, like the standard normal (hence the name), we would be able to generate new samples in the data distribution by simply sampling noise from the standard normal, and pushing the noise back through the inverse functions. </p>
 
@@ -73,9 +73,9 @@
                 
             <p class="whisper"> for a more comprehensive overview and a much more mathematically rigorous definition of normalizing flows see <a href="https://arxiv.org/abs/1908.09257">this review</a>.</p>
 
-            <p class="whisper"> this change of variable formula is also useful for inverse transform sampling, which is relevant but also super cool, you can read more about that <a href="https://www.bishopbook.com/"> in the bishop & bishop deep learning book</a>.</p>
+            <p class="whisper"> this change of variable formula is also useful for inverse transform sampling, which is not super relevant but super cool, you can read more about that <a href="https://www.bishopbook.com/"> in the bishop & bishop deep learning book, chapter 14.</a>.</p>
 
-            <p> that formula prescribes the necessary components to building such an invertible layer: we want a bijection \( g \), and more importantly for building models, we need this bijection, its inverse to be easy to compute, and the determinant of the jacobian to be easily computable. if we had such a function, we would be able to build such a normalizing flow to our hearts contents. </p>
+            <p> that formula prescribes the necessary components to building such an invertible layer: we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would be able to build such a normalizing flow to our hearts contents. </p>
 
             <p class="question"> that is, <b> if</b> we had such a function. </p>
 
