@@ -32,7 +32,7 @@
         </div>
         <div class="body">
 
-            <h4 class="section-title"> a primer on invertibility </h4>
+            <h3 class="section-title"> a primer on invertibility </h3>
 
             <p> in caveman terms, an invertible process is one we know how to undo. moving a banana is invertible, eating the banana is not. </p>
 
@@ -55,7 +55,7 @@
 
             <p class="response"> no, not yet. </p>
 
-            <h4 class="section-title"> normalizing flows </h4>
+            <h3 class="section-title"> normalizing flows </h3>
 
             <p> never give up. </p>
 
@@ -79,11 +79,37 @@
 
             <p class="question"> that is, <b> if</b> we had such a function. </p>
 
-            <p class="response"> and we do... </p>
+            <p class="response"> and we do. </p>
 
-            <h4 class="section-title"> coupling layers and friends </h4>
+            <h3 class="section-title"> coupling layers and friends </h3>
 
-            <p> the authors of non-linear independent components estimation (dinh et al.) came up with what they coined an coupling layer, which gave rise to a whole family of  </p>
+            <p class="whisper"> original paper <a href="https://arxiv.org/abs/1410.8516">here</a></p>
+
+            <p> coupling layers as proposed by dihn et al gives us such a invertible function. the core idea behind this sort of layer is to split the input \( x \) to each layer into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
+
+            <p>  \begin{align*} y_1 &= x_1 \\ y_2 &= x_2 + m(x_1) \end{align*} </p>
+
+            <p> a little bit of rearranging very trivially gives us the inverse function: </p>
+
+            <p> \begin{align*} x_1 &= y_1 \\ x_2 &= y_2 - m(y_1) \end{align*} </p>
+
+            <p> note that both the forward and inverse computation of the coupling layer can happen with just the forward pass of the function \(m\), which can be as simple or as complex as the builder of the model desires it to be. </p>
+
+            <p> of course, the coupling layer leaves part of the input completely unchanged, but this issue of expressibility can be fixed simply by having multiple coupling layers, and alternating the block that receives the identity function at each turn. composition of invertible functions is invertible, and so this stacking of coupling layers gives us the analytically invertible that we sought for. </p>
+
+            <p> and that, my chums, is two out of three of our requirements to build a usable normalizing flow. all we need now is a fast way to compute the determinant of the jacobian of the function. </p>
+
+            <p class="response"> do you remember how to compute a matrix determinant? </p>
+
+            <p class="question"> o_o </p>
+
+            <h4 class="aside"> aside: bitesized determinants </h4>
+
+            <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it intuitively the factor by which space is stretched after applying \(A\). </p>
+
+            <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations. </p>
+
+            <p> how to compute it? well. you can dog it via laplace expansion or a number of equivalent ways, with a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it way faster. </p>
 
         </div>
     </body>
