@@ -28,9 +28,11 @@
                 </h2>
                 <p> may, 2025 </p>
             </div>
-            <p id="intro"> i put thing in black box, then i want thing back, but how? what does it take to build an invertible neural network? </p>
+            <p id="intro"> i put thing in black box, then i want thing back, but how? </p>
         </div>
         <div class="body">
+
+            <p class="whisper"> the goal of this blog is to give a structured introduction on how we can make neural networks invertible and is of course not a comprehensive review. as such, much math and much theory is ommitted, though i do try to leave pointers for further reading when possible. enjoy! :3  </p>
 
             <h3 class="section-title"> a primer on invertibility </h3>
 
@@ -55,7 +57,7 @@
 
             <p class="response"> no, not yet. </p>
 
-            <h3 class="section-title"> normalizing flows </h3>
+            <h3 class="section-title"> normalizing flows & flowing towards normality </h3>
 
             <p> never give up. </p>
 
@@ -75,13 +77,13 @@
 
             <p class="whisper"> this change of variable formula is also useful for inverse transform sampling, which is not super relevant but super cool, you can read more about that <a href="https://www.bishopbook.com/"> in the bishop & bishop deep learning book, chapter 14.</a>.</p>
 
-            <p> that formula prescribes the necessary components to building such an invertible layer: we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would be able to build such a normalizing flow to our hearts contents. </p>
+            <p> essentially. we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would be able to build such a normalizing flow to our hearts contents. </p>
 
             <p class="question"> that is, <b> if</b> we had such a function. </p>
 
             <p class="response"> and we do. </p>
 
-            <h3 class="section-title"> coupling layers and friends </h3>
+            <h3 class="section-title"> coupling layers and their acquaintances </h3>
 
             <p class="whisper"> original paper <a href="https://arxiv.org/abs/1410.8516">here</a></p>
 
@@ -103,13 +105,66 @@
 
             <p class="question"> o_o </p>
 
-            <h4 class="aside"> aside: bitesized determinants </h4>
+            <h4 class="aside"> start: aside on bitesized determinants </h4>
 
             <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it intuitively the factor by which space is stretched after applying \(A\). </p>
 
             <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this topic! </p>
 
             <p> how to compute it? well. you can dog it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it way faster. </p>
+
+            <p> one such useful property, is that the determinant of a triangular matrix is simply the product of its diagonal: </p>
+
+            <p> \[ \text{If } A \text{ is triangular, then } \det(A) = \prod_{i=1}^{n} A_{ii} \]</p>
+            
+            <p class="whisper"> a proof can (probably) be found in <a href="https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html">gil strang's linear algebra textbook</a> </p>
+
+            <h4 class="aside"> end: aside on bitesized determinants </h4>
+
+            <p class="response"> back to coupling layers! </p>
+
+            <p> in our case, the determinant of the jacobian is simply 1. here's why: </p>
+
+            <p>
+                \[
+                x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, \quad
+                y = \begin{bmatrix} y_1 \\ y_2 \end{bmatrix}, \quad
+                y_1 = x_1, \quad y_2 = x_2 + m(x_1).
+                \]
+            </p>
+
+            <p> \[ J = \frac{\partial x}{\partial y} = 
+                \begin{bmatrix}
+                \frac{\partial x_1}{\partial y_1} & \frac{\partial x_1}{\partial y_2} \\
+                \frac{\partial x_2}{\partial y_1} & \frac{\partial x_2}{\partial y_2}
+                \end{bmatrix} \] 
+            </p>
+            
+            <p> since \(y_1 = x_1\), \( \frac{\partial x_1}{\partial y_1} = I \),  similarly, \( \frac{\partial x_2}{\partial y_2} = I \) </p>
+            <p> and since \( y_2 \) does not depend on \(x_2\) at all, \( \frac{\partial x_1}{\partial y_2} = 0 \)</p> 
+
+            <p> putting those blocks together, we get a lower triangular matrix, with ones along the diagonal: </p>
+
+            <p> \[
+            J = \begin{bmatrix}
+            1 & 0 \\
+            \frac{\partial x_2}{\partial y_1} & 1
+            \end{bmatrix}
+            \] </p>
+
+            <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. </p>
+
+            <p> many such coupling layers can be constructed using similar logic in designing the \( \det(J) \) to be easily computable, the authors of the linked paper cover a few more variations, and prove that they also satisfy the necessary conditions for invertibility and computational efficiency. </p>
+
+            <p> similarly, coupling layers are not the only way to build normalizing flows. but similar principles and goals apply when making such designs. again, i refer yall to <a href="https://arxiv.org/abs/1908.09257">this review</a> for further reading. </p>
+
+            <p class="question"> but wait, you keep saying analytic invertibility like there is somehow a secret, second form of invertibility... can invertibility exist without a explicit inverse? </p>
+
+            <p class="response"> *nods slowly, with a smug smirk* </p>
+
+            <h3 class="section-title"> 1-lipschitz neural networks </h3> 
+
+            
 
         </div>
     </body>
