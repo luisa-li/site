@@ -145,6 +145,18 @@ a {
     text-decoration: underline;
 }
 
+table {
+    font-size: 15px;
+    width: 80%;
+    margin: 40px auto 30px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: center;
+    font-weight: normal;
+}
+
 @media (max-width: 600px) {
     
     body {
@@ -156,14 +168,6 @@ a {
         overflow-x: hidden;
         text-align: center;
         padding: 3vw;
-    }
-
-    #makeitup {
-        width: 100%;
-    }
-    
-    #gptstatistics {
-        width: 100%
     }
     
 }

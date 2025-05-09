@@ -166,9 +166,41 @@
 
             <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">link to paper</a> </p>
 
-            
+            <p> there is a nice similarity between resisual layers and euler's method for numerically solving ordinary differential equation initial value problems: </p>
 
-            <p> here's the thesis. </p>
+            <p> \[ x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t) \] </p>
+            <p> \[ x_{t+1} \leftarrow x_t + h f_{\theta_t}(x_t) \] </p>
+
+            <p> where the top equation is the standard <a href="https://arxiv.org/abs/1512.03385">residual layer</a> update rule, and the bottom equation is <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> with \( h \) being the step size, for clarify, here is a summary of the notation. </p>
+
+            <table border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>component</th>
+                    <th>residual layer</th>
+                    <th>euler's method</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>update rule</td>
+                    <td>\( x_{t+1} = x_t + g_{\theta_t}(x_t) \)</td>
+                    <td>\( x_{t+1} = x_t + f_{\theta_t}(x_t) \)</td>
+                  </tr>
+                  <tr>
+                    <td>\( x_t \)</td>
+                    <td>input at layer \( t \)</td>
+                    <td>state at time \( t \)</td>
+                  </tr>
+                  <tr>
+                    <td>\( g_{\theta_t} \), \( f_{\theta_t} \)</td>
+                    <td>learned residual function</td>
+                    <td>derivative function</td>
+                  </tr>
+                </tbody>
+            </table>
+              
+            
 
             <p> if we think about a residual layer as a ordinary differential equation, we can think about the inverse as the dynamics of the system going backwards in time. we can rewrite this backwards dynamics as a iteration that converges to a fixed point, this fixed point being the inverse of the function for a given output. if lipschitz of this residual layer is less than unitary, then banach's fixed point theorem will guarantee that a fixed point exists and is unique. this means that if we are able to constrain all residual layers to have a lipschitz constant less than one, we will have invertibility. </p>
             
