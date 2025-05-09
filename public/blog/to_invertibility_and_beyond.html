@@ -21,7 +21,7 @@
         <div class="head">
             <div class="title-data">
                 <h2> 
-                    <span class="pink-highlight">to</span>
+                    <span class="yellow-highlight">to</span>
                     <span class="blue-highlight">invertibility</span>
                     <span class="red-highlight">and</span>
                     <span class="aqua-highlight">beyond</span>
@@ -32,7 +32,7 @@
         </div>
         <div class="body">
 
-            <p class="whisper"> the goal of this blog is to give a structured introduction on how we can make neural networks invertible and is of course not a comprehensive review. as such, much math and much theory is ommitted, though i do try to leave pointers for further reading when possible. enjoy! :3  </p>
+            <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. of course, this is not a comprehensive or rigorous review, hence the pointers for further reading. enjoy! :3  </p>
 
             <h3 class="section-title"> a primer on invertibility </h3>
 
@@ -160,9 +160,21 @@
 
             <p class="question"> but wait, you keep saying analytic invertibility like there is somehow a secret, second form of invertibility... can invertibility exist without a explicit inverse? </p>
 
-            <p class="response"> *nods slowly, with a smug smirk* </p>
+            <p class="response"> *nods mysteriously, with a smug smirk* </p>
 
             <h3 class="section-title"> 1-lipschitz neural networks </h3> 
+
+            <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">link to paper</a> </p>
+
+            
+
+            <p> here's the thesis. </p>
+
+            <p> if we think about a residual layer as a ordinary differential equation, we can think about the inverse as the dynamics of the system going backwards in time. we can rewrite this backwards dynamics as a iteration that converges to a fixed point, this fixed point being the inverse of the function for a given output. if lipschitz of this residual layer is less than unitary, then banach's fixed point theorem will guarantee that a fixed point exists and is unique. this means that if we are able to constrain all residual layers to have a lipschitz constant less than one, we will have invertibility. </p>
+            
+            <p class="response"> did you get that? </p>
+
+            <p class="question"> ?_? </p>
 
             
 

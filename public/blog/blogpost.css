@@ -61,7 +61,7 @@ body {
 }
 
 .body a {
-    color: var(--green);  
+    color: var(--pink);  
 } 
 
 .left-navbar {
@@ -117,7 +117,7 @@ body {
 }
 
 .aside {
-    color: var(--purple);
+    color: var(--green);
     text-align: center;
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
