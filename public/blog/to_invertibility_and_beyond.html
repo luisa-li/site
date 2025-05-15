@@ -166,7 +166,7 @@
 
             <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">link to paper</a> </p>
 
-            <p> there is a nice similarity between resisual layers and euler's method for numerically solving ordinary differential equation initial value problems: </p>
+            <p> there is a nice similarity between resisual layers and euler's method for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
 
             <p> \[ x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t) \] </p>
             <p> \[ x_{t+1} \leftarrow x_t + h f_{\theta_t}(x_t) \] </p>
@@ -200,16 +200,30 @@
                 </tbody>
             </table>
               
+            <p> given this similarity, we can think about the inverse of this ODE IVP as the dynamics of the system going backwards in time. more importantly, we can write this as an iteration that converges to the <span class="blue-highlight"> fixed point</span>, which is the inverse for a given function: </p>
+
+            <p> \[ x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t) \] </p>
+            <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \] </p>         
             
+            <p class="question"> so what does this **actually** mean for us? </p>
 
-            <p> if we think about a residual layer as a ordinary differential equation, we can think about the inverse as the dynamics of the system going backwards in time. we can rewrite this backwards dynamics as a iteration that converges to a fixed point, this fixed point being the inverse of the function for a given output. if lipschitz of this residual layer is less than unitary, then banach's fixed point theorem will guarantee that a fixed point exists and is unique. this means that if we are able to constrain all residual layers to have a lipschitz constant less than one, we will have invertibility. </p>
+            <p> well, it means that if we can guarantee that this fixed point (which is also our inverse) exists and is unique. and a way to compute this fixed point will give us the inverse of the residual layer that we yearn for. </p>
+
+            <p class="response"> and the two missing ingredients our answer are... </p>
+
+            <p class="aside"> <span class="blue-highlight"> aside: banach's fixed point theorem, and lipschitz continuity </span> </p>
+
+            <p class="whisper"> wikipedia pages for <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">banach's fixed point theorem</a>, <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> and <a href="https://en.wikipedia.org/wiki/Contraction_mapping">contraction mapping</a></p>
+
+            <p> to start, obligatory math definitions, in very serious capitalizations. </p>
+
+            <div class="theorem-container">
+                <div class="theorem-box">
+                  <p class="theorem-title"> Banach's Fixed Point Theorem </p>
+                  <p> Let \( (X, d) \) be a non-empty complete metric space with a contraction mapping \( T: X \to X \). Then \( T \) admits a unique fixed point \( x^* \in X \), i.e., \( T(x^*) = x^* \). Furthermore, \( x^* \) can be found as follows: start with an arbitrary element \( x_0 \in X \) and define a sequence \( (x_n)_{n \in \mathbb{N}} \) by \( x_n = T(x_{n-1}) \, \text{for } n \geq 1 \). Then the sequence \( (x_n) \) converges to \( x^* \): \( \lim_{n \to \infty} x_n = x^* \) </p>
+                </div>
+            </div>
             
-            <p class="response"> did you get that? </p>
-
-            <p class="question"> ?_? </p>
-
-            
-
         </div>
     </body>
 </html>

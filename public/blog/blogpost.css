@@ -93,7 +93,9 @@ body {
     text-align: left;
     align-items: left;
     justify-content: left;
-    padding-left: 1vh; 
+    padding-left: 2vh; 
+    margin-top: 2vh; 
+    margin-bottom: 2vh;     
 }
 
 .response {
@@ -101,8 +103,9 @@ body {
     text-align: right;
     align-items: right;
     justify-content: right;
-    padding-right: 1vh; 
-
+    padding-right: 2vh; 
+    margin-top: 2vh; 
+    margin-bottom: 2vh;    
 }
 
 .section-title {
@@ -112,8 +115,8 @@ body {
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    margin-top: 2vh;
-    
+    margin-top: 4vh; 
+    margin-bottom: 4vh;    
 }
 
 .aside {
@@ -122,7 +125,8 @@ body {
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    margin-top: 2vh; 
+    margin-top: 3vh; 
+    margin-bottom: 3vh;
 }
 
 .glossary {
@@ -155,6 +159,33 @@ table {
 th, td {
     text-align: center;
     font-weight: normal;
+}
+
+.theorem-box {
+    border: 1px solid var(--lightwhite);
+    border-radius: 6px;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    width: 80%;
+    margin: 1em auto;
+    background-color: transparent;
+    text-align: center;
+    max-width: 90%;
+    font-size: 14px;
+}
+
+.theorem-container {
+    text-align: center;
+    margin-top: 4vh; 
+    margin-bottom: 4vh;
+}
+
+.theorem-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 @media (max-width: 600px) {
