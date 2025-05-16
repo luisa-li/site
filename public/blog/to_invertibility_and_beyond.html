@@ -165,7 +165,7 @@
 
             <h3 class="section-title"> 1-lipschitz neural networks </h3> 
 
-            <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">link to paper</a> </p>
+            <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> invertible residual networks, and <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a> spectral normalization for GANs </p>
 
             <p> there is a nice similarity between resisual layers and euler's method for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
 
@@ -251,7 +251,25 @@
               </div>
             </div>
 
-            <p> a contraction mapping is thus a  </p>
+            <p> a contraction mapping is thus a special case of a lipschitz continuos function. specifically, it is one with a lipschitz constant of less than one, also known as a 1-lipschitz function. </p>
+            
+            <p> intuitively, it is helpful to think of the lipschitz constant as an upper bound on how much a function can change between any two points, which gives a even stronger guarantee on continuity than an upper bound on derivatives and thus the instantaneous change. </p>
+
+            <p class="whisper"> the wikipedia article on <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> has a very good animation illustrating this intuition </p>
+            
+            <p> ok. we want to guarantee a unique fixed point and a way to compute it, and banach's fixed point theorem gives us that. in exchange, it wants a contraction mapping, which requires a lipschitz constant of less than one. looking back to our original backwards dynamic... </p>
+
+            <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \] </p>         
+
+            <p>... it should be clear that we just need our \( f_{\theta_t}\) to have be 1-lipschitz. </p>
+
+            <p> fortunately, 1-lipschitz layers have already been used as a mechanism to stabilize training for the discriminator in a generative adversarial network, see <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a>. to put it simply, one can achieve such a 1-lipschitz layer by normalizing the weight matrix by its spectral norm, which is also known as its largest singular value: </p>
+
+            \[ \bar{W} := \frac{W}{\sigma(W)} \]
+
+            <p> and that, finally gives us an invertible neural network layer with unconstrained form. what it also gives us, is a blueprint for extending invertibility beyond fully connected and convolution layers. given a layer, we just need to prove that can be made 1-lipschitz. of course, much care is needed in practice to ensure the expressibility and usability of such layers, but we won't worry about that. </p>
+            
+            <h4 class="aside"> ...and scene </h3> 
 
         </div>
     </body>
