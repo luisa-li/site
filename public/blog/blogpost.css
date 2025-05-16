@@ -11,6 +11,15 @@ h4 {
     color : var(--lightwhite)
 }
 
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+  
+.table-container table {
+    width: 100%;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -161,11 +170,11 @@ th, td {
     font-weight: normal;
 }
 
-.theorem-box {
+.box {
     border: 1px solid var(--lightwhite);
-    border-radius: 6px;
-    padding-left: 1em;
-    padding-right: 1em;
+    border-radius: 3px;
+    padding-left: 3em;
+    padding-right: 3em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     width: 80%;
@@ -174,18 +183,21 @@ th, td {
     text-align: center;
     max-width: 90%;
     font-size: 14px;
-}
-
-.theorem-container {
-    text-align: center;
     margin-top: 4vh; 
     margin-bottom: 4vh;
 }
 
-.theorem-title {
+.container {
+    text-align: center;
+    margin-top: 2vh; 
+    margin-bottom: 2vh;
+}
+
+.box-title {
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
     font-weight: bold;
+    text-align: center; 
 }
 
 @media (max-width: 600px) {
@@ -199,6 +211,20 @@ th, td {
         overflow-x: hidden;
         text-align: center;
         padding: 3vw;
+    }
+
+    .box {
+        font-size: 12px;
+        padding: 0.5em 1.5em;
+        width: 95%;
+    }
+
+    .box-title {
+        font-size: 13px;
+    }
+
+    table {
+        font-size: 12px;
     }
     
 }

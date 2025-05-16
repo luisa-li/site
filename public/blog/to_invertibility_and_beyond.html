@@ -105,23 +105,24 @@
 
             <p class="question"> o_o </p>
 
-            <h4 class="aside"> start: aside on bitesized determinants </h4>
+            <div class="box">
+              <div class="container">
 
-            <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it intuitively the factor by which space is stretched after applying \(A\). </p>
+                <p class="box-title"> aside: bitesized determinants </p>
+                <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it intuitively the factor by which space is stretched after applying \(A\). </p>
 
-            <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this topic! </p>
+                <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this topic! </p>
 
-            <p> how to compute it? well. you can dog it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it way faster. </p>
+                <p> how to compute it? well. you can dog it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it way faster. </p>
 
-            <p> one such useful property, is that the determinant of a triangular matrix is simply the product of its diagonal: </p>
+                <p> one such useful property, is that the determinant of a triangular matrix is simply the product of its diagonal: </p>
 
-            <p> \[ \text{If } A \text{ is triangular, then } \det(A) = \prod_{i=1}^{n} A_{ii} \]</p>
-            
-            <p class="whisper"> a proof can (probably) be found in <a href="https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html">gil strang's linear algebra textbook</a> </p>
+                <p> \[ \text{If } A \text{ is triangular, then } \det(A) = \prod_{i=1}^{n} A_{ii} \]</p>
+                
+                <p> a proof can (probably) be found in <a href="https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html">gil strang's linear algebra textbook</a> </p>
 
-            <h4 class="aside"> end: aside on bitesized determinants </h4>
-
-            <p class="response"> back to coupling layers! </p>
+              </div>
+            </div>
 
             <p> in our case, the determinant of the jacobian is simply 1. here's why: </p>
 
@@ -173,32 +174,34 @@
 
             <p> where the top equation is the standard <a href="https://arxiv.org/abs/1512.03385">residual layer</a> update rule, and the bottom equation is <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> with \( h \) being the step size, for clarify, here is a summary of the notation. </p>
 
-            <table border="1" cellpadding="8" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>component</th>
-                    <th>residual layer</th>
-                    <th>euler's method</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>update rule</td>
-                    <td>\( x_{t+1} = x_t + g_{\theta_t}(x_t) \)</td>
-                    <td>\( x_{t+1} = x_t + f_{\theta_t}(x_t) \)</td>
-                  </tr>
-                  <tr>
-                    <td>\( x_t \)</td>
-                    <td>input at layer \( t \)</td>
-                    <td>state at time \( t \)</td>
-                  </tr>
-                  <tr>
-                    <td>\( g_{\theta_t} \), \( f_{\theta_t} \)</td>
-                    <td>learned residual function</td>
-                    <td>derivative function</td>
-                  </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+              <table border="1" cellpadding="8" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>component</th>
+                      <th>residual layer</th>
+                      <th>euler's method</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>update rule</td>
+                      <td>\( x_{t+1} = x_t + g_{\theta_t}(x_t) \)</td>
+                      <td>\( x_{t+1} = x_t + f_{\theta_t}(x_t) \)</td>
+                    </tr>
+                    <tr>
+                      <td>\( x_t \)</td>
+                      <td>input at layer \( t \)</td>
+                      <td>state at time \( t \)</td>
+                    </tr>
+                    <tr>
+                      <td>\( g_{\theta_t} \), \( f_{\theta_t} \)</td>
+                      <td>learned residual function</td>
+                      <td>derivative function</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
               
             <p> given this similarity, we can think about the inverse of this ODE IVP as the dynamics of the system going backwards in time. more importantly, we can write this as an iteration that converges to the <span class="blue-highlight"> fixed point</span>, which is the inverse for a given function: </p>
 
@@ -211,19 +214,45 @@
 
             <p class="response"> and the two missing ingredients our answer are... </p>
 
-            <p class="aside"> <span class="blue-highlight"> aside: banach's fixed point theorem, and lipschitz continuity </span> </p>
+            <p class="aside"> <span class="blue-highlight"> banach's fixed point theorem, and lipschitz continuity </span> </p>
 
             <p class="whisper"> wikipedia pages for <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">banach's fixed point theorem</a>, <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> and <a href="https://en.wikipedia.org/wiki/Contraction_mapping">contraction mapping</a></p>
 
             <p> to start, obligatory math definitions, in very serious capitalizations. </p>
 
-            <div class="theorem-container">
-                <div class="theorem-box">
-                  <p class="theorem-title"> Banach's Fixed Point Theorem </p>
-                  <p> Let \( (X, d) \) be a non-empty complete metric space with a contraction mapping \( T: X \to X \). Then \( T \) admits a unique fixed point \( x^* \in X \), i.e., \( T(x^*) = x^* \). Furthermore, \( x^* \) can be found as follows: start with an arbitrary element \( x_0 \in X \) and define a sequence \( (x_n)_{n \in \mathbb{N}} \) by \( x_n = T(x_{n-1}) \, \text{for } n \geq 1 \). Then the sequence \( (x_n) \) converges to \( x^* \): \( \lim_{n \to \infty} x_n = x^* \) </p>
+            <div class="container">
+                <div class="box">
+                  <p class="box-title"> Banach's Fixed Point Theorem </p>
+                  <p> Let \( (X, d) \) be a non-empty complete metric space with a contraction mapping \( T: X \to X \). Then \( T \) admits a unique fixed point \( x^* \in X \) (i.e., \( T(x^*) = x^* \)). Furthermore, \( x^* \) can be found as follows: start with an arbitrary element \( x_0 \in X \) and define a sequence \( (x_n)_{n \in \mathbb{N}} \) by \( x_n = T(x_{n-1}) \, \text{for } n \geq 1 \). Then: \( \lim_{n \to \infty} x_n = x^* \). </p>
                 </div>
             </div>
+
+            <p> banach's fixed point theorem essentially guarantees a unique fixed point on a mapping, if the mapping is a contraction. it also provides a numerical way to iterate to converge to this fixed point. this method is aptly known as <span class="blue-highlight">fixed point iteration</span>.</p>
+
+            <p class="whisper"> now. what is a contraction mapping? and how does it relate to lipschitz continuous functions? </p>
+
+            <div class="container">
+              <div class="box">
+                <p class="box-title"> Lipschitz Continuity </p>
+
+                  <p> Given two metric spaces \((X, d_X)\) and \((Y, d_Y)\), where \(d_X\) denotes the metric on the set \(X\) and \(d_Y\) is the metric on set \(Y\), a function \(f : X \rightarrow Y\) is called Lipschitz continuous if there exists a real constant \(K \geq 0\) such that, for all \(x_1\) and \(x_2\) in \(X\), </p>
+                  
+                  \[ d_Y(f(x_1), f(x_2)) \leq K \cdot d_X(x_1, x_2) \]
+                  
+                  <p> Any such \(K\) is referred to as a Lipschitz constant for the function \(f\). </p>               
+              </div>
+            </div>
             
+            <div class="container">
+              <div class="box">
+                <p class="box-title"> Contraction Mapping </p>
+                <p> A contraction mapping on a metric space \((M, d)\) is a function \(f\) from \(M\) to itself, with the property that there is some real number \(0 \leq k < 1\) such that for all \(x\) and \(y\) in \(M\), </p>
+                <p> \[ d(f(x), f(y)) \leq k \cdot d(x, y). \] </p>
+              </div>
+            </div>
+
+            <p> a contraction mapping is thus a  </p>
+
         </div>
     </body>
 </html>
