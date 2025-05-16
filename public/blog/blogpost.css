@@ -97,6 +97,11 @@ body {
     justify-content: center;
 }
 
+.postscript {
+    color: var(--grey1);
+    font-size: 14px;
+}
+
 .question {
     color: var(--grey1);
     text-align: left;
