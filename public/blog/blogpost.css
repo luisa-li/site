@@ -133,6 +133,10 @@ body {
     margin-bottom: 4vh;    
 }
 
+.codefont {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .aside {
     color: var(--green);
     text-align: center;

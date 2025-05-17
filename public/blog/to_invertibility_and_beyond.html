@@ -32,7 +32,7 @@
         </div>
         <div class="body">
 
-            <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. of course, this is not a comprehensive or rigorous review, hence the pointers for further reading. enjoy! :3  </p>
+            <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. note that this blog assumes a good level of knowledge of probability theory, calculus, linear algebera, and machine learning principles, though i do try and define some terms along the way. of course, suggestions are always welcome! </p>
 
             <h3 class="section-title"> a primer on invertibility </h3>
 
@@ -43,23 +43,33 @@
                 <li> injective: \( F(x) = F(y) \implies x=y \) </li>
                 <li> surjective: \( \forall \, b \in B,  \exists \, a \in A\) such that \(F(a) = b \) </li>
             </ul>
-            <p> in human words, an injective function is such that one output is given by one input exactly, with no two inputs giving the same output, and a surjective function is such that every possible output is mapped to by some input. together, they give a bijection. given any output, i know the input that mapped to it exists and is unique. </p>
+            <p> an injective function is such that one output is given by one input exactly, with no two inputs giving the same output, and a surjective function is such that every possible output is mapped to by some input. together, they give a bijection. given any output, i know the input that mapped to it exists and is unique. </p>
 
-            <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we can find an analytical form of the inverse function. </p>
+            <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we are able to give a closed form expression of the inverse function that gives us back the input exactly. </p>
 
-            <p> without going into the math, it is pretty easy to see that most neural networks are <b> not </b> analytically invertible. for one, the most common choice of activation function, ReLU, would render the whole thing non-invertible: </p>
+            <p> without going into the much detail, it is pretty easy to see that most neural networks are <b> not </b> analytically invertible in their usual forms. for one, the most common choice of activation function, \( ReLU(x) = max(0, x) \), would render the whole thing non-invertible. if we receive a positive value as output to ReLU, we can be sure that that is the same number we put in. but we are certainly out of luck if a negative number is spit out. </p>
 
-            <p> \[ ReLU(x) = max(0, x) \]</p>
-
-            <p> intuitively, if i got a positive number out of ReLU, i would know that that positive number is exactly the number that i put in. but if the output of ReLU is 0, then we would have no idea what we put in. and, since a composition of functions is only invertible if all pieces of the composition are invertible, the usage of ReLU renders the most common linear layer \( y = \phi(w^Tx + b)\) not analytically invertible. beyond linear layers, things like convolutions on images and message passing on graphs are also not invertible under similar reasoning. in both cases, the aggregation step renders the whole thing not analytically invertible - simply put, the result of an addition tell you nothing about what each component might have been. </p>
+            <p> since the composition of functions is only invertible iff each function in the composition is invertible, the usage of ReLU as an activation function to a linear makes the whole thing non-invertible. beyond ReLU and linear layers, common operations like convolutions on images and message passing on graphs are also not analytically invertible because of their aggregation steps. simply put, the result of an addition tells you nothing about the things you added to get there. </p>
 
             <p class="question"> so is all hope lost? can we go home now? </p>
 
             <p class="response"> no, not yet. </p>
 
-            <h3 class="section-title"> normalizing flows & flowing towards normality </h3>
+            <p class="aside"> <span class="blue-highlight"> the hard and soft ways to invertibility </span> </p>
 
-            <p> never give up. </p>
+            <p> before we move on to discussions about neural networks, it is useful to make a distinction between hard and soft invertibility. this will make our mission precise, as well as yield a general framework for us to pursue. </p>
+
+            <p> loosely speaking, soft invertibility is encouraged, and hard invertibility is enforced. encouraging a model to be invertible involves regularizing it via a loss term that punishes poor invertibility. enforcing a model to be invertible, on the other hands, means architectural designs that guarantees the model to be invertible, regardless of how the training run goes. </p>
+
+            <p> a classic example of a soft invertible model is the autoencoder, which is trained to learn an efficient encoding of unlabeled data. it consists of two networks, an encoder \( E_{\phi} \) and a decoder \( D_{\theta} \), the former encodes the input data into a latent space, and the latter decodes it back into the original data space. the autoencoder is trained to minimize reconstruction loss, which measures the distance between \(x\), the original input, and \( x' = D_{\theta}(E_{\phi}(x)) \), the result of pushing \( x \) through the network and back. </p>
+
+            <p> super important to note is that soft invertibility may only be accurately invertible on the data distribution it is trained on. in other words, an autoencoder that recovers pictures of sharks accurately might not generalize to pictures of chairs. on the other hand, hard invertibility gives us a guarantee that any input will be invertible. in this blog, we are in pursuit of hard invertibility, and so our next stop is naturally to look at constraining our model architecture to enforce this property. </p>
+
+            <h3 class="section-title"> normalizing flows: flowing towards the normal </h3>
+
+            <p class="whisper"> a comprehensive overview of normalizing flows can be found in <a href="https://arxiv.org/abs/1908.09257">this review</a></p>
+
+            <p> normalizing flows is one class of models that bakes analytical invertibility into its architecture. </p>
 
             <p> normalizing flows are a class of generative models. think of stable diffusion and the gpts: its objective is to produce more samples in the distribution of data it is trained on. if i feed it pictures ikea sharks, it should learn how to generate more ikea shark looking plushies. </p>
 
