@@ -110,7 +110,7 @@
 
             <p> coupling layers as proposed by dihn et al gives us just that. the core idea behind this sort of layer is to split the input \( x \) to each layer into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
 
-            <p>  \begin{align*} y_1 &= x_1 \\ y_2 &= x_2 + m(x_1) \end{align*} </p>
+            <p> \begin{align*} y_1 &= x_1 \\ y_2 &= x_2 + m(x_1) \end{align*} </p>
 
             <p> a little bit of rearranging very trivially gives us the inverse function: </p>
 
@@ -173,28 +173,24 @@
             \end{bmatrix}
             \] </p>
 
-            <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. </p>
+            <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. this significantly simplifies our likelihood computations for this type of layers, and finally gives us the analytically invertible, explicitly generative model that we have worked so hard for. </p>
 
-            <p> and what this actually means, is that a fully invertible neural network can be built simply by stacking these coupling layers together, and </p>
-
-            <p> many such coupling layers can be constructed using similar logic in designing the \( \det(J) \) to be easily computable, the authors of the linked paper cover a few more variations, and prove that they also satisfy the necessary conditions for invertibility and computational efficiency. </p>
-
-            <p> similarly, coupling layers are not the only way to build normalizing flows. but similar principles and goals apply when making such designs. again, i refer yall to <a href="https://arxiv.org/abs/1908.09257">this review</a> for further reading. </p>
+            <p> many other types of coupling layers can be constructed using similar logic - desinging \( \det \left( \frac{\partial f}{\partial y} \right) \) to be easily computable. dihn et al cover a few more variations, and prove that they also satisfy the conditions for invertibility and computational efficiency. similarly, coupling layers are not the only way to build normalizing flows, but again, similar principles apply. </p>
 
             <p class="question"> but wait, you keep saying analytic invertibility like there is somehow a secret, second form of invertibility... can invertibility exist without a explicit inverse? </p>
 
             <p class="response"> *nods mysteriously, with a smug smirk* </p>
 
-            <h3 class="section-title"> 1-lipschitz neural networks </h3> 
+            <h3 class="section-title"> 1-lipschitz neural networks </h3>
 
-            <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> invertible residual networks, and <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a> spectral normalization for GANs </p>
+            <p class="whisper"> <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a> spectral normalization for gans, and <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> </p>
 
-            <p> there is a nice similarity between resisual layers and euler's method for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
+            <p> central to behrmann et al.'s thesis is that there is a very nice similarity between <a href="https://arxiv.org/abs/1512.03385">residual layers</a> and <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
 
-            <p> \[ x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t) \] </p>
-            <p> \[ x_{t+1} \leftarrow x_t + h f_{\theta_t}(x_t) \] </p>
+            <p> \[ x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t) \quad \text{ResNet} \] </p>
+            <p> \[ x_{t+1} \leftarrow x_t + h f_{\theta_t}(x_t) \quad \text{ODE IVP} \] </p>
 
-            <p> where the top equation is the standard <a href="https://arxiv.org/abs/1512.03385">residual layer</a> update rule, and the bottom equation is <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> with \( h \) being the step size, for clarify, here is a summary of the notation. </p>
+            <p> for clarity, here's a summary on the notation for each: </p>
 
             <div class="table-container">
               <table border="1" cellpadding="8" cellspacing="0">

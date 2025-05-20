@@ -170,8 +170,9 @@ a {
 table {
     font-size: 15px;
     width: 80%;
-    margin: 40px auto 30px auto;
     border-collapse: collapse;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 th, td {
