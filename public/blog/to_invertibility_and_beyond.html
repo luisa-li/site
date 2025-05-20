@@ -69,35 +69,42 @@
 
             <p class="whisper"> a comprehensive overview of normalizing flows can be found in <a href="https://arxiv.org/abs/1908.09257">this review</a></p>
 
-            <p> normalizing flows is one class of models that bakes analytical invertibility into its architecture. </p>
+            <p> normalizing flows is one class of models that bakes hard invertibility into its architecture. it is generative, in that its goal is to produce more samples in the distribution of data it is trained on, think of stable diffusion and the gpts. if i trained it on pictures of plushies, it should be able to create more similar looking, but not identical images. </p>
 
-            <p> normalizing flows are a class of generative models. think of stable diffusion and the gpts: its objective is to produce more samples in the distribution of data it is trained on. if i feed it pictures ikea sharks, it should learn how to generate more ikea shark looking plushies. </p>
+            <p> the key idea to normalizing flow is the following: all of our data is drawn from some unknown data distribution, but this distribution may be arbitrarily complex and therefore hard to sample new data points from. however, if we are able to transform this input data distribution into a simpler distribution via a series of invertible and differentiable mappings, then we would be able to generate new samples simply by sampling from the simple distribution (say that 10 times fast), and applying the inverse of the mappings one by one. most commonly, the simpler distribution that we map to is the standard normal distribution, hence the name of the model - we are flowing our data distribution towards the normal. </p>
 
-            <p> the key idea of normalizing flows is as follows: if we are able to transforming the data distribution into a simpler distribution via a series of invertible and differentiable mappings, like the standard normal (hence the name), we would be able to generate new samples in the data distribution by simply sampling noise from the standard normal, and pushing the noise back through the inverse functions. </p>
-
-            <p> this class of generative models is at its core based on the change of variables formula in probability theory, which gives us a way to compute the resulting (or the <i> pushforward</i>) distribution after applying a function to a distribution. </p>
-
-            <p> given \( Z \in \mathbb{R}^D\), a random variable with a known and tractable probability density function \( p_z: \mathbb{R}^D \rightarrow \mathbb{R} \), if \( g \) is an invertible function, and \( Y = g(z) \), then the change of variables formula gives us a way to compute the probability density function of the random variable \( Y\). </p>
-
-            <p> \[ p_Y(y) = p_Z(f(y)) \left| \det \frac{\partial f}{\partial y} \right| \] </p>
+            <p> TODO: NEED TO WRITE ABOUT LIKELIHOOD, AND WHY WE NEED TO COMPUTE IT D: </p>
             
-            <p> the inverse of this transformation can be similarly computed as long as \(g\) is invertible. this formula is informative in that it prescribes the necessary condition to building such an invertible layer. </p>
-                
-            <p class="whisper"> for a more comprehensive overview and a much more mathematically rigorous definition of normalizing flows see <a href="https://arxiv.org/abs/1908.09257">this review</a>.</p>
+            <p> the change of variables formula from probability theory describes exactly how we would go about transforming probability distributions in an invertible way. in essence, it tells us how to compute the resulting (or the <i>pushforward</i>) distribution after applying an invertible function to a distribution: </p>
 
-            <p class="whisper"> this change of variable formula is also useful for inverse transform sampling, which is not super relevant but super cool, you can read more about that <a href="https://www.bishopbook.com/"> in the bishop & bishop deep learning book, chapter 14.</a>.</p>
+            <div class="container">
+              <div class="box">
+                <p class="box-title">Change of Variables Formula</p>
+                <p>
+                  Given \( Z \in \mathbb{R}^D \), a random variable with a known and tractable probability density function \( p_Z: \mathbb{R}^D \to \mathbb{R} \), if \( g \) is an invertible function and \( Y = g(Z) \), let \( f = g^{-1} \). Then the probability density function of the random variable \( Y \) is:
+                </p>
+                <p>
+                  \[ p_Y(y) = p_Z(f(y)) \left| \det \left( \frac{\partial f}{\partial y} \right) \right| \]
+                </p>
+                <p>
+                  Here, \( \det \left( \frac{\partial f}{\partial y} \right) \) denotes the determinant of the Jacobian matrix of \( f \), evaluated at \( y \).
+                </p>
+              </div>
+            </div>
+            
+            <p> the inverse of this transformation can be similarly computed as long as \(g\) is invertible. this formula is the basis to the normalizing flow class of models, and is illuminating in that it prescribes the necessary conditions to building an efficient normalizing flow: </p>
 
-            <p> essentially. we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would be able to build such a normalizing flow to our hearts contents. </p>
+            <p> essentially. we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a machine learning model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would have all the puzzle pieces to a complete normalizing flow architecture. </p>
 
             <p class="question"> that is, <b> if</b> we had such a function. </p>
 
             <p class="response"> and we do. </p>
 
-            <h3 class="section-title"> coupling layers and their acquaintances </h3>
+            <h3 class="section-title"> a couple of coupling layers </h3>
 
             <p class="whisper"> original paper <a href="https://arxiv.org/abs/1410.8516">here</a></p>
 
-            <p> coupling layers as proposed by dihn et al gives us such a invertible function. the core idea behind this sort of layer is to split the input \( x \) to each layer into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
+            <p> coupling layers as proposed by dihn et al gives us just that. the core idea behind this sort of layer is to split the input \( x \) to each layer into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
 
             <p>  \begin{align*} y_1 &= x_1 \\ y_2 &= x_2 + m(x_1) \end{align*} </p>
 
@@ -109,32 +116,31 @@
 
             <p> of course, the coupling layer leaves part of the input completely unchanged, but this issue of expressibility can be fixed simply by having multiple coupling layers, and alternating the block that receives the identity function at each turn. composition of invertible functions is invertible, and so this stacking of coupling layers gives us the analytically invertible that we sought for. </p>
 
-            <p> and that, my chums, is two out of three of our requirements to build a usable normalizing flow. all we need now is a fast way to compute the determinant of the jacobian of the function. </p>
+            <p> all we need now is a fast way to compute the determinant of the jacobian... </p>
 
-            <p class="response"> do you remember how to compute a matrix determinant? </p>
+            <p class="response"> do you remember your matrix determinant rules? </p>
 
-            <p class="question"> o_o </p>
+            <p class="question"> O_O </p>
 
             <div class="box">
               <div class="container">
 
                 <p class="box-title"> aside: bitesized determinants </p>
-                <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it intuitively the factor by which space is stretched after applying \(A\). </p>
+                <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it is intuitively the factor by which space is stretched after applying \(A\). </p>
 
-                <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this topic! </p>
+                <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this stretching action! </p>
 
-                <p> how to compute it? well. you can dog it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it way faster. </p>
+                <p> how to compute it? well. you can sit down with your pencil and get it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it <b> way </b> faster. </p>
 
                 <p> one such useful property, is that the determinant of a triangular matrix is simply the product of its diagonal: </p>
 
                 <p> \[ \text{If } A \text{ is triangular, then } \det(A) = \prod_{i=1}^{n} A_{ii} \]</p>
-                
-                <p> a proof can (probably) be found in <a href="https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html">gil strang's linear algebra textbook</a> </p>
+                <p> proof is left as an excercise for the readers (: </p>
 
               </div>
             </div>
 
-            <p> in our case, the determinant of the jacobian is simply 1. here's why: </p>
+            <p> in the case of coupling layers, the determinant of the jacobian is simply 1. here's all the formulas again, explicitly written out: </p>
 
             <p>
                 \[
@@ -164,6 +170,8 @@
             \] </p>
 
             <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. </p>
+
+            <p> and what this actually means, is that a fully invertible neural network can be built simply by stacking these coupling layers together, and </p>
 
             <p> many such coupling layers can be constructed using similar logic in designing the \( \det(J) \) to be easily computable, the authors of the linked paper cover a few more variations, and prove that they also satisfy the necessary conditions for invertibility and computational efficiency. </p>
 
