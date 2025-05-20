@@ -34,6 +34,8 @@
 
             <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. note that this blog assumes a good level of knowledge of probability theory, calculus, linear algebera, and machine learning principles, though i do try and define some terms along the way. of course, suggestions are always welcome! </p>
 
+            <p class="whisper"> this ended up being incredibly long and technical, you have <a href="https://jakegines.in/"><span class="blue-highlight"><u>jake</u></span></a> to thank for that. </p>
+
             <h3 class="section-title"> a primer on invertibility </h3>
 
             <p> in caveman terms, an invertible process is one we know how to undo. moving a banana is invertible, eating the banana is not. </p>
@@ -69,13 +71,19 @@
 
             <p class="whisper"> a comprehensive overview of normalizing flows can be found in <a href="https://arxiv.org/abs/1908.09257">this review</a></p>
 
-            <p> normalizing flows is one class of models that bakes hard invertibility into its architecture. it is generative, in that its goal is to produce more samples in the distribution of data it is trained on, think of stable diffusion and the gpts. if i trained it on pictures of plushies, it should be able to create more similar looking, but not identical images. </p>
+            <p> normalizing flows are one class of generative models that bakes hard invertibility into its architecture. unlike a discriminator whose objective is to estimate a label conditioned on its input variales: \( p (y|x_1, x_2, ..., x_n) \), a generative model aims to learn the joint probability distribution \( p(x_1, x_2, ..., x_n) \) over all its input variables. generative models are attractive because of their flexibility - given a well trained model, we can turn it into a discriminator using bayes' rule, use it to perform density estimation, and generate new samples from the original data distribution. </p>
 
-            <p> the key idea to normalizing flow is the following: all of our data is drawn from some unknown data distribution, but this distribution may be arbitrarily complex and therefore hard to sample new data points from. however, if we are able to transform this input data distribution into a simpler distribution via a series of invertible and differentiable mappings, then we would be able to generate new samples simply by sampling from the simple distribution (say that 10 times fast), and applying the inverse of the mappings one by one. most commonly, the simpler distribution that we map to is the standard normal distribution, hence the name of the model - we are flowing our data distribution towards the normal. </p>
+            <p class="whisper"> see section 1.1 of kingma et al's <a href="https://arxiv.org/abs/1906.02691">introduction to variational autoencoders</a> for a great explanation of distriminative v.s generative modeling and motivation for the latter. </p>
 
-            <p> TODO: NEED TO WRITE ABOUT LIKELIHOOD, AND WHY WE NEED TO COMPUTE IT D: </p>
+            <p> the key idea to normalizing flow is the following: all of our data is drawn from some unknown data distribution, but this distribution may be arbitrarily complex and therefore hard to sample new data points from. however, if we are able to transform this input data distribution into a simpler distribution via a series of invertible and differentiable mappings, then we would be able to generate new samples simply by sampling from the simple distribution (say that 10 times fast), and applying the inverse of the mappings one by one. most commonly, that simpler distribution is the standard normal distribution, hence the name of the model - we are flowing our data distribution towards the normal. </p>
+
+            <p> generative models aim to capture the underlying data generation process, and so one of the central objectives during training is to maximize the likelihood of seeing the observed data under our model. in other words, we want to optimize the parameters so that it assigns high probability to the data points we do observe. this process is known as maximum likelihood estimation, and is the primary learning objective for models that aim to explicitly model the entire joint distribution. our current subject of study, the normalizing flow family of models, is an example of explicit generative models. </p>
+
+            <p class="whisper"> for some great intuition on maximum likelihood and bayesian statistics, see <a href="https://allendowney.github.io/ThinkBayes2/index.html">think bayes 2</a> </p>
+
+            <p> maximum likelihood estimation requires us to know how to compute the likelihood. lucky us, the transformations used by normalizing flows are invertible and differentiable, which enables exact computation of the likelihood via the change of variables formula. </p>
             
-            <p> the change of variables formula from probability theory describes exactly how we would go about transforming probability distributions in an invertible way. in essence, it tells us how to compute the resulting (or the <i>pushforward</i>) distribution after applying an invertible function to a distribution: </p>
+            <p> the change of variables formula from probability theory describes exactly how we would go about computing likelihoods resulting from these invertible and differentiable mappings: </p>
 
             <div class="container">
               <div class="box">
@@ -92,13 +100,9 @@
               </div>
             </div>
             
-            <p> the inverse of this transformation can be similarly computed as long as \(g\) is invertible. this formula is the basis to the normalizing flow class of models, and is illuminating in that it prescribes the necessary conditions to building an efficient normalizing flow: </p>
+            <p>this formula is ✨ <span class="yellow-highlight">illuminating</span> ✨ because it prescribes the necessary conditions to build an invertible model that allows for exact and tractable likelihood computations throughout training: we need a bijectiion that is expressive when stacked in layers, and we need this bijection, its inverse and the determinant of its jacobian to be speedily computable. if we had such a function, we would have collected all the puzzle pieces to a invertible and explicitly generative model. </p>
 
-            <p> essentially. we want a bijection \( g \) that is expressive when stacked in layers. and importantly for building and training a machine learning model, we need this bijection, its inverse and the determinant of its jacobian to be easily computable. if we had such a function, we would have all the puzzle pieces to a complete normalizing flow architecture. </p>
-
-            <p class="question"> that is, <b> if</b> we had such a function. </p>
-
-            <p class="response"> and we do. </p>
+            <p class="response"> and of course, we <b>do</b> have such a function. </p>
 
             <h3 class="section-title"> a couple of coupling layers </h3>
 
