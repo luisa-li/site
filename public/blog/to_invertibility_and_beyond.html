@@ -220,19 +220,52 @@
                   </tbody>
               </table>
             </div>
-              
-            <p> given this similarity, we can think about the inverse of this ODE IVP as the dynamics of the system going backwards in time. more importantly, we can write this as an iteration that converges to the <span class="blue-highlight"> fixed point</span>, which is the inverse for a given function: </p>
 
-            <p> \[ x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t) \] </p>
-            <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \] </p>         
+            <p> given this similarity, the behrmann et al. argued that the we can think about a residual neural network as a ODE problem and interpret the inverse of this ODE's IVP as the dynamics of the system going backwards in time. this backwards step looks as follows: </p>
+
+            <p> \[ x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t) \quad \text{ResNet} \] </p>
+            <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \quad \text{ODE IVP} \] </p>
+
+            <p> solving this backwards dynamic would implement an inverse of our corresponding resnet. in other words, if we are able to use \( g_{\theta_t} \) and \( x_{t+1 }\) to get \( x_t \), then we would be able to invert a residual layer as defined above. </p>
+
+            <p> concretely, this is done by finding the fixed point of the function \(T\) defined as follows: </p>
+
+            <p> \[ T(x) = x_{t + 1} - g_{\theta_t} (x) \] </p>
+
+            <p class="whisper"> what is a fixed point, you ask? well... </p>
+
+            <div class="container">
+              <div class="box">
+                <p class="box-title">Fixed Point</p>
+                <p> 
+                  Formally, \( c \) is a fixed point of a function \( f \) if \( c \) belongs to both the domain and the codomain of \( f \), and \(f(c) = c\).
+                </p>
+                <p>
+                  Less formally, a fixed point is a value that does not change under a given transformation. For functions, it is a element that is mapped to itself under the function.
+                </p>
+              </div>
+            </div> 
+
+            <p> if we are able to find the fixed point to \( T \), we would have solved the backwards dynamics. since this fixed point \(x\) is exactly the inverse: </p>
+
+            <p> \[ T(x) = x \quad \text{by definition of a fixed point} \] </p>
             
-            <p class="question"> so what does this **actually** mean for us? </p>
+            <p> \[ T(x) = x_{t + 1} - g_{\theta_t} (x) \] </p>
 
-            <p> well, it means that if we can guarantee that this fixed point (which is also our inverse) exists and is unique. and a way to compute this fixed point will give us the inverse of the residual layer that we yearn for. </p>
+            <p> \[ x = x_{t + 1} - g_{\theta_t} (x) \implies x_{t + 1} = x + g_{\theta_t}(x) \] </p>
 
-            <p class="response"> and the two missing ingredients our answer are... </p>
+            <p> the last equation shows that \( x \) was the input to the residual layer whose output was \( x_{t + 1} \), and so the fixed point \( x = x_t \) is the solution to the backwards dynamics. </p>
+            
+            <p> as is with a lot of mathematics, we've solved one problem, and our reward is two more: </p>
 
-            <p class="aside"> <span class="blue-highlight"> banach's fixed point theorem, and lipschitz continuity </span> </p>
+            <ul>
+              <li> how can we guarantee that this fixed point exist and is unique? </li>
+              <li> how do we concrete compute this fixed point? </li>
+            </ul>
+
+            <p> thankfully, banach's fixed point theorem addresses both of our problems in one fell swoop. </p>
+
+            <p class="aside"> <span class="blue-highlight"> banach's fixed point theorem (and lipschitz continuity) </span> </p>
 
             <p class="whisper"> wikipedia pages for <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">banach's fixed point theorem</a>, <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> and <a href="https://en.wikipedia.org/wiki/Contraction_mapping">contraction mapping</a></p>
 
