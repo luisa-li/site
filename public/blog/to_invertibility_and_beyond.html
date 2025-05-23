@@ -49,41 +49,39 @@
 
             <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we are able to give a closed form expression of the inverse function. </p>
 
-            <p> from that alone, it is pretty easy to see that most neural networks are <i> not </i> analytically invertible in their usual forms. for one, the most common choice of activation function, \( ReLU(x) = max(0, x) \), would render the whole thing non-invertible. if we receive a positive value as output to ReLU, we can be sure that that is the same number we put in. but we are certainly out of luck if a negative number is spit out. </p>
+            <p> from that alone, it is pretty easy to see that most neural networks are <i> not </i> analytically invertible in their usual forms. for one, the most common choice of activation function, \( ReLU(x) = max(0, x) \), would render the whole thing non-invertible. if we receive a positive value as output to ReLU, we can be sure that that is the same number that we put in. but we are certainly out of luck if a negative number is spit out. </p>
 
-            <p> since the composition of functions is only invertible iff each function in the composition is invertible, the usage of ReLU as an activation function to a linear makes the whole thing non-invertible. beyond ReLU and linear layers, common operations like convolutions on images and message passing on graphs are also not analytically invertible because of their aggregation steps. simply put, the result of an addition tells you nothing about the things you added to get there. </p>
+            <p> since the composition of functions is only invertible iff each function is invertible, the usage of ReLU as an activation function to a linea layer makes the whole thing not analytically invertible. beyond ReLU and linear layers, common operations like convolutions on images and message passing on graphs are also not analytically invertible because of their aggregation steps. simply put, the result of an addition tells you nothing about the things you added to get there. </p>
 
             <p class="question"> so is all hope lost? can we go home now? </p>
 
-            <p class="response"> no, not yet. </p>
+            <p class="response"> no, not yet. buckle in. </p>
 
             <p class="aside"> <span class="blue-highlight"> the hard and soft ways to invertibility </span> </p>
 
-            <p> before we move on to discussions about neural networks, it is useful to make a distinction between hard and soft invertibility. this will make our mission precise, as well as yield a general framework for us to pursue. </p>
+            <p> before we move on to discussions about neural networks, it is useful to make a distinction between hard and soft invertibility. this will make our mission precise, as well as yield a paved path for us to pursue. </p>
 
             <p> loosely speaking, soft invertibility is encouraged, and hard invertibility is enforced. encouraging a model to be invertible involves regularizing it via a loss term that punishes poor invertibility. enforcing a model to be invertible, on the other hands, means architectural designs that guarantees the model to be invertible, regardless of how the training run goes. </p>
 
-            <p> a classic example of a soft invertible model is the autoencoder, which is trained to learn an efficient encoding of unlabeled data. it consists of two networks, an encoder \( E_{\phi} \) and a decoder \( D_{\theta} \), the former encodes the input data into a latent space, and the latter decodes it back into the original data space. the autoencoder is trained to minimize reconstruction loss, which measures the distance between \(x\), the original input, and \( x' = D_{\theta}(E_{\phi}(x)) \), the result of pushing \( x \) through the network and back. </p>
+            <p> a classic example of a soft invertible model is the autoencoder, which is trained to learn an efficient encoding of unlabeled data. it consists of two networks, an encoder \( E_{\phi} \) and a decoder \( D_{\theta} \), the former encodes the input data into a latent space, and the latter decodes it back into the original data space. the autoencoder is trained to minimize reconstruction loss, which measures the distance between \(x\), the original input, and \( x' = D_{\theta}(E_{\phi}(x)) \), the result of pushing \( x \) through the network and back. that is to say, with appropriate encouragement, an autoencoder is softly invertible. </p>
 
-            <p> super important to note is that soft invertibility may only be accurately invertible on the data distribution it is trained on. in other words, an autoencoder that recovers pictures of sharks accurately might not generalize to pictures of chairs. on the other hand, hard invertibility gives us a guarantee that any input will be invertible. in this blog, we are in pursuit of hard invertibility, and so our next stop is naturally to look at constraining our model architecture to enforce this property. </p>
+            <p> super important to note here is that models regularized to be invertible may only be accurately invertible on the data distribution it is trained on. in other words, an autoencoder that encodes and decodes pictures of bananas losslessly might not be able to do the same on pictures of oranges. on the other hand, hard invertibility gives us a guarantee that invertibility holds for all possible data distribution. in this blog, we are in pursuit of hard invertibility, and so our next stop is naturally to look at constraining our model architecture to enforce this property. </p>
 
             <h3 class="section-title"> normalizing flows: flowing towards the normal </h3>
 
             <p class="whisper"> a comprehensive overview of normalizing flows can be found in <a href="https://arxiv.org/abs/1908.09257">this review</a></p>
 
-            <p> normalizing flows are one class of generative models that bakes hard invertibility into its architecture. unlike a discriminator whose objective is to estimate a label conditioned on its input variales: \( p (y|x_1, x_2, ..., x_n) \), a generative model aims to learn the joint probability distribution \( p(x_1, x_2, ..., x_n) \) over all its input variables. generative models are attractive because of their flexibility - given a well trained model, we can turn it into a discriminator using bayes' rule, use it to perform density estimation, and generate new samples from the original data distribution. </p>
+            <p> normalizing flows are one class of generative models that bakes hard invertibility into its architecture. unlike a discriminative model whose objective is to estimate a label conditioned on its input variales: \( p (y|x_1, x_2, ..., x_n) \), a generative model aims to learn the joint probability distribution \( p(x_1, x_2, ..., x_n) \) over all its input variables. generative models are attractive because of their flexibility - given a well trained model, we can turn it into a discriminator using bayes' rule, use it to perform density estimation, generate new samples from the original data distribution, and much more. </p>
 
-            <p class="whisper"> see section 1.1 of kingma et al's <a href="https://arxiv.org/abs/1906.02691">introduction to variational autoencoders</a> for a great explanation of distriminative v.s generative modeling and motivation for the latter. </p>
+            <p class="whisper"> see section 1.1 of kingma et al's <a href="https://arxiv.org/abs/1906.02691">introduction to variational autoencoders</a> for a great explanation of discriminative v.s generative modeling and motivation for the latter. </p>
 
-            <p> the key idea to normalizing flow is the following: all of our data is drawn from some unknown data distribution, but this distribution may be arbitrarily complex and therefore hard to sample new data points from. however, if we are able to transform this input data distribution into a simpler distribution via a series of invertible and differentiable mappings, then we would be able to generate new samples simply by sampling from the simple distribution (say that 10 times fast), and applying the inverse of the mappings one by one. most commonly, that simpler distribution is the standard normal distribution, hence the name of the model - we are flowing our data distribution towards the normal. </p>
+            <p> the key idea to normalizing flows is the following: all of our data is drawn from some unknown data distribution, but this distribution may be arbitrarily complex and therefore hard to sample new data points from. however, if we are able to transform this input data distribution into a simpler distribution via a series of invertible and differentiable mappings, then we would be able to generate new samples simply by sampling from the simple distribution (say that 10 times fast), and applying the inverse of the mappings one by one. most commonly, that simpler distribution is the standard normal distribution, hence the name of the model - we are flowing our data distribution towards the normal. </p>
 
             <p> generative models aim to capture the underlying data generation process, and so one of the central objectives during training is to maximize the likelihood of seeing the observed data under our model. in other words, we want to optimize the parameters so that it assigns high probability to the data points we do observe. this process is known as maximum likelihood estimation, and is the primary learning objective for models that aim to explicitly model the entire joint distribution. our current subject of study, the normalizing flow family of models, is an example of explicit generative models. </p>
 
             <p class="whisper"> for some great intuition on maximum likelihood and bayesian statistics, see <a href="https://allendowney.github.io/ThinkBayes2/index.html">think bayes 2</a> </p>
 
-            <p> maximum likelihood estimation requires us to know how to compute the likelihood. lucky us, the transformations used by normalizing flows are invertible and differentiable, which enables exact computation of the likelihood via the change of variables formula. </p>
-            
-            <p> the change of variables formula from probability theory describes exactly how we would go about computing likelihoods resulting from these invertible and differentiable mappings: </p>
+            <p> maximum likelihood estimation requires us to know how to compute the likelihood. lucky us, the transformations used by normalizing flows are invertible and differentiable, which enables exact computation of the likelihood via the change of variables formula. in short, the formula describes exactly how we would go about computing likelihoods resulting from these mappings: </p>
 
             <div class="container">
               <div class="box">
@@ -102,13 +100,13 @@
             
             <p>this formula is ✨ <span class="yellow-highlight">illuminating</span> ✨ because it prescribes the necessary conditions to build an invertible model that allows for exact and tractable likelihood computations throughout training: we need a bijectiion that is expressive when stacked in layers, and we need this bijection, its inverse and the determinant of its jacobian to be speedily computable. if we had such a function, we would have collected all the puzzle pieces to a invertible and explicitly generative model. </p>
 
-            <p class="response"> and of course, we <b>do</b> have such a function. </p>
+            <p class="response"> and of course, we <i>do</i> have such a function. </p>
 
             <h3 class="section-title"> a couple of coupling layers </h3>
 
-            <p class="whisper"> original paper <a href="https://arxiv.org/abs/1410.8516">here</a></p>
+            <p class="whisper"> original paper by dihn et al <a href="https://arxiv.org/abs/1410.8516">here</a></p>
 
-            <p> coupling layers as proposed by dihn et al gives us just that. the core idea behind this sort of layer is to split the input \( x \) to each layer into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
+            <p> coupling layers as proposed by dihn et al. gives us just that. the core idea behind this sort of layer is to split the input \( x \) into two pieces, \(x_1\) and \(x_2\) and perform the following computation, with \( m \) being an arbitrarily complex function. </p>
 
             <p> \begin{align*} y_1 &= x_1 \\ y_2 &= x_2 + m(x_1) \end{align*} </p>
 
@@ -116,11 +114,11 @@
 
             <p> \begin{align*} x_1 &= y_1 \\ x_2 &= y_2 - m(y_1) \end{align*} </p>
 
-            <p> note that both the forward and inverse computation of the coupling layer can happen with just the forward pass of the function \(m\), which can be as simple or as complex as the builder of the model desires it to be. </p>
+            <p> note that both the forward and inverse computation of the entire coupling layer can happen with just the forward pass of the function \(m\), which can be as simple or as complex as the builder of the model desires it to be. </p>
 
-            <p> of course, the coupling layer leaves part of the input completely unchanged, but this issue of expressibility can be fixed simply by having multiple coupling layers, and alternating the block that receives the identity function at each turn. composition of invertible functions is invertible, and so this stacking of coupling layers gives us the analytically invertible that we sought for. </p>
+            <p> of course, the coupling layer leaves part of the input completely unchanged, but this issue of expressibility can be fixed simply by having multiple coupling layers, and alternating the block that receives the identity function at each turn. composition of invertible functions is invertible, and so this stacking of coupling layers is invertible. </p>
 
-            <p> all we need now is a fast way to compute the determinant of the jacobian... </p>
+            <p> all we need now is a fast way to compute the determinant of the jacobian of this function... </p>
 
             <p class="response"> do you remember your matrix determinant rules? </p>
 
@@ -129,12 +127,12 @@
             <div class="box">
               <div class="container">
 
-                <p class="box-title"> aside: bitesized determinants </p>
+                <p class="box-title"> bitesized determinants </p>
                 <p> the determinant of a matrix \(A\) is nonzero iff \(A\) is invertible, and it is intuitively the factor by which space is stretched after applying \(A\). </p>
 
                 <p class="whisper"> there is a beautiful <a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk">3b1b video</a> with great visualizations on this stretching action! </p>
 
-                <p> how to compute it? well. you can sit down with your pencil and get it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it <b> way </b> faster. </p>
+                <p> how to compute it? well. you can sit down with your pencil and get it via laplace expansion or LU decomposition or a variety of other methods, giving you a time complexity of \( O(n^3) \). or, if your matrix is well behaved (not a mathematical definition), you can apply a number of properties of the determinant to compute it <i> way </i> faster. </p>
 
                 <p> one such useful property, is that the determinant of a triangular matrix is simply the product of its diagonal: </p>
 
@@ -147,35 +145,38 @@
             <p> in the case of coupling layers, the determinant of the jacobian is simply 1. here's all the formulas again, explicitly written out: </p>
 
             <p>
-                \[
-                x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, \quad
-                y = \begin{bmatrix} y_1 \\ y_2 \end{bmatrix}, \quad
-                y_1 = x_1, \quad y_2 = x_2 + m(x_1).
-                \]
+              \[
+              x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, \quad
+              y = \begin{bmatrix} y_1 \\ y_2 \end{bmatrix}, \quad
+              y_1 = x_1, \quad y_2 = x_2 + m(x_1)
+              \]
             </p>
 
-            <p> \[ J = \frac{\partial x}{\partial y} = 
-                \begin{bmatrix}
-                \frac{\partial x_1}{\partial y_1} & \frac{\partial x_1}{\partial y_2} \\
-                \frac{\partial x_2}{\partial y_1} & \frac{\partial x_2}{\partial y_2}
-                \end{bmatrix} \] 
+            <p>
+            \[
+            J = \frac{\partial y}{\partial x} =
+            \begin{bmatrix}
+            \frac{\partial y_1}{\partial x_1} & \frac{\partial y_1}{\partial x_2} \\
+            \frac{\partial y_2}{\partial x_1} & \frac{\partial y_2}{\partial x_2}
+            \end{bmatrix}
+            \]
             </p>
             
             <p> since \(y_1 = x_1\), \( \frac{\partial x_1}{\partial y_1} = I \),  similarly, \( \frac{\partial x_2}{\partial y_2} = I \) </p>
-            <p> and since \( y_2 \) does not depend on \(x_2\) at all, \( \frac{\partial x_1}{\partial y_2} = 0 \)</p> 
+            <p> and since \( y_1 \) does not depend on \(x_2\) at all, \( \frac{\partial y_1}{\partial x_2} = 0 \)</p> 
 
             <p> putting those blocks together, we get a lower triangular matrix, with ones along the diagonal: </p>
 
             <p> \[
             J = \begin{bmatrix}
             1 & 0 \\
-            \frac{\partial x_2}{\partial y_1} & 1
+            \frac{\partial y_2}{\partial x_1} & 1
             \end{bmatrix}
             \] </p>
 
-            <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. this significantly simplifies our likelihood computations for this type of layers, and finally gives us the analytically invertible, explicitly generative model that we have worked so hard for. </p>
+            <p> by our aside on determinants, the determinant of the jacobian of this particular coupling layer is just 1, and we are able to drop this term entirely from our change of variables formula. this significantly simplifies our likelihood computations, and finally gives us the analytically invertible, explicitly generative model that we have worked so hard for. </p>
 
-            <p> many other types of coupling layers can be constructed using similar logic - desinging \( \det \left( \frac{\partial f}{\partial y} \right) \) to be easily computable. dihn et al cover a few more variations, and prove that they also satisfy the conditions for invertibility and computational efficiency. similarly, coupling layers are not the only way to build normalizing flows, but again, similar principles apply. </p>
+            <p> many other types of coupling layers can be constructed using a similar logic of desinging the jacobian to be easily computable. dihn et al cover a few more variations, and prove that they also satisfy the conditions for invertibility and computational efficiency. similarly, coupling layers are not the only way to build normalizing flows, but again, similar principles apply. </p>
 
             <p class="question"> but wait, you keep saying analytic invertibility like there is somehow a secret, second form of invertibility... can invertibility exist without a explicit inverse? </p>
 
@@ -185,7 +186,7 @@
 
             <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> </p>
 
-            <p> central to behrmann et al.'s thesis is that there is a very nice similarity between <a href="https://arxiv.org/abs/1512.03385">residual layers</a> and <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
+            <p> central to behrmann et al.'s thesis is that there is a very nice similarity between <a href="https://arxiv.org/abs/1512.03385">residual layers</a> and <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> for numerically solving ordinary differential equations (ODE) initial value problems (IVP): </p>
 
             <p> \[ x_{t+1} \leftarrow x_t + g_{\theta_t}(x_t) \quad \text{ResNet} \] </p>
             <p> \[ x_{t+1} \leftarrow x_t + h f_{\theta_t}(x_t) \quad \text{ODE IVP} \] </p>
@@ -221,14 +222,14 @@
               </table>
             </div>
 
-            <p> given this similarity, the behrmann et al. argued that the we can think about a residual neural network as a ODE problem and interpret the inverse of this ODE's IVP as the dynamics of the system going backwards in time. this backwards step looks as follows: </p>
+            <p> given this similarity, behrmann et al. argued that the we can think of a residual neural network as an ODE problem and interpret the inverse of this ODE's IVP as the dynamics of the system going backwards in time. this backwards step looks as follows: </p>
 
             <p> \[ x_{t} \leftarrow x_{t+1} - g_{\theta_t}(x_t) \quad \text{ResNet} \] </p>
             <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \quad \text{ODE IVP} \] </p>
 
-            <p> solving this backwards dynamic would implement an inverse of our corresponding resnet. in other words, if we are able to use \( g_{\theta_t} \) and \( x_{t+1 }\) to get \( x_t \), then we would be able to invert a residual layer as defined above. </p>
+            <p> solving this backwards dynamic would implement an inverse of our function. in other words, if we are able to use \( g_{\theta_t} \) and \( x_{t+1 }\) to get \( x_t \), then we would be able to invert a residual layer as defined above. </p>
 
-            <p> concretely, this is done by finding the fixed point of the function \(T\) defined as follows: </p>
+            <p> concretely, this can be done by finding the fixed point of the function \(T\) defined as follows: </p>
 
             <p> \[ T(x) = x_{t + 1} - g_{\theta_t} (x) \] </p>
 
@@ -254,7 +255,7 @@
 
             <p> \[ x = x_{t + 1} - g_{\theta_t} (x) \implies x_{t + 1} = x + g_{\theta_t}(x) \] </p>
 
-            <p> the last equation shows that \( x \) was the input to the residual layer whose output was \( x_{t + 1} \), and so the fixed point \( x = x_t \) is the solution to the backwards dynamics. </p>
+            <p> ...so \( x \) was the input to the residual layer whose output was \( x_{t + 1} \), and so thus fixed point \( x = x_t \) is the solution to the backwards dynamics. </p>
             
             <p> as is with a lot of mathematics, we've solved one problem, and our reward is two more: </p>
 
@@ -280,7 +281,7 @@
 
             <p> banach's fixed point theorem guarantees us the existence of a unique fixed point, and provides a numerican way to compute it via what is aptly named <span class="green-highlight">fixed point iteration</span>. in turn, it requires that our function be a <span class="green-highlight">contraction mapping</span>. </p>
 
-            <p class="whisper"> now. what is a contraction cammping? </p>
+            <p class="whisper"> now. what is a contraction mapping? </p>
 
             <div class="container">
               <div class="box">
@@ -340,9 +341,9 @@
 
             <p> which says, essentially, the lipschitz constant of a linear layer is its largest singular value. </p>
           
-            <p> knowing this equality, we now have the power to do ✨<span class="yellow-highlight">anything</span>✨, because there are lots of ways to make a matrix have a less than 1 singular value. </p>
+            <p> knowing this equality, we now have the power to do ✨<span class="yellow-highlight">anything</span>✨, because there are lots of ways to make fix a matrix \( A \) such that \( \sigma(A) < 1\). </p>
 
-            <p> the simplest way, and also the approach taken by behrmann et al. is to use power iteration to estimate \( \sigma(W) \), and dividing the weight matrix \( W \) by its singular value. a small constant \(c < 1 \) is applied to account for the fact that power iteration undershoots the true largest singular value. </p>
+            <p> the simplest way, and also the approach taken by behrmann et al. is to use power iteration to estimate \( \sigma(W) \), and then divide the weight matrix \( W \) by \( \sigma \). a small constant \(c < 1 \) is applied to account for the fact that power iteration undershoots the true largest singular value. </p>
             
             <p> \[
               W = 
@@ -354,18 +355,19 @@
             
             <p> there are of course many other ways to correct a matrix to have a less than one singular value, for example, by projecting the weight matrices into orthogonal space, but we are plenty satisfied with this approach, which miyato et al. calls spectral normalization. </p>
 
-            <p> combining everything finally gives us a hard, implicit invertible neural network layer. making \( g_{\theta_t} (x) \) 1-lipschitz makes \( T(x) \) 1-lipschitz, which was needed to guarantee that \( T \) was a contractive mapping so that banach's fixed point theorem could hold on it, which was needed to guarantee the existence and uniqueness of a fixed point which was also the inverse for \( T \). this inverse then finally solves the backwards formulation of the resnet dynammics that we initially set out to address. </p>
+            <p> combining everything finally gives us a hard, implicit invertible neural network layer: making \( g_{\theta_t} (x) \) 1-lipschitz makes \( T(x) \) 1-lipschitz, which was needed to guarantee that \( T \) was a contractive mapping so that banach's fixed point theorem could hold on, which was needed to guarantee the existence and uniqueness of a fixed point, this fixed point then finally solves the backwards formulation of the residual layer dynamics that we initially set out to address. </p>
 
-            <p> we also need not be satisfied at having a single layer. the composition of invertible functions is invertible, and building a network would simply involve stacking many of these layers together, with the inverse being computed layer by layer using fixed point iteration. </p>
+            <p> we need not be satisfied at having a single layer. the composition of invertible functions is invertible, and building a network would simply involve stacking many of these layers together, with the inverse being computed residual layer by residual layer, using fixed point iteration. </p>
 
-            <p> what it also gives us, is a blueprint for extending invertibility beyond fully connected as we've covered. given any residual formulation of a layer, we just need to prove that the residual stream is 1-lipschitz. of course, much care is needed in practice to ensure the expressibility and usability of such layers, but we won't worry about that for now, this must be enough math for one day. </p>
+            <p> what this framework also gives us, is a blueprint for extending invertibility beyond fully connected layers as the ones we've covered. given any residual formulation of a neural network, we just need to prove that the residual stream is 1-lipschitz. of course, much more care is needed in practice to ensure the expressibility and usability of such layers, but we won't worry about that for now. </p>
+              
+            <p class="whisper"> this must be enough math for one day. </p>
             
             <h4 class="whisper"> ...and scene </h4>
 
-            <p class="postscript"> <span class="highlight"> postscript 1: </span> i'm *holds up fingers* three months deep in this invertibility rabbit hole. from autoencoders, which are invertible only with gentle parenting and lots of tlc, to to finding normalizing flows as a niche idea for analytical invertibility with significant architectural constraints, to accidentally stumbling upon a seemingly soft invertible network that was <i> just a little too invertible on out of distribution data </i>, to finally finding the mathematical framework that backs the hard invertibility after digging through wikipedia and many many references. it was quite the journey. </p>
+            <p class="postscript"> <span class="highlight"> postscript 1: </span> i'm *holds up fingers* three months deep in this invertibility rabbit hole. from autoencoders, which are invertible only with gentle parenting and lots of tlc, to finding normalizing flows as a niche idea for analytical invertibility with significant architectural constraints, to accidentally stumbling upon a seemingly soft invertible network that was <i> just a little too invertible on out of distribution data </i>, to finally finding the mathematical framework that backs the its hard invertibility after digging through wikipedia and many many references. it was quite the journey. </p>
 
-            <p class="postscript"> <span class="highlight"> postscript 2: </span> shoutout to <a href="https://ebrmn.space/"><span class="eddie"><u>eddie</u></span></a>, my trusty companion on this long and treacherous road to invertibility and beyond. i am so grateful for the countless hours of back and forth yaps and sanity checks when it feels like i'm losing it. </p>
-
+            <p class="postscript"> <span class="highlight"> postscript 2: </span> shoutout to <a href="https://ebrmn.space/"><span class="eddie"><u>eddie</u></span></a>, my trusty companion on this long and treacherous road to invertibility and beyond. i am so grateful for the countless hours of back and forth yaps and sanity checks when it genuinely feels like i'm losing it. </p>
 
         </div>
     </body>
