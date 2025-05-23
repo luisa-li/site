@@ -32,9 +32,9 @@
         </div>
         <div class="body">
 
-            <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. note that this blog assumes a good level of knowledge of probability theory, calculus, linear algebera, and machine learning principles, though i do try and define some terms along the way. of course, suggestions are always welcome! </p>
+            <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. note that this blog assumes a good level of knowledge of probability theory, linear algebra, and machine learning principles. suggestions always welcome, just drop me a message! </p>
 
-            <p class="whisper"> this ended up being incredibly long and technical, you have <a href="https://jakegines.in/"><span class="blue-highlight"><u>jake</u></span></a> to thank for that. </p>
+            <p class="whisper"> this blog ended up being incredibly long and technical, you have <a href="https://jakegines.in/"><span class="jake"><u>jake</u></span></a> to thank for that. </p>
 
             <h3 class="section-title"> a primer on invertibility </h3>
 
@@ -47,9 +47,9 @@
             </ul>
             <p> an injective function is such that one output is given by one input exactly, with no two inputs giving the same output, and a surjective function is such that every possible output is mapped to by some input. together, they give a bijection. given any output, i know the input that mapped to it exists and is unique. </p>
 
-            <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we are able to give a closed form expression of the inverse function that gives us back the input exactly. </p>
+            <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we are able to give a closed form expression of the inverse function. </p>
 
-            <p> without going into the much detail, it is pretty easy to see that most neural networks are <b> not </b> analytically invertible in their usual forms. for one, the most common choice of activation function, \( ReLU(x) = max(0, x) \), would render the whole thing non-invertible. if we receive a positive value as output to ReLU, we can be sure that that is the same number we put in. but we are certainly out of luck if a negative number is spit out. </p>
+            <p> from that alone, it is pretty easy to see that most neural networks are <i> not </i> analytically invertible in their usual forms. for one, the most common choice of activation function, \( ReLU(x) = max(0, x) \), would render the whole thing non-invertible. if we receive a positive value as output to ReLU, we can be sure that that is the same number we put in. but we are certainly out of luck if a negative number is spit out. </p>
 
             <p> since the composition of functions is only invertible iff each function in the composition is invertible, the usage of ReLU as an activation function to a linear makes the whole thing non-invertible. beyond ReLU and linear layers, common operations like convolutions on images and message passing on graphs are also not analytically invertible because of their aggregation steps. simply put, the result of an addition tells you nothing about the things you added to get there. </p>
 
@@ -181,9 +181,9 @@
 
             <p class="response"> *nods mysteriously, with a smug smirk* </p>
 
-            <h3 class="section-title"> 1-lipschitz neural networks </h3>
+            <h3 class="section-title"> invertible residual networks </h3>
 
-            <p class="whisper"> <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a> spectral normalization for gans, and <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> </p>
+            <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> </p>
 
             <p> central to behrmann et al.'s thesis is that there is a very nice similarity between <a href="https://arxiv.org/abs/1512.03385">residual layers</a> and <a href="https://en.wikipedia.org/wiki/Euler_method">euler's method</a> for numerically solving ordinary differential equation (ODE) initial value problems (IVP): </p>
 
@@ -260,14 +260,14 @@
 
             <ul>
               <li> how can we guarantee that this fixed point exist and is unique? </li>
-              <li> how do we concrete compute this fixed point? </li>
+              <li> how do we concretely compute this fixed point? </li>
             </ul>
 
             <p> thankfully, banach's fixed point theorem addresses both of our problems in one fell swoop. </p>
 
             <p class="aside"> <span class="blue-highlight"> banach's fixed point theorem (and lipschitz continuity) </span> </p>
 
-            <p class="whisper"> wikipedia pages for <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">banach's fixed point theorem</a>, <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> and <a href="https://en.wikipedia.org/wiki/Contraction_mapping">contraction mapping</a></p>
+            <p class="whisper"> wikipedia pages for <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">banach's fixed point theorem</a> and <a href="https://en.wikipedia.org/wiki/Contraction_mapping">contraction mapping</a></p>
 
             <p> to start, obligatory math definitions, in very serious capitalizations. </p>
 
@@ -278,53 +278,94 @@
                 </div>
             </div>
 
-            <p> banach's fixed point theorem essentially guarantees a unique fixed point on a mapping, if the mapping is a contraction. it also provides a numerical way to iterate to converge to this fixed point. this method is aptly known as <span class="blue-highlight">fixed point iteration</span>.</p>
+            <p> banach's fixed point theorem guarantees us the existence of a unique fixed point, and provides a numerican way to compute it via what is aptly named <span class="green-highlight">fixed point iteration</span>. in turn, it requires that our function be a <span class="green-highlight">contraction mapping</span>. </p>
 
-            <p class="whisper"> now. what is a contraction mapping? and how does it relate to lipschitz continuous functions? </p>
+            <p class="whisper"> now. what is a contraction cammping? </p>
 
-            <div class="container">
-              <div class="box">
-                <p class="box-title"> Lipschitz Continuity </p>
-
-                  <p> Given two metric spaces \((X, d_X)\) and \((Y, d_Y)\), where \(d_X\) denotes the metric on the set \(X\) and \(d_Y\) is the metric on set \(Y\), a function \(f : X \rightarrow Y\) is called Lipschitz continuous if there exists a real constant \(K \geq 0\) such that, for all \(x_1\) and \(x_2\) in \(X\), </p>
-                  
-                  \[ d_Y(f(x_1), f(x_2)) \leq K \cdot d_X(x_1, x_2) \]
-                  
-                  <p> Any such \(K\) is referred to as a Lipschitz constant for the function \(f\). </p>               
-              </div>
-            </div>
-            
             <div class="container">
               <div class="box">
                 <p class="box-title"> Contraction Mapping </p>
                 <p> A contraction mapping on a metric space \((M, d)\) is a function \(f\) from \(M\) to itself, with the property that there is some real number \(0 \leq k < 1\) such that for all \(x\) and \(y\) in \(M\), </p>
                 <p> \[ d(f(x), f(y)) \leq k \cdot d(x, y). \] </p>
+                <p> Any contraction mapping is Lipschitz continuous, and the infimum of all such constants \( k \) is known as the Lipschitz constant of \( f \). A contraction mapping is thus a special case of Lipschitz continuous functions, with the condition that the Lipschitz constant \( < 1\). </p>
               </div>
             </div>
 
-            <p> a contraction mapping is thus a special case of a lipschitz continuos function. specifically, it is one with a lipschitz constant of less than one, also known as a 1-lipschitz function. </p>
+            <p class="whisper"> from now on, we will refer to functions with a lipschitz constant < 1, or contraction mappings, as 1-lipschitz functions. </p>
+
+            <p> a good anchor for intuition that i found while thinking about lipschitz continuity is that the lipschitz constant puts an upper bound on how much a function can change between any two points on the function. the wikipedia article on <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> has an animation that offers a similar, but more visual intuition.</p>
+
+            <p> thus far, we have a function \( T(x) = x_{t + 1} - g_{\theta_t} (x) \) for which we want to find the fixed point, we know that a unique fixed point exists if this function is a 1-lipschitz function. </p>
+
+            <p class="aside"> <span class="blue-highlight"> making \( T(x) = x_{t + 1} - g_{\theta_t} (x) \) 1-lipschitz </span> </p>
+
+            <p class="whisper"> note that for all ensuing analysis, we pick the norm to be the euclidean norm </p>
+
+            <p> the function \( T \) is 1-lipschitz if: </p>
+
+            <p> \[ \|T(x) - T(y)\| \leq L \|x - y\|, \quad L < 1 \] </p>
+
+            <p> expanding and rewriting left hand side: </p>
+
+            <p> \[ T(x) - T(y) = -g_{\theta_t} (x) + g_{\theta_t} (y) = -(g_{\theta_t} (x) - g_{\theta_t} (y)) \] </p>
+            <p> \[ \Rightarrow \|T(x) - T(y)\| = \|g_{\theta_t} (x) - g_{\theta_t} (y) \| \] </p>
+
+            <p> \[ \Rightarrow \|g_{\theta_t} (x) - g_{\theta_t} (y) \| \leq L \|x - y\| \] </p>
+
+            <p> ...we trivially get to the conclusion that making \( T \) 1-lipschitz requires only that we make \( g_{\theta_t} (x) \) 1-lipschitz.</p>
+
+            <p class="aside"> <span class="blue-highlight"> making \( g_{\theta_t} (x) \) 1-lipschitz </span></p>
+
+            <p class="whisper"> <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a> spectral normalization for GANs, section 2.1 </p>
+
+            <p> \( g_{\theta_t} \) can be any arbitrary function, so long as it is 1-lipschitz. we'd like it to be a neural network, which in its simplest form is composed of a linear layer, followed by a nonlinear activation function: </p>
+
+            <p> \[ f(h) = \phi(Wh) \] </p>
+
+            <p> important to note is that the composition of 1-lipschitz functions is 1-lipschitz, this can be shown as follows: </p>
+
+            <p> \[ \| f(x) - f(y) \| \leq L_f \| x - y \|, \quad L_f < 1 \] </p>
+            <p> \[ \| g(x) - g(y) \| \leq L_g \| x - y \|, \quad L_g < 1 \] </p>
+            <p> \[ \| f(g(x)) - f(g(y)) \| \leq L_f \| g(x) - g(y) \| \] </p>
+            <p> \[ \leq L_f L_g \| x - y \|, \quad L_f L_g < 1 \] </p>
+
+            <p> and so we just need both the activation function \( \phi \) and the linear function \( f(h) = Wh \) to both be 1-lipschitz. </p>
+
+            <p> there are many popular nonlinearities that fit the bill, we can we just pick our favorite ReLU. for the linear layers, it's a tad bit more complicated. </p>
+
+            <p> by definition, \( \|g\|_{\text{Lip}} = \sup_{h} \sigma\left( \nabla g(h) \right)
+            \), where \( \sigma \) is the largest singular value. for a linear layer where \( g(h) = Wh \), \( \nabla g(h) \) is simply \(W \). here, the intuition for me was that the matrix \( W \) ultimately represents a linear system of equations, and so the derivative of \( g(h) \) is simply the weights \( W \). then we have: </p>
             
-            <p> intuitively, it is helpful to think of the lipschitz constant as an upper bound on how much a function can change between any two points, which gives a even stronger guarantee on continuity than an upper bound on derivatives and thus the instantaneous change. </p>
+            <p> \[ \|g\|_{\text{Lip}} = \sup_{h} \sigma\left( \nabla g(h) \right) = \sup_{h} \sigma (W) = \sigma (W) \] </p>
 
-            <p class="whisper"> the wikipedia article on <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">lipschitz continuity</a> has a very good animation illustrating this intuition </p>
+            <p> which says, essentially, the lipschitz constant of a linear layer is its largest singular value. </p>
+          
+            <p> knowing this equality, we now have the power to do ✨<span class="yellow-highlight">anything</span>✨, because there are lots of ways to make a matrix have a less than 1 singular value. </p>
+
+            <p> the simplest way, and also the approach taken by behrmann et al. is to use power iteration to estimate \( \sigma(W) \), and dividing the weight matrix \( W \) by its singular value. a small constant \(c < 1 \) is applied to account for the fact that power iteration undershoots the true largest singular value. </p>
             
-            <p> ok. we want to guarantee a unique fixed point and a way to compute it, and banach's fixed point theorem gives us that. in exchange, it wants a contraction mapping, which requires a lipschitz constant of less than one. looking back to our original backwards dynamic... </p>
-
-            <p> \[ x_{t} \leftarrow x_{t+1} - h f_{\theta_t}(x_t) \] </p>         
-
-            <p>... it should be clear that we just need our \( f_{\theta_t}\) to have be 1-lipschitz. </p>
-
-            <p> fortunately, 1-lipschitz layers have already been used as a mechanism to stabilize training for the discriminator in a generative adversarial network, see <a href="https://arxiv.org/abs/1802.05957">miyato et al.</a>. to put it simply, one can achieve such a 1-lipschitz layer by normalizing the weight matrix by its spectral norm, which is also known as its largest singular value: </p>
-
-            \[ \bar{W} := \frac{W}{\sigma(W)} \]
-
-            <p> and that, finally gives us an invertible neural network layer with unconstrained form. what it also gives us, is a blueprint for extending invertibility beyond fully connected and convolution layers. given a layer, we just need to prove that can be made 1-lipschitz. of course, much care is needed in practice to ensure the expressibility and usability of such layers, but we won't worry about that. </p>
+            <p> \[
+              W = 
+              \begin{cases}
+                  \dfrac{c}{\sigma} W, & \text{if } \dfrac{c}{\sigma} < 1 \\[0.5em]
+                  W, & \text{otherwise}
+              \end{cases}
+              \] </p>
             
-            <h4 class="aside"> ...and scene </h4>
+            <p> there are of course many other ways to correct a matrix to have a less than one singular value, for example, by projecting the weight matrices into orthogonal space, but we are plenty satisfied with this approach, which miyato et al. calls spectral normalization. </p>
 
-            <p class="postscript"> <span class="highlight"> postscript: </span> ways to achieve hard invertibility in neural networks is something that i'm three months deep in the rabbit hole for. starting off with autoencoders, which are invertible by gentle encouragement and only on its input data distribution. to finding normalizing flows as a niche and cool idea to achieve analytical invertibility, but being unhappy with its architectural constraints. to accidentally stumbling upon a seemingly soft invertible network that was just a little too invertible on out of distribution data, and digging through references and wikipedia pages. to finally finding the mathematical framework that back the claims of invertibility. it was quite the journey, and i hope that this blog emulates at least part of that. </p>
+            <p> combining everything finally gives us a hard, implicit invertible neural network layer. making \( g_{\theta_t} (x) \) 1-lipschitz makes \( T(x) \) 1-lipschitz, which was needed to guarantee that \( T \) was a contractive mapping so that banach's fixed point theorem could hold on it, which was needed to guarantee the existence and uniqueness of a fixed point which was also the inverse for \( T \). this inverse then finally solves the backwards formulation of the resnet dynammics that we initially set out to address. </p>
 
-            <p class="postscript"> <span class="highlight"> postscript 2: </span> shoutout to <a href="https://ebrmn.space/"><span class="red-highlight"><u>eddie</u></span></a>, my trusty companion on this long and treacherous road to invertibility and beyond. i am beyond grateful for the countless hours of back and forth yaps (: </p>
+            <p> we also need not be satisfied at having a single layer. the composition of invertible functions is invertible, and building a network would simply involve stacking many of these layers together, with the inverse being computed layer by layer using fixed point iteration. </p>
+
+            <p> what it also gives us, is a blueprint for extending invertibility beyond fully connected as we've covered. given any residual formulation of a layer, we just need to prove that the residual stream is 1-lipschitz. of course, much care is needed in practice to ensure the expressibility and usability of such layers, but we won't worry about that for now, this must be enough math for one day. </p>
+            
+            <h4 class="whisper"> ...and scene </h4>
+
+            <p class="postscript"> <span class="highlight"> postscript 1: </span> i'm *holds up fingers* three months deep in this invertibility rabbit hole. from autoencoders, which are invertible only with gentle parenting and lots of tlc, to to finding normalizing flows as a niche idea for analytical invertibility with significant architectural constraints, to accidentally stumbling upon a seemingly soft invertible network that was <i> just a little too invertible on out of distribution data </i>, to finally finding the mathematical framework that backs the hard invertibility after digging through wikipedia and many many references. it was quite the journey. </p>
+
+            <p class="postscript"> <span class="highlight"> postscript 2: </span> shoutout to <a href="https://ebrmn.space/"><span class="eddie"><u>eddie</u></span></a>, my trusty companion on this long and treacherous road to invertibility and beyond. i am so grateful for the countless hours of back and forth yaps and sanity checks when it feels like i'm losing it. </p>
+
 
         </div>
     </body>
