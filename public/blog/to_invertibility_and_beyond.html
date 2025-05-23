@@ -34,17 +34,22 @@
 
             <p class="whisper"> this blog aims to give a structured introduction on how we can make neural networks invertible. note that this blog assumes a good level of knowledge of probability theory, linear algebra, and machine learning principles. suggestions always welcome, just drop me a message! </p>
 
-            <p class="whisper"> this blog ended up being incredibly long and technical, you have <a href="https://jakegines.in/"><span class="jake"><u>jake</u></span></a> to thank for that. </p>
+            <p class="whisper"> this ended up being incredibly long and technical, you have <a href="https://jakegines.in/"><span class="jake"><u>jake</u></span></a> to thank for that.</p>
 
-            <h3 class="section-title"> a primer on invertibility </h3>
+            <h3 class="section-title" id="primer"> a primer on invertibility </h3>
 
             <p> in caveman terms, an invertible process is one we know how to undo. moving a banana is invertible, eating the banana is not. </p>
 
             <p> mathematically, an invertible function is a bijective one, and a bijective function is both injective and surjective. these are defined as follows: </p>
-            <ul>
-                <li> injective: \( F(x) = F(y) \implies x=y \) </li>
-                <li> surjective: \( \forall \, b \in B,  \exists \, a \in A\) such that \(F(a) = b \) </li>
-            </ul>
+
+            <div class="container">
+              <div class="box">
+                <p class="box-title">Injective and Surjective Functions</p>
+                  <p>Injective: \( F(x) = F(y) \implies x = y \)</p>
+                  <p>Surjective: \( \forall \, b \in B, \exists \, a \in A \) such that \( F(a) = b \)</p>
+              </div>
+            </div>
+
             <p> an injective function is such that one output is given by one input exactly, with no two inputs giving the same output, and a surjective function is such that every possible output is mapped to by some input. together, they give a bijection. given any output, i know the input that mapped to it exists and is unique. </p>
 
             <p> example o' clock, the function \(y = 4x + 10\) is invertible, because given any \(y\), i can give you back \(x\) via the inverse function \(x = \frac{y - 10}{4}\). note that this function is analytically invertible, because we are able to give a closed form expression of the inverse function. </p>
@@ -57,7 +62,7 @@
 
             <p class="response"> no, not yet. buckle in. </p>
 
-            <p class="aside"> <span class="blue-highlight"> the hard and soft ways to invertibility </span> </p>
+            <h3 class="section-title" id="hardsoft"> the hard and soft ways to invertibility </h3>
 
             <p> before we move on to discussions about neural networks, it is useful to make a distinction between hard and soft invertibility. this will make our mission precise, as well as yield a paved path for us to pursue. </p>
 
@@ -65,9 +70,9 @@
 
             <p> a classic example of a soft invertible model is the autoencoder, which is trained to learn an efficient encoding of unlabeled data. it consists of two networks, an encoder \( E_{\phi} \) and a decoder \( D_{\theta} \), the former encodes the input data into a latent space, and the latter decodes it back into the original data space. the autoencoder is trained to minimize reconstruction loss, which measures the distance between \(x\), the original input, and \( x' = D_{\theta}(E_{\phi}(x)) \), the result of pushing \( x \) through the network and back. that is to say, with appropriate encouragement, an autoencoder is softly invertible. </p>
 
-            <p> super important to note here is that models regularized to be invertible may only be accurately invertible on the data distribution it is trained on. in other words, an autoencoder that encodes and decodes pictures of bananas losslessly might not be able to do the same on pictures of oranges. on the other hand, hard invertibility gives us a guarantee that invertibility holds for all possible data distribution. in this blog, we are in pursuit of hard invertibility, and so our next stop is naturally to look at constraining our model architecture to enforce this property. </p>
+            <p> super important to note here is that models regularized to be invertible may only be accurately invertible on the data distribution it is trained on. in other words, an autoencoder that encodes and decodes pictures of bananas losslessly might not be able to do the same on pictures of oranges. on the other hand, hard invertibility gives us a guarantee that invertibility holds for elements in the domain. in this blog, we are in pursuit of hard invertibility, and so our next stop is naturally to look at constraining our model architecture to enforce this property. </p>
 
-            <h3 class="section-title"> normalizing flows: flowing towards the normal </h3>
+            <h3 class="section-title" id="normalizing"> normalizing flows: flowing towards the normal </h3>
 
             <p class="whisper"> a comprehensive overview of normalizing flows can be found in <a href="https://arxiv.org/abs/1908.09257">this review</a></p>
 
@@ -87,7 +92,7 @@
               <div class="box">
                 <p class="box-title">Change of Variables Formula</p>
                 <p>
-                  Given \( Z \in \mathbb{R}^D \), a random variable with a known and tractable probability density function \( p_Z: \mathbb{R}^D \to \mathbb{R} \), if \( g \) is an invertible function and \( Y = g(Z) \), let \( f = g^{-1} \). Then the probability density function of the random variable \( Y \) is:
+                  Given \( Z \in \mathbb{R}^D \), a random variable with a known and tractable probability density function \( p_Z: \mathbb{R}^D \to \mathbb{R} \), if \( g \) is an invertible function, let \( f = g^{-1} \) and \( Y = g(Z) \). Then the probability density function of the random variable \( Y \) is:
                 </p>
                 <p>
                   \[ p_Y(y) = p_Z(f(y)) \left| \det \left( \frac{\partial f}{\partial y} \right) \right| \]
@@ -102,7 +107,7 @@
 
             <p class="response"> and of course, we <i>do</i> have such a function. </p>
 
-            <h3 class="section-title"> a couple of coupling layers </h3>
+            <h3 class="section-title" id="coupling"> a couple of coupling layers </h3>
 
             <p class="whisper"> original paper by dihn et al <a href="https://arxiv.org/abs/1410.8516">here</a></p>
 
@@ -182,7 +187,7 @@
 
             <p class="response"> *nods mysteriously, with a smug smirk* </p>
 
-            <h3 class="section-title"> invertible residual networks </h3>
+            <h3 class="section-title" id="iresnets"> invertible residual networks </h3>
 
             <p class="whisper"> <a href="https://arxiv.org/abs/1811.00995">behrmann et al.</a> </p>
 
@@ -365,7 +370,7 @@
             
             <h4 class="whisper"> ...and scene </h4>
 
-            <p class="postscript"> <span class="highlight"> postscript 1: </span> i'm *holds up fingers* three months deep in this invertibility rabbit hole. from autoencoders, which are invertible only with gentle parenting and lots of tlc, to finding normalizing flows as a niche idea for analytical invertibility with significant architectural constraints, to accidentally stumbling upon a seemingly soft invertible network that was <i> just a little too invertible on out of distribution data </i>, to finally finding the mathematical framework that backs the its hard invertibility after digging through wikipedia and many many references. it was quite the journey. </p>
+            <p class="postscript"> <span class="highlight"> postscript 1: </span> i'm *holds up fingers* three months deep in this invertibility rabbit hole. from autoencoders, which are invertible only with gentle parenting and lots of tlc, to finding normalizing flows as a niche idea for analytical invertibility with significant architectural constraints, to accidentally stumbling upon a seemingly soft invertible network that was <i> just a little too invertible on out of distribution data</i>, to finally finding the mathematical framework that backs its invertibility after digging through wikipedia and many many references. it was quite the journey. </p>
 
             <p class="postscript"> <span class="highlight"> postscript 2: </span> shoutout to <a href="https://ebrmn.space/"><span class="eddie"><u>eddie</u></span></a>, my trusty companion on this long and treacherous road to invertibility and beyond. i am so grateful for the countless hours of back and forth yaps and sanity checks when it genuinely feels like i'm losing it. </p>
 
