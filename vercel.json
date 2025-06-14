@@ -62,6 +62,10 @@
       {
         "source": "/blog/to_invertibility_and_beyond",
         "destination": "/public/blog/to_invertibility_and_beyond.html"
+      },
+      {
+        "source": "/blog/getting_it_done",
+        "destination": "/public/blog/getting_it_done.html"
       }
     ]
   }
