@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>luisa's blog</title>
+        <link rel="stylesheet" href="/public/base.css"/>
+        <link rel="stylesheet" href="/public/blog/blogpost.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="icon" type="image/png" href="/public/resources/tau.png">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+    </head>
+    <body>
+        <div class="center-box">
+        <nav class="left-navbar">
+            <a href="/blog">
+                <i class="fas fa-arrow-left icon"></i> Back
+            </a>
+        </nav>
+        <div class="head">
+            <div class="title-data">
+                <h2> 
+                    <span class="blue-highlight">getting</span>
+                    <span class="aqua-highlight">it</span>
+                    <span class="green-highlight">done</span>
+                </h2>
+                <p> june 2025 </p>
+            </div>
+            <p id="intro"> code is a hammer and i wack every nail with it </p>
+        </div>
+        <div class="body">
+
+            <p> i write one off scripts fairly often, mostly to sanity check my math, other times to solve a mundane task. for this blog, sometimes its both. for this blog, i dug them out of their graves for them to tell you their story. </p>
+
+            <h3 class="section-title"> visiting portugal, and the game of azul </h3>
+
+            <p> a year ago i visited lisbon. i brought back many postcards of portugal's famous azulejo tiles and, without me knowing, the advantage of going first everytime in the game of azul. </p>
+
+            <p> let me explain. azul is a board game about laying tiles, named after the portuguese azulejos. like most board games, first to play affords a signficant advantage. unlike most board games, azul has a deterministic, and special way to decide who the starting player is: </p>
+
+            <p class="highlight"> "the player who most recently visited portugal takes the starting player marker" </p>
+
+            <p> and it turned out to be me. for the entire year after my trip, no one among the azul peeps visited portugal. </p>
+
+            <p> finally, people were tired of me going first, every single time. and a new house rule was created. it looks like this: </p>
+
+            <div class="code-block">
+while no starting player:
+generate a random country
+has anyone been there?
+yes!
+    starting player = most recent visitor
+no :(
+    keep going 
+            </div>
+
+            <p> for this, we needed a random country generator. options online generate one country at a time, and then give you a 10 second ad. i spent a few mins writing a thing that gives 10 at a time, and it is just a script with a for loop that prints out <span class="code"> random.choice(countries)</span> for each iteration, and an alias in my <span class="code">.zshrc</span> that runs the script: </p>
+
+            <div class="code-block">
+alias azul="python3 $HOME/misc/country_generator.py"
+~ azul
+Australia
+Serbia
+Chile
+Bosnia and Herzegovina
+Palau
+Vatican City
+Peru
+Laos
+Tanzania
+Zimbabwe
+            </div>
+
+            <p> surpringly handy! </p>
+
+            <h3 class="section-title"> <span class="orange-highlight"> archival translation, and the leetcode question </span> </h3>
+
+            <p> my roommate sofia works on archives, and part of her job is translation. a few months ago, she showed me two excel sheets, one containing a spanish vocabulary, the other containing an english vocabulary, and gave me a problem: </p>
+
+            <p> 
+                take the identifiers in english sheet and compare them to the identifiers in spanish sheet. if the identifiers are exist in both sheets, ignore. if the identifiers are only present in english sheet, keep the pre-label, alt-label, scope note and history note. in other words, we want all terms in the english sheet that have not yet been translated into spanish.
+            </p>
+
+            <p> leetcode pandas easy. i thought to myself. should just be a filter. </p>
+
+            <p> and that was it. read in the excel files with pandas, do a filter by the identifiers, take only a subset of columns, and then write it back into a excel. </p>
+
+            <div class="code-block">
+import pandas as pd
+spanish = pd.read_excel('data/spanish.xlsx')
+english = pd.read_excel('data/english.xlsx')
+result = english[~english['identifier'].isin(spanish['Identifier'])]
+result = result[['identifier', 'prefLabel', 'altLabel', 'description', 'historyNote']]
+result.reset_index(drop=True, inplace=True)
+result.to_excel('data/english_but_not_spanish.xlsx', index=False)
+            </div>
+
+            <p> this genuinely gave me such a sense of accomplishment - my degree was put to good use :> </p>
+
+            <h3 class="section-title"> <span class="red-highlight"> number theory, primes, and fib </span> </h3>
+
+        </div>
+    </body>
+</html>
