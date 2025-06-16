@@ -31,7 +31,7 @@
         </div>
         <div class="body">
 
-            <p> i write one off scripts fairly often, often to sanity check my math, other times to solve a mundane task, sometimes both. for this blog, i dug some of these out of their graves, to tell the story of their creation. </p>
+            <p> i write one off scripts fairly often, sometimes to sanity check my math, sometimes to solve a mundane task, sometimes both. for this blog, i dug some of these out of their graves, to tell the odd stories of their creation. </p>
 
             <h3 class="section-title"> visiting portugal, and the game of azul </h3>
 
@@ -93,19 +93,17 @@ result.reset_index(drop=True, inplace=True)
 result.to_excel('data/english_but_not_spanish.xlsx', index=False)
             </div>
 
-            <p> this genuinely gave me such a sense of accomplishment - my degree was put to good use, because it saved sofi some time. </p>
-
             <h3 class="section-title"> <span class="red-highlight"> the prime trick, and number theory </span> </h3>
 
-            <p> i went to budapest last summer to do math. one of the two classes i did involved solving mathematical puzzles. though i spent most of my time staring at 8 by 8 boards or muttering about patterns to deterministically crack open a door whose state is unknown, i also spent some time coding - there were many problems that required hand calculating many sums or products, or brute force computing a sequence until a pattern emerged - and i was certainly not known for my patience. </p>
+            <p> i went to budapest last summer to study math. one of the two classes i took involved solving math puzzles. though i spent most of my time staring at 8 by 8 boards or muttering about patterns to deterministically crack open a door whose state is unknown, i also spent some time coding - there were many problems that required hand calculating long sums or products, or brute force computing a sequence until a pattern emerged - and i was certainly not known for my patience. </p>
 
-            <p> one of the first problems given to us was called the prime trick, and our problem was to figure out the magic sauce to this trick: </p>
+            <p> one of the first problems given to us was called the prime trick, and our problem was to figure out the magic sauce to it: </p>
 
             <p class="highlight"> "here's a magic trick, think of at most 7 prime numbers which are greater than 10. calculate the squares of primes and add up these squares, tell me the sum and i will tell you how many numbers were added up." </p>
 
             <p class="whisper"> needless to say, spoilers to the solution ahead. </p>
 
-            <p> usually with problems like these, the conditions stated are both necessary and sufficient. this problem is tricky, however, because the conditions stated are actually sufficient but not strictly necessary. in fact, this trick will works as long as all numbers are odd and larger or equal to 3 — nothing to do with primes, nothing to do with greater than 10. </p>
+            <p> usually with problems like these, the conditions stated are both necessary and sufficient. this problem is tricky, however, because the conditions stated are actually sufficient but not strictly necessary. in fact, this trick works as long as all numbers are odd and larger or equal to 3 — nothing to do with primes, nothing to do with them being greater than 10. </p>
 
             <p class="whisper"> *sigh* </p>
 
@@ -115,9 +113,9 @@ result.to_excel('data/english_but_not_spanish.xlsx', index=False)
 
             <p> square that, and you get: \( (2n + 1)^2 = 4n^2 + 4n + 1 = 4n(n+1) + 1 \)</p>
 
-            <p> \( n (n + 1)\) will always be even, and so \( 4n (n + 1) \) will always be a multiple of 8 (<i>one more than the magic number 7</i>). </p>
+            <p> \( n (n + 1)\) will always be even, and \( 4n (n + 1) \) will always be a multiple of 8 (<i>one more than the magic number 7</i>). </p>
 
-            <p> and so \( (2n + 1)^2 \equiv 1\pmod{8} \), and the sum of \( k \) primes larger than 10 is \( \equiv k \pmod{8} \), and the congruency will not "cycle" because we capped the number of squares of primes to be at leaset 7. </p>
+            <p> so \( (2n + 1)^2 \equiv 1\pmod{8} \), and the sum of \( k \) primes larger than 10 is \( \equiv k \pmod{8} \). the congruency will not "cycle" because we capped the number of squares of primes to be at leaset 7. </p>
 
             <p> of course none of this came naturally. instead, i intuited a vibe that the answer had something to do with the sum being congruent to something modulo something from the <i>at most 7 prime numbers</i> part, and brute forced to a solution via code. </p>
 
@@ -159,7 +157,7 @@ misc git:(main) ✗ python3 math/sum_of_primes.py
 [7 7 7 7 7 7 7 7]
             </div>
 
-            <p> bingo! the sum of \( k \) squared primes fitting the conditions always gave \(k \) modulo 8. what was left was coming up with the logic as to why, which went way faster than the initial bumbling taken to find the pattern. </p>
+            <p> bingo! the sum of \( k \) squared primes fitting the conditions always gave \(k \) modulo 8. and performing the magic trick was simply a matter of computing its remainer modulo 8. what was left was coming up with the number theory as to why, which went way faster than the initial fumbling and bumbling taken to find the pattern. </p>
 
             <h3 class="section-title"> <span class="pink-highlight"> homework!!! </span> </h3>
 
@@ -177,7 +175,7 @@ misc git:(main) ✗ python3 math/sum_of_primes.py
                 </li>
             </ol>
 
-            <p> i didn't want to do this, but i knew my buddy python would. the homework also required showing your work, so i added a pictures of my code for good measure, and received full credit! </p>
+            <p> i didn't want to do this by hand, and write out all 32 possible length 5 strings, and manually check against condition 1 and 2. so i wrote a script. the homework also required showing your work, so i added a pictures of my code for good measure, to ensure that full credit. </p>
 
             <div class="code-block">
 from itertools import product
@@ -195,9 +193,9 @@ print(c, f"count: {len(c)}")
 
             <h3 class="section-title"> <span class="blue-highlight"> finder </span> </h3>
 
-            <p> i use zotero to manage papers and citations, and the papers i save go into a local directory for future reading, even when i'm not connected to the interwebs. the papers get saved with a specific name format, which includes the full title and the first few authors. </p>
+            <p> i use zotero to manage papers and citations, and the papers i save go into a local directory for future reading, even when i'm not connected to the interwebs. i customized the name format the papers are saved with, which includes the full title and the first few authors, so searching for papers by keyword could be done trivially. </p>
 
-            <p> for easy access, i wrote a shell script that takes a keyword, looks through that directory, and opens the closest match. the shell script looks like this: </p>
+            <p> then, i wrote a shell script that takes a keyword, looks through that directory, and opens the closest match. the shell script looks like this: </p>
 
             <div class="code-block">
 #!/bin/bash
@@ -214,11 +212,9 @@ else
 fi
             </div>
             
-            <p> lots to be desired about the search algorithm, but it remains a surprisingly handy tool, especially when all i remember is a single, distinctive keyword. </p>
+            <p> there's lots to be desired about the search algorithm, but it remains a surprisingly handy tool, especially when all i remember is a single, distinctive keyword. </p>
 
-            <p class="postscript"> <span class="white-highlight"> postscript 1: </span> maybe i should make a habit of saying what i'll write about next, because me saying "next one will be silly" did actually motivate me to write another blog, within the short span of a month. </p>
-
-            <p class="postscript"> <span class="white-highlight"> postscript 2: </span> well. next blog will hopefully be about math and crochet. </p>
+            <p class="postscript"> <span class="white-highlight"> postscript: </span> next blog will hopefully be about math and crochet, mark my words :) </p>
 
         </div>
     </body>
