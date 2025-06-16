@@ -31,17 +31,17 @@
         </div>
         <div class="body">
 
-            <p> i write one off scripts fairly often, mostly to sanity check my math, other times to solve a mundane task. for this blog, sometimes its both. for this blog, i dug them out of their graves for them to tell you their story. </p>
+            <p> i write one off scripts fairly often, often to sanity check my math, other times to solve a mundane task, sometimes both. for this blog, i dug some of these out of their graves, to tell the story of their creation. </p>
 
             <h3 class="section-title"> visiting portugal, and the game of azul </h3>
 
-            <p> a year ago i visited lisbon. i brought back many postcards of portugal's famous azulejo tiles and, without me knowing, the advantage of going first everytime in the game of azul. </p>
+            <p> a year ago i visited lisbon. i brought back many postcards of portugal's famous azulejo tiles and, without me knowing, a consistent advantage in the game of azul. </p>
 
-            <p> let me explain. azul is a board game about laying tiles, named after the portuguese azulejos. like most board games, first to play affords a signficant advantage. unlike most board games, azul has a deterministic, and special way to decide who the starting player is: </p>
+            <p> let me explain. azul is a board game about laying tiles, named after portuguese azulejos. like most board games, first to play affords a signficant advantage. unlike most board games, azul has a deterministic, and special way to decide who the starting player is: </p>
 
             <p class="highlight"> "the player who most recently visited portugal takes the starting player marker" </p>
 
-            <p> and it turned out to be me. for the entire year after my trip, no one among the azul peeps visited portugal. </p>
+            <p> and that was me. for the entire year after my trip, no one among the azul peeps visited portugal. </p>
 
             <p> finally, people were tired of me going first, every single time. and a new house rule was created. it looks like this: </p>
 
@@ -55,10 +55,9 @@ no :(
     keep going 
             </div>
 
-            <p> for this, we needed a random country generator. options online generate one country at a time, and then give you a 10 second ad. i spent a few mins writing a thing that gives 10 at a time, and it is just a script with a for loop that prints out <span class="code"> random.choice(countries)</span> for each iteration, and an alias in my <span class="code">.zshrc</span> that runs the script: </p>
+            <p> for this, we needed a random country generator. options online generate one country at a time, and then give you a 10 second ad. i spent a few mins writing a thing that gives 10 at a time. it is just a script with a for loop that prints out <span class="code"> random.choice(countries)</span> each iteration, and an alias in my <span class="code">.zshrc</span> that runs the script. </p>
 
             <div class="code-block">
-alias azul="python3 $HOME/misc/country_generator.py"
 ~ azul
 Australia
 Serbia
@@ -72,8 +71,6 @@ Tanzania
 Zimbabwe
             </div>
 
-            <p> surpringly handy! </p>
-
             <h3 class="section-title"> <span class="orange-highlight"> archival translation, and the leetcode question </span> </h3>
 
             <p> my roommate sofia works on archives, and part of her job is translation. a few months ago, she showed me two excel sheets, one containing a spanish vocabulary, the other containing an english vocabulary, and gave me a problem: </p>
@@ -84,7 +81,7 @@ Zimbabwe
 
             <p> leetcode pandas easy. i thought to myself. should just be a filter. </p>
 
-            <p> and that was it. read in the excel files with pandas, do a filter by the identifiers, take only a subset of columns, and then write it back into a excel. </p>
+            <p> and that was it. read in the excel files with pandas, do a filter by the identifiers, take only a subset of columns, and then write it back into an excel sheet. </p>
 
             <div class="code-block">
 import pandas as pd
@@ -96,9 +93,134 @@ result.reset_index(drop=True, inplace=True)
 result.to_excel('data/english_but_not_spanish.xlsx', index=False)
             </div>
 
-            <p> this genuinely gave me such a sense of accomplishment - my degree was put to good use :> </p>
+            <p> this genuinely gave me such a sense of accomplishment - my degree was put to good use, because it saved sofi some time. </p>
 
-            <h3 class="section-title"> <span class="red-highlight"> number theory, primes, and fib </span> </h3>
+            <h3 class="section-title"> <span class="red-highlight"> the prime trick, and number theory </span> </h3>
+
+            <p> i went to budapest last summer to do math. one of the two classes i did involved solving mathematical puzzles. though i spent most of my time staring at 8 by 8 boards or muttering about patterns to deterministically crack open a door whose state is unknown, i also spent some time coding - there were many problems that required hand calculating many sums or products, or brute force computing a sequence until a pattern emerged - and i was certainly not known for my patience. </p>
+
+            <p> one of the first problems given to us was called the prime trick, and our problem was to figure out the magic sauce to this trick: </p>
+
+            <p class="highlight"> "here's a magic trick, think of at most 7 prime numbers which are greater than 10. calculate the squares of primes and add up these squares, tell me the sum and i will tell you how many numbers were added up." </p>
+
+            <p class="whisper"> needless to say, spoilers to the solution ahead. </p>
+
+            <p> usually with problems like these, the conditions stated are both necessary and sufficient. this problem is tricky, however, because the conditions stated are actually sufficient but not strictly necessary. in fact, this trick will works as long as all numbers are odd and larger or equal to 3 — nothing to do with primes, nothing to do with greater than 10. </p>
+
+            <p class="whisper"> *sigh* </p>
+
+            <p> the hint to this problem lies in the words <i>at most 7</i>, and the answer can be found through reasoning with basic number theory. </p>
+
+            <p> all primes larger than 10 are odd, and can be written as \( 2n + 1\), \( n \in \mathbb{Z}^+\).</p>
+
+            <p> square that, and you get: \( (2n + 1)^2 = 4n^2 + 4n + 1 = 4n(n+1) + 1 \)</p>
+
+            <p> \( n (n + 1)\) will always be even, and so \( 4n (n + 1) \) will always be a multiple of 8 (<i>one more than the magic number 7</i>). </p>
+
+            <p> and so \( (2n + 1)^2 \equiv 1\pmod{8} \), and the sum of \( k \) primes larger than 10 is \( \equiv k \pmod{8} \), and the congruency will not "cycle" because we capped the number of squares of primes to be at leaset 7. </p>
+
+            <p> of course none of this came naturally. instead, i intuited a vibe that the answer had something to do with the sum being congruent to something modulo something from the <i>at most 7 prime numbers</i> part, and brute forced to a solution via code. </p>
+
+            <p> here's the code, with docstrings only for obvious helper functions for brevity. </p>
+
+            <div class="code-block">
+def squared_primes(lowest, highest):
+    """Computes all primes between lowest and highest, and squares them."""
+
+def sum_of_items(items, k):
+    """
+    Computes all combinations of `k` elements of the list `items`,
+    and returns the sum of elements for each. 
+    """
+
+# compute all squares of primes to some arbitrary upper limit (40)
+squares = squared_primes(10, 40)
+# for all possible elements in the sum (1-7)
+for i in range(7):
+    # take all possible combinations of i + 1 elements of the list 
+    # of squared primes, sum each combination, and compute its value 
+    # modulo 8. 
+    print(np.mod(np.array(sums_of_items(squares, i + 1)), 8))
+            </div>
+
+            <p> i reran this code many times, swapping out the magic modulus manually with increasing numbers starting from 2, and eventually: </p>
+
+            <div class="code-block">
+misc git:(main) ✗ python3 math/sum_of_primes.py  
+[1 1 1 1 1 1 1 1]
+[2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2]
+[3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+ 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3]
+[4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+ 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4]
+[5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+ 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5]
+[6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6]
+[7 7 7 7 7 7 7 7]
+            </div>
+
+            <p> bingo! the sum of \( k \) squared primes fitting the conditions always gave \(k \) modulo 8. what was left was coming up with the logic as to why, which went way faster than the initial bumbling taken to find the pattern. </p>
+
+            <h3 class="section-title"> <span class="pink-highlight"> homework!!! </span> </h3>
+
+            <p> the first homework in my theory of computation class required us to count. </p>
+
+            <ol>
+                <li>
+                how many strings of length 5 over the alphabet {0, 1} contain the substring <code>01</code> but not the substring <code>11</code>?
+                </li>
+                <li>
+                how many strings of length 5 over the alphabet {0, 1} contain the substring <code>11</code> but not the substring <code>01</code>?
+                </li>
+                <li>
+                how many strings of length 5 over the alphabet {0, 1} contain the substring <code>11</code> but not the substring <code>00</code>?
+                </li>
+            </ol>
+
+            <p> obviously, it would be way faster to do this in a few lines of code, than to manually write out the 32 length 5 substrings of that alphabet, and count. </p>
+
+            <p> the homework required showing your work, so i added a pictures of my code. </p>
+
+            <div class="code-block">
+from itertools import product
+
+all_bin = [''.join(p) for p in product(["0", "1"], repeat=5)]
+a = [s for s in all_bin if "01" in s and "11" not in s]
+b = [s for s in all_bin if "11" in s and "01" not in s]
+c = [s for s in all_bin if "11" in s and "00" not in s]
+
+print(all_bin)
+print(a, f"count: {len(a)}")
+print(b, f"count: {len(b)}")
+print(c, f"count: {len(c)}")
+            </div>
+
+            <h3 class="section-title"> <span class="blue-highlight"> finder </span> </h3>
+
+            <p> i use zotero to manage papers and citations, and the papers i save go into a local directory for future reading, even when i'm not connected to the interwebs. the papers get saved with a specific name format, which includes the full title and the first few authors. </p>
+
+            <p> for easy access, i wrote a shell script that takes a keyword, looks through that directory, and opens the closest match. the shell script looks like this: </p>
+
+            <div class="code-block">
+#!/bin/bash
+
+keyword=$1
+# find the top match with find (recursively) and grep (case-insensitive)
+match=$(find "$HOME/papers" -type f -iname "*$keyword*" | head -n 1)
+
+# open if a match is found
+if [ -n "$match" ]; then
+    open "$match"
+else
+    echo "no paper found! :("
+fi
+            </div>
+            
+            <p> lots to be desired about the search algorithm, but it remains a surprisingly handy tool, especially when all i remember is a single, distinctive keyword. </p>
+
+            <p class="postscript"> <span class="white-highlight"> postscript 1: </span> maybe i should make a habit of saying what i'll write about next, because me saying "next one will be silly" did actually motivate me to write another blog, within the short span of a month. </p>
+
+            <p class="postscript"> <span class="white-highlight"> postscript 2: </span> well. next blog will hopefully be about math and crochet. </p>
 
         </div>
     </body>
