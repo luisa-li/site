@@ -31,19 +31,19 @@
         </div>
         <div class="body">
 
-            <p> i write one off scripts fairly often, sometimes to sanity check my math, sometimes to solve a mundane task, sometimes both. for this blog, i dug some of these out of their graves, to tell the odd stories of their creation. </p>
+            <p> i write one off scripts fairly often, sometimes to sanity check my math, sometimes to solve a mundane task, sometimes both. here's a few. </p>
 
             <h3 class="section-title"> visiting portugal, and the game of azul </h3>
 
-            <p> a year ago i visited lisbon. i brought back many postcards of portugal's famous azulejo tiles and, without me knowing, a consistent advantage in the game of azul. </p>
+            <p> a year ago i visited lisbon. i lots of postcards of portugal's famous azulejo tiles, almost losing my phone on day 1 on the trip. without knowing, i also brought back a consistent advantage when playing azul. </p>
 
-            <p> let me explain. azul is a board game about laying tiles, named after portuguese azulejos. like most board games, first to play affords a signficant advantage. unlike most board games, azul has a deterministic, and special way to decide who the starting player is: </p>
+            <p> let me explain. azul is a board game about laying tiles, named after portuguese azulejos. like most board games, first to play gives a signficant advantage. unlike most board games, azul has a deterministic, and special way to decide who the starting player is: </p>
 
             <p class="highlight"> "the player who most recently visited portugal takes the starting player marker" </p>
 
             <p> and that was me. for the entire year after my trip, no one among the azul peeps visited portugal. </p>
 
-            <p> finally, people were tired of me going first, every single time. and a new house rule was created. it looks like this: </p>
+            <p> finally, people were tired of me going first, and a new house rule was created. it looks like this: </p>
 
             <div class="code-block">
 while no starting player:
@@ -55,7 +55,7 @@ no :(
     keep going 
             </div>
 
-            <p> for this, we needed a random country generator. options online generate one country at a time, and then give you a 10 second ad. i spent a few mins writing a thing that gives 10 at a time. it is just a script with a for loop that prints out <span class="code"> random.choice(countries)</span> each iteration, and an alias in my <span class="code">.zshrc</span> that runs the script. </p>
+            <p> for this, we needed a random country generator. options online generate one country at a time, and then give you a 10 second advertisement. i spent a few mins writing a script with a simple for loop that prints out <span class="code"> random.choice(countries)</span> 10 times. then i wrote an alias in my <span class="code">.zshrc</span> that runs the script. </p>
 
             <div class="code-block">
 ~ azul
@@ -97,11 +97,11 @@ result.to_excel('data/english_but_not_spanish.xlsx', index=False)
 
             <p> i went to budapest last summer to study math. one of the two classes i took involved solving math puzzles. though i spent most of my time staring at 8 by 8 boards or muttering about patterns to deterministically crack open a door whose state is unknown, i also spent some time coding - there were many problems that required hand calculating long sums or products, or brute force computing a sequence until a pattern emerged - and i was certainly not known for my patience. </p>
 
-            <p> one of the first problems given to us was called the prime trick, and our problem was to figure out the magic sauce to it: </p>
+            <p> one of the first problems given to us was called the prime trick, and our problem was to figure out the magic sauce to the trick: </p>
 
             <p class="highlight"> "here's a magic trick, think of at most 7 prime numbers which are greater than 10. calculate the squares of primes and add up these squares, tell me the sum and i will tell you how many numbers were added up." </p>
 
-            <p class="whisper"> needless to say, spoilers to the solution ahead. </p>
+            <p class="whisper"> needless to say, spoilers to the solution ahead, pause now if you want an attempt. </p>
 
             <p> usually with problems like these, the conditions stated are both necessary and sufficient. this problem is tricky, however, because the conditions stated are actually sufficient but not strictly necessary. in fact, this trick works as long as all numbers are odd and larger or equal to 3 — nothing to do with primes, nothing to do with them being greater than 10. </p>
 
@@ -115,9 +115,9 @@ result.to_excel('data/english_but_not_spanish.xlsx', index=False)
 
             <p> \( n (n + 1)\) will always be even, and \( 4n (n + 1) \) will always be a multiple of 8 (<i>one more than the magic number 7</i>). </p>
 
-            <p> so \( (2n + 1)^2 \equiv 1\pmod{8} \), and the sum of \( k \) primes larger than 10 is \( \equiv k \pmod{8} \). the congruency will not "cycle" because we capped the number of squares of primes to be at leaset 7. </p>
+            <p> so \( (2n + 1)^2 \equiv 1\pmod{8} \), and the sum of \( k \) primes larger than 10 is \( \equiv k \pmod{8} \). the congruency will not "cycle" because we capped the number of squares of primes to be at most 7. </p>
 
-            <p> of course none of this came naturally. instead, i intuited a vibe that the answer had something to do with the sum being congruent to something modulo something from the <i>at most 7 prime numbers</i> part, and brute forced to a solution via code. </p>
+            <p> of course none of this came naturally. instead, i caught a vibe that the answer had something to do with the sum being congruent to something modulo something from the <i>at most 7 prime numbers</i> part, and brute forced to a solution via code. </p>
 
             <p> here's the code, with docstrings only for obvious helper functions for brevity. </p>
 
@@ -157,9 +157,9 @@ misc git:(main) ✗ python3 math/sum_of_primes.py
 [7 7 7 7 7 7 7 7]
             </div>
 
-            <p> bingo! the sum of \( k \) squared primes fitting the conditions always gave \(k \) modulo 8. and performing the magic trick was simply a matter of computing its remainer modulo 8. what was left was coming up with the number theory as to why, which went way faster than the initial fumbling and bumbling taken to find the pattern. </p>
+            <p> bingo! the sum of \( k \) squared primes fitting the conditions always gave \(k \) modulo 8. and performing the magic trick was simply a matter of computing the remainer of the sum modulo 8. what was left was coming up with the number theory as to why, which went way faster than the initial fumbling and bumbling taken to find the pattern. </p>
 
-            <h3 class="section-title"> <span class="pink-highlight"> homework!!! </span> </h3>
+            <h3 class="section-title"> <span class="pink-highlight"> homework! :( </span> </h3>
 
             <p> the first homework in my theory of computation class required us to count. </p>
 
@@ -175,7 +175,7 @@ misc git:(main) ✗ python3 math/sum_of_primes.py
                 </li>
             </ol>
 
-            <p> i didn't want to do this by hand, and write out all 32 possible length 5 strings, and manually check against condition 1 and 2. so i wrote a script. the homework also required showing your work, so i added a pictures of my code for good measure, to ensure that full credit. </p>
+            <p> i didn't want to do this by hand, and write out all 32 possible length 5 strings, and manually check against condition 1 and 2, and agonize and triple checkiing to make sure i didn't make a mistake. so i wrote a script. the homework also required showing your work, so i added a pictures of my code for good measure, to ensure that full credit. </p>
 
             <div class="code-block">
 from itertools import product
@@ -193,9 +193,9 @@ print(c, f"count: {len(c)}")
 
             <h3 class="section-title"> <span class="blue-highlight"> finder </span> </h3>
 
-            <p> i use zotero to manage papers and citations, and the papers i save go into a local directory for future reading, even when i'm not connected to the interwebs. i customized the name format the papers are saved with, which includes the full title and the first few authors, so searching for papers by keyword could be done trivially. </p>
+            <p> i use zotero to manage papers and citations, and the papers i save go into a local directory for future reading, even when i'm not connected to the interwebs. i customized the name format the papers are saved with, which includes the full title and the first few authors, so searching for papers by keyword could be done trivially in my file system. </p>
 
-            <p> then, i wrote a shell script that takes a keyword, looks through that directory, and opens the closest match. the shell script looks like this: </p>
+            <p> then, i found myself pulling up the same papers a lot, like a lot. so i wrote a shell script that takes a keyword, looks through the directory zotero saves to, and opens the closest match. the shell script looks like this: </p>
 
             <div class="code-block">
 #!/bin/bash
@@ -212,9 +212,7 @@ else
 fi
             </div>
             
-            <p> there's lots to be desired about the search algorithm, but it remains a surprisingly handy tool, especially when all i remember is a single, distinctive keyword. </p>
-
-            <p class="postscript"> <span class="white-highlight"> postscript: </span> next blog will hopefully be about math and crochet, mark my words :) </p>
+            <p> there's lots to be desired about the search algorithm, but it remains a surprisingly handy tool, especially when all i remember is a single, distinctive keyword. i have a similar tool for digital textbooks, so pulling up a chapter to a forgotten concept is as simple as typing in <span class="code"> book bishop</span> into my terminal. </p>
 
         </div>
     </body>
