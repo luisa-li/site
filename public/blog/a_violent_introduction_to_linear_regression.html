@@ -39,7 +39,8 @@
           <p>june 2024</p>
         </div>
         <p id="intro">
-          sick and tired of gentle introductions to *insert an ml concept*?
+          sick and tired of gentle introductions to (some machine learning concept)?
+          <br />
           <br />
           worry no more, for today, we will catapult you to the wolves of linear
           regression.
@@ -91,7 +92,7 @@
         <p>
           to get good knob settings, you want to minimize the error. the most
           common way to define error is known as `mean squared error`, which,
-          you guessed it, takes the square and then the mean of all the errors.
+          you guessed it, takes the square of the means of all the errors.
         </p>
 
         <p>\[ MSE = \frac{1}{n} \sum^n_{i = 1} (y_i - \hat{y}_i)^2\]</p>
@@ -127,16 +128,14 @@
         <p>
           in formalized math jargon, this corresponds to finding the minima of
           the loss function. the steepness of each direction corresponds to the
-          partial derivative of each independent variable of the loss function,
-          also known as the parameters \(m\) and \(b\). to get to the minima of
-          the loss, we calculate the partial derivative, which gives the
+          partial derivative of each independent variable with respect to the loss function.
+          to get to the minima of the loss, we calculate the partial derivative, which gives the
           direction of the steepest ascent, and move our parameters towards the
-          opposite direction, the direction of the steepest descent.
+          opposite direction, the direction of the steepest descent. hence the name - gradient descent. 
         </p>
 
         <p class="whisper">
-          there is a lot more complexity surrounding finding the local V.S.
-          global minima, but for simplicity we will keep one eye shut today.
+          being stuck in a local minima is a universal problem while using gradient descent, but we won't get into it here.
         </p>
 
         <p>
@@ -168,8 +167,8 @@
         </p>
 
         <p>
-          wielding one parameter in each hand, we can now improve our parameters
-          by having them go a little bit towards the direction negative of their
+          wielding one parameter in each hand, we can now improve our model by
+          by having the parameters go a little bit towards the direction negative of their
           gradient:
         </p>
 
@@ -283,7 +282,7 @@ evaluate the model's predictions on the test set
           <a
             href="https://github.com/luisa-li/scratch-ml/blob/017314baa2c64b01c6c9fb224d5ffd360ffde8fc/linear_regression.py"
             >here</a
-          >, written with just python and numpy.
+          >, written with just numpy.
         </p>
       </div>
     </div>
